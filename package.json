@@ -40,6 +40,6 @@
     "react-intl-number-format": "^1.1.1",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
-    "yarn": "^1.22.18"
+    "yarn": "^1.22.22"
   }
 }
