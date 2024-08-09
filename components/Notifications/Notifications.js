@@ -7,28 +7,39 @@ import FilterBtns from '../Custom_Components/FilterBtns';
 import { useRouter } from 'next/router';
 import { getData } from '../../utils/fetchData';
 import {handleUIError} from '../../middleware/error'
+import { CONTACT_ADMIN_ERR_MSG } from '../../utils/constants';
 
 function Notifications() {
     const { state, dispatch } = useContext(DataContext);
     const { auth } = state;
     const router = useRouter()
     const query = router.query;
-    const [notificationsArr, setNotificationsArr] = useState()
+    const [notificationsArr, setNotificationsArr] = useState([])
     const [filteredNotifications, setFilteredNotifications] = useState()
     const [filterBtns, setFilterBtns] = useState([])
     const [selectedTypes, setSelectedTypes] = useState([])
-    const isAdmin = auth && auth.user && auth.user.role === 'admin';
+    const isAdmin = auth?.user?.role === 'admin';
 
     useEffect(() => {
-        if (!isEmpty(auth.token)) {
-            isLoading(true, dispatch)
-            getData('notifications', auth.token)
-                .then(res => {
+        const fetchData = async () => {
+            if (!isEmpty(auth.token)) {
+                isLoading(true, dispatch)
+                try {
+                    const res = await getData('notifications', auth.token);
                     isLoading(false, dispatch)
-                    if (res.code) return handleUIError(res.err, res.code, auth, dispatch);
-                    if (!isEmpty(res.notifications)) setNotificationsArr(res.notifications)
-                })
-        }
+                    if (res.code) {
+                        return handleUIError(res.err, res.code, auth, dispatch);
+                    }
+                    if (!isEmpty(res.notifications)) {
+                        setNotificationsArr(res.notifications);
+                    }
+                } catch (err) {
+                    handleUIError(err, CONTACT_ADMIN_ERR_MSG, auth, dispatch);
+                }
+            }
+        };
+
+        fetchData();
     }, [auth.token])
 
     useEffect(() => {
