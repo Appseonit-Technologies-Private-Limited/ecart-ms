@@ -126,7 +126,7 @@ const Payment = (props) => {
             const adminData = {
                 orderUrl: process.env.NEXT_PUBLIC_BASE_URL + `/order?id=${order._id}`,
                 userName: props.auth.user.name,
-                email: process.env.NEXT_PUBLIC_ADMIN_ID,
+                email: process.env.NEXT_PUBLIC_ADMIN_PAY_MAIL_ADDRESS,
                 address: order.address,
                 mobile: order.mobile,
                 cusEmail: props.auth.user.email,
