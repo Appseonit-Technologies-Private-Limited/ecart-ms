@@ -8,7 +8,7 @@ import { orderAdminMail } from '../../../utils/orderAdminMail'
 import { orderConfirmationMail } from '../../../utils/orderConfirmationMail'
 import { restPasswordMail } from '../../../utils/resetPasswordMail'
 import { orderDeliveredMail } from '../../../utils/orderDeliveredMail'
-import auth from '../../../middleware/auth'
+import {auth} from '../../../middleware/auth'
 
 
 connectDB()
@@ -32,8 +32,8 @@ export default async (req, res) => {
 }
 
 const sendMail = async (req, res) => {
-    let fromMailId = process.env.NEXT_PUBLIC_ADMIN_ID;
-    let toMailId = process.env.NEXT_PUBLIC_ADMIN_ID;
+    let fromMailId = process.env.NEXT_PUBLIC_MAIL_SENDER;
+    let toMailId = process.env.NEXT_PUBLIC_MAIL_SENDER;
     try {
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({

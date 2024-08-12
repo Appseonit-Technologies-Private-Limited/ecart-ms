@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { DataContext } from '../store/GlobalState'
 import { postData, putData } from '../utils/fetchData'
 import Cookie from 'js-cookie'
-import { ACC_ACT_MAIL } from '../utils/constants.js'
+import { ACC_ACT_MAIL} from '../utils/constants.js'
 import isEmpty from 'lodash/isEmpty';
 import MenuNotifications from './Notifications/MenuNotifications'
 
@@ -20,14 +20,12 @@ function NavBar() {
     const handleLogout = async () => {
         const res = await putData(`auth/logout`, {}, auth.token)
         if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-        Cookie.remove('refreshtoken', { path: 'api/auth/accessToken' })
-        Cookie.remove('firstLogin', { path: 'api/auth/accessToken' })
         dispatch({ type: 'AUTH', payload: {} })
         dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
         setAccountActivated(null)
         return router.push('/')
     }
-
+    
     const adminRouter = () => {
         return (
             <>

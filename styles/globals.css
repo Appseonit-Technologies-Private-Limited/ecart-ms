@@ -437,3 +437,6 @@ h5{
 /* ----------- Menu Dropdown ------------- */
 
 @import url("./menu.css");
+
+/* ----------- unauthorized page ------------- */
+@import url("./unauthorized.css");

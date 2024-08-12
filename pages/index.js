@@ -6,7 +6,6 @@ import ControlledCarousel from '../components/Carousel'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import HomePageCards from '../components/HomePageCards'
-import { isAdminRole } from '../utils/util'
 import { ShopByCategories } from '../components/Home/Categories/ShopByCategories'
 import { BestSellingProducts } from '../components/Home/BestSellingProducts/BestSellingProducts'
 import { CategoryDisplayItems } from '../components/Home/Categories/CategoryDisplayItems'

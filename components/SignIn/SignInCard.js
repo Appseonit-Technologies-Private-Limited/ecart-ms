@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { useState, useContext, useEffect } from 'react'
-import Cookie from 'js-cookie'
 import { DataContext } from '../../store/GlobalState'
 import { postData } from '../../utils/fetchData'
 import Loading from '../Loading'
@@ -9,7 +8,7 @@ import { PLEASE_LOG_IN, SIGNING_MSG } from '../../utils/constants'
 
 export default function SignInCard({ loadingMsg, delay, executeSignInCallback }) {
 
-    const initialState = { userName: '', password: '' }
+    const initialState = { userName: '', password: '', cookieConsent: 'false' }
     const [userData, setUserData] = useState(initialState)
     const { userName, password } = userData
     const { state, dispatch } = useContext(DataContext)
@@ -44,23 +43,11 @@ export default function SignInCard({ loadingMsg, delay, executeSignInCallback })
             if (!userData.password) return dispatch({ type: 'NOTIFY', payload: { error: "Please enter a 'Password'." } })
             setIsLoading(true);
             setLoadingText(SIGNING_MSG);
-            const res = await postData('auth/login', userData)
+            const res = await postData('auth/login', {...userData, cookieConsent: localStorage.getItem('cookieConsent')})
             if (res.err) throw res.err;
-            dispatch({ type: 'NOTIFY', payload: { success: res.msg, delay: 1000 } })
+            //dispatch({ type: 'NOTIFY', payload: { success: res.msg, delay: 1000 } })
             dispatch({ type: 'AUTH', payload: { token: res.access_token, user: res.user } })
-            Cookie.set('refreshtoken', res.refresh_token, {
-                path: 'api/auth/accessToken',
-                expires: 7,//7 days
-                secure: process.env.NEXT_PUBLIC_HOSTNAME !== 'localhost',
-                sameSite: 'Lax'
-            })
-
-            Cookie.set('firstLogin', true, {
-                path: '/',
-                expires: 15 / 1440,//15 minutes
-                secure: process.env.NEXT_PUBLIC_HOSTNAME !== 'localhost',
-                sameSite: 'Lax'
-            })
+            
             setIsLoading(false);
             $('#confirmModal').modal('hide');
             if (executeSignInCallback) executeSignInCallback({ token: res.access_token, user: res.user });

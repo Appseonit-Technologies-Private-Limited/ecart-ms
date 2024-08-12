@@ -3,7 +3,7 @@ export const ProductPrice = ({ product, isAdmin, isProductDetailPage }) => {
     return (
         <>
             {!isProductDetailPage &&
-                <h6 className="card-title text-capitalize" title={product.title} style={{ fontSize: isProductDetailPage ? "24px" : "" }}>
+                <h6 className="card-title text-capitalize" title={product.title} style={{ fontSize: isProductDetailPage ? "24px" : "12px" }}>
                     {product.title}
                 </h6>
             }

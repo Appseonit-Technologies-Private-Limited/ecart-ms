@@ -1,0 +1,35 @@
+
+/* styles/Unauthorized.css */
+
+.unauthorised .container {
+    text-align: center;
+    padding: 20px;
+    margin: auto;
+    max-width: 600px;
+  }
+  
+  
+.unauthorised h1 {
+    font-size: 2rem;
+    color: #d9534f; /* Example color for error message */
+  }
+  
+  
+.unauthorised p {
+    font-size: 1.25rem;
+  }
+  
+  
+.unauthorised a {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #0070f3; /* Example color for links */
+    text-decoration: none;
+  }
+  
+  
+.unauthorised a:hover {
+    text-decoration: underline;
+  }
+  

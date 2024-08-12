@@ -17,6 +17,14 @@ export const isAdmin = (auth, dispatch) => {
         return dispatch({ type: 'NOTIFY', payload: { error: ERROR_403 } })
 }
 
+export const isAdminPage = (isAdminPath, adminIdArr, decodedAccessToken) =>{
+    return isAdminPath && adminIdArr.indexOf(decodedAccessToken.id) > -1;
+}
+
+export const isProtectedPage = (path, protectedURIArr) =>{
+    return protectedURIArr.indexOf(path) > -1;
+}
+
 export const isLoggedIn = (auth) => {
     return (isEmpty(auth) || isEmpty(auth.token))
 }

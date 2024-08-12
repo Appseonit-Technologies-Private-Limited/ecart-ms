@@ -1,7 +1,6 @@
 import { createContext, useReducer, useEffect } from 'react'
 import reducers from './Reducers'
 import { getData } from '../utils/fetchData'
-import Cookie from 'js-cookie';
 
 export const DataContext = createContext()
 
@@ -14,19 +13,23 @@ export const DataProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducers, initialState)
     const { cart, auth } = state
 
+    const redirectToHttps = () => {
+        if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_HOSTNAME !== 'localhost') {
+            if (window.location.protocol == 'http:') {
+                window.location.href = window.location.href.replace('http:', 'https:');
+            }
+        }
+    }
+
     useEffect(() => {
         redirectToHttps();
-        const firstLogin = Cookie.get("firstLogin");
-        const refreshtoken = Cookie.get("refreshtoken");
-        if (firstLogin || refreshtoken) {
+        console.log(auth);
+        if (!auth.token) {
+            console.log('Fetching access_token........');
             getData('auth/accessToken').then(res => {
-                if (res.err) {
-                    Cookie.remove('firstLogin', { path: 'api/auth/accessToken' });
-                    Cookie.remove('refreshtoken', { path: 'api/auth/accessToken' });
-                    return;
-                }
-                dispatch({
-                    type: "AUTH",
+                if (res.err) return;
+                
+                dispatch({type: "AUTH",
                     payload: {
                         token: res.access_token,
                         user: res.user
@@ -37,13 +40,11 @@ export const DataProvider = ({ children }) => {
 
         getData('categories').then(res => {
             if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-
             dispatch({
                 type: "ADD_CATEGORIES",
                 payload: res.categories
             })
         })
-
     }, [])
 
     useEffect(() => {
@@ -70,14 +71,6 @@ export const DataProvider = ({ children }) => {
             dispatch({ type: 'ADD_USERS', payload: [] })
         }
     }, [auth.token])
-
-    const redirectToHttps = () => {
-        if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_HOSTNAME !== 'localhost') {
-            if (window.location.protocol == 'http:') {
-                window.location.href = window.location.href.replace('http:', 'https:');
-            }
-        }
-    }
 
     return (
         <DataContext.Provider value={{ state, dispatch }}>

@@ -14,6 +14,13 @@ export const TIME_SERIES_ARR = ['WEEK', 'MONTH', 'YEAR'];
 export const SIGN_IN = 'SIGN_IN';
 export const PRODUCT_ATTR = 'PRODUCT_ATTR';
 export const OKCODE_200 = 200; 
+
+//Cookies
+export const COM1 = "com1";
+export const COM2 = "com2";
+export const COM1_EXPIRES_IN = '15m';
+export const COM2_EXPIRES_IN = '7d';
+
 // Error msgs
 export const ERROR_403 = 'Unauthorized Access!';
 export const ERRCODE_408 = 408;
@@ -23,6 +30,7 @@ export const PLEASE_LOG_IN = 'Please sign in to proceed further.';
 export const INVALID_LOGIN = 'Login failed! Invalid User Name or Password.';
 export const PROCESSING_MSG = 'Processing, please wait...';
 export const SIGNING_MSG = 'Signing in, please wait...';
+export const ACCEPT_COOKIE_CONSENT_MSG = 'Please accept our cookie policy to continue with your login.';
 
 //Filters.js
 export const ALL = 'All Orders';

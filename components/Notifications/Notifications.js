@@ -25,6 +25,8 @@ function Notifications() {
             if (!isEmpty(auth.token)) {
                 isLoading(true, dispatch)
                 try {
+                    console.log('auth.token : ',auth.token);
+                    
                     const res = await getData('notifications', auth.token);
                     isLoading(false, dispatch)
                     if (res.code) {
