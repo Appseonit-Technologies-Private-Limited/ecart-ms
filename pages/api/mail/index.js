@@ -8,8 +8,7 @@ import { orderAdminMail } from '../../../utils/orderAdminMail'
 import { orderConfirmationMail } from '../../../utils/orderConfirmationMail'
 import { restPasswordMail } from '../../../utils/resetPasswordMail'
 import { orderDeliveredMail } from '../../../utils/orderDeliveredMail'
-import {auth} from '../../../middleware/auth'
-
+import auth from '../../../middleware/auth'
 
 connectDB()
 
