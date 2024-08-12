@@ -2,7 +2,7 @@ import connectDB from '../../../utils/connectDB'
 import Users from '../../../models/userModel'
 import bcrypt from 'bcrypt'
 import { createAccessToken, createRefreshToken } from '../../../utils/generateToken'
-import { ACCEPT_COOKIE_CONSENT_MSG, COM1, COM2, COM2_EXPIRES_IN, CONTACT_ADMIN_ERR_MSG, INVALID_LOGIN } from '../../../utils/constants'
+import { ACCEPT_COOKIE_CONSENT_MSG, COM1, COM1_MAXAGE, COM2, COM2_EXPIRES_IN, COM2_MAXAGE, CONTACT_ADMIN_ERR_MSG, INVALID_LOGIN } from '../../../utils/constants'
 import { generateCookie } from '../../../utils/CookieHelper'
 
 connectDB()
@@ -35,8 +35,8 @@ const login = async (req, res) => {
         const access_token = await createAccessToken({ id: user._id });
         const refresh_token = await createRefreshToken({ id: user._id}, COM2_EXPIRES_IN);
 
-        const accessTokenCookie = generateCookie(COM1, access_token, '/', (15 * 60));
-        const refreshTokenCookie = generateCookie(COM2, refresh_token,  'api/auth/accessToken', (60 * 60 * 24 * 7));
+        const accessTokenCookie = generateCookie(COM1, access_token, '/', COM1_MAXAGE);
+        const refreshTokenCookie = generateCookie(COM2, refresh_token,  'api/auth/accessToken', COM2_MAXAGE);
       
         // Set both cookies in the response header
         res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);

@@ -25,22 +25,6 @@ const logout = async (req, res) => {
         //await auth(req, res); // removed because session timeout issue occur.
         const refreshTokenId = await blacklistRefreshToken(req.cookies.com2, res);
         if (refreshTokenId) await Tokens.updateMany({ refreshTokenId }, { $set: { isBlackListed: true } });
-        
-        //  // Remove access token cookie
-        // const accessTokenCookie = serialize(COM1, '', {
-        //     httpOnly: true,
-        //     secure: process.env.NODE_ENV === 'production',
-        //     maxAge: -1, // Expire the cookie immediately
-        //     path: '/',
-        // });
-
-        // // Remove refresh token cookie
-        // const refreshTokenCookie = serialize(COM2, '', {
-        //     httpOnly: true,
-        //     secure: process.env.NODE_ENV === 'production',
-        //     maxAge: -1, // Expire the cookie immediately
-        //     path: '/',
-        // });
 
         const accessTokenCookie = generateCookie(COM1, '', '/', -1);
         const refreshTokenCookie = generateCookie(COM2, '',  'api/auth/accessToken', -1);

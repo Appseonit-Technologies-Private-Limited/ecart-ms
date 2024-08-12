@@ -2,8 +2,7 @@ import connectDB from '../../../utils/connectDB'
 import Users from '../../../models/userModel'
 import Tokens from '../../../models/tokenModel'
 import { createAccessToken } from '../../../utils/generateToken'
-import { serialize } from 'cookie';
-import { COM1, CONTACT_ADMIN_ERR_MSG, ERROR_403, PLEASE_LOG_IN } from '../../../utils/constants'
+import { COM1, COM1_MAXAGE, CONTACT_ADMIN_ERR_MSG, PLEASE_LOG_IN } from '../../../utils/constants'
 import { verifyToken } from '../../../middleware/VerifyToken'
 
 connectDB()
@@ -45,14 +44,8 @@ export default async (req, res) => {
             access_token = await createAccessToken({ id: user._id });
             console.log('New Access Token ['+access_token+'] generated successfully!');
 
-            const accessTokenCookie = serialize(COM1, access_token, {
-                path: '/', // it will be available in every request.
-                maxAge: 15 * 60,// Cookie expires in 15 minutes (15 * 60 seconds)
-                secure: process.env.NEXT_PUBLIC_HOSTNAME !== 'localhost',
-                 //httpOnly: true, reading this cookie in clientside js.
-                sameSite: 'Lax'
-            })
-    
+            const accessTokenCookie = generateCookie(COM1, access_token, '/', COM1_MAXAGE);
+
             // Set both cookies in the response header
             res.setHeader('Set-Cookie', accessTokenCookie);
         }

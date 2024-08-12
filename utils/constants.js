@@ -20,6 +20,8 @@ export const COM1 = "com1";
 export const COM2 = "com2";
 export const COM1_EXPIRES_IN = '15m';
 export const COM2_EXPIRES_IN = '7d';
+export const COM1_MAXAGE = 15 * 60;
+export const COM2_MAXAGE = 60 * 60 * 24 * 7;
 
 // Error msgs
 export const ERROR_403 = 'Unauthorized Access!';
