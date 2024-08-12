@@ -4,6 +4,7 @@ import Tokens from '../../../models/tokenModel'
 import { createAccessToken } from '../../../utils/generateToken'
 import { COM1, COM1_MAXAGE, CONTACT_ADMIN_ERR_MSG, PLEASE_LOG_IN } from '../../../utils/constants'
 import { verifyToken } from '../../../middleware/VerifyToken'
+import { generateCookie } from '../../../utils/CookieHelper'
 
 connectDB()
 
