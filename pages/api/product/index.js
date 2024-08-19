@@ -3,7 +3,7 @@ import Categories from '../../../models/categoryModel'
 import Products from '../../../models/productModel'
 import auth from '../../../middleware/auth'
 import { CONTACT_ADMIN_ERR_MSG, ERROR_403 } from '../../../utils/constants'
-import { displayProducts } from '../../../utils/productUtil'
+import { displayProduct, displayProducts } from '../../../utils/productUtil'
 
 connectDB()
 
@@ -41,17 +41,23 @@ const getAllProductsCount = async (req, res) => {
 
 const getProducts = async (req, res) => {
     try {
-        const { category, page, limit, sort, title } = req.query;
+        const { categoryWise, category, page, limit, sort, title } = req.query;
+        let products;
+        if(categoryWise && categoryWise > 0){
+            products = await getProductsCategoryWise(req, res);
+        }else{
+            let params = {}
+            if (category && category !== 'all') params = { ...params, categories: category }
+            if (title && title !== 'all') params = { ...params, title: { $regex: title } }
 
-        let params = {}
-        if (category && category !== 'all') params = { ...params, categories: category }
-        if (title && title !== 'all') params = { ...params, title: { $regex: title } }
-        const products = await Products.find(params).populate({ path: "categories", select: "name _id", model: Categories })
-            .sort(sort ? sort : '-createdAt').skip((page ? (page - 1) : 0) * limit).limit(limit);
+            products = await Products.find(params).populate({ path: "categories", select: "name _id", model: Categories })
+                .sort(sort ? sort : '-createdAt').skip((page ? (page - 1) : 0) * limit).limit(limit);
+        }
+
         res.json({
             status: 'success',
             count: products.length,
-            products: displayProducts(products)
+            products: categoryWise && categoryWise > 0 ? products : displayProducts(products)
         })
     } catch (err) {
         console.error('Error occurred while getProducts: ' + err);
@@ -81,4 +87,33 @@ const createProduct = async (req, res) => {
         console.error('Error occurred while createProduct: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
+}
+
+const getProductsCategoryWise = async (req, res) =>{
+    let catWiseProducts = [];
+    try {
+        const { limit } = req.query;
+        let params = {};
+        // Fetch all categories and select only the '_id' field
+        const categories = await Categories.find({}).exec();
+        params = {categories: categories.map(category => category._id)}
+
+        const products = await Products.find(params).populate({ path: "categories", select: "name _id", model: Categories })
+        .sort('-createdAt').skip(0 * limit).limit(limit);
+
+        categories && categories.map(cat =>{
+            let catObj = {};
+            catObj = {id: cat._id, name: cat.name, products: []};
+            products && products.map(product =>{
+                if(product.categories && product.categories.name === cat.name){
+                    catObj.products.push(displayProduct(product));
+                }
+            });
+            catWiseProducts.push(catObj);
+        })
+    } catch (err) {
+        console.error('Error occurred while getProductsCategoryWise: ' + err);
+        return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
+    }
+    return catWiseProducts;
 }

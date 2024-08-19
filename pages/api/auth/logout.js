@@ -1,9 +1,8 @@
 import connectDB from '../../../utils/connectDB'
 import Tokens from '../../../models/tokenModel'
-import { COM1, COM2, CONTACT_ADMIN_ERR_MSG } from '../../../utils/constants'
+import { COM1, COM2, CONTACT_ADMIN_ERR_MSG, PLEASE_LOG_IN } from '../../../utils/constants'
 import { verifyToken } from '../../../middleware/VerifyToken'
 import { JWTExpired } from 'jose/errors'
-import { serialize } from 'cookie';
 import { generateCookie } from '../../../utils/CookieHelper'
 
 connectDB()

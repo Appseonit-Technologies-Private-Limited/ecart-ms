@@ -1,0 +1,36 @@
+
+import ProductCard from '../product/ProductCard';
+
+
+function CategoryWiseProducts({ catWiseProducts }) {
+    console.log(catWiseProducts);
+
+    return (
+
+        <>
+            {
+                catWiseProducts && catWiseProducts.map(
+                    (cat, i) => (
+                        cat.products && (
+                            <div key={`${cat.name}-catwiseProd${i}`} className='my-3 card'>
+                                <h6 className='my-2'>{cat.name}</h6>
+                                <div className='catwise-prod'>
+                                    {
+                                        cat.products.map(product => (
+                                            <div className='product-card'>
+                                                <ProductCard key={product._id} product={product} />
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        )
+
+                    )
+                )
+            }
+        </>
+    );
+}
+
+export default CategoryWiseProducts;

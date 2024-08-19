@@ -7,7 +7,7 @@ import { isEmpty } from 'lodash';
 import { updateCheckedNotifications } from '../../utils/NotificationHelper';
 import { getData } from '../../utils/fetchData';
 
-function MenuNotifications() {
+function MenuNotifications({windowWidth}) {
     const { state, dispatch } = useContext(DataContext);
     const { auth } = state;
     const [notificationsArr, setNotificationsArr] = useState([])
@@ -32,7 +32,7 @@ function MenuNotifications() {
                     notificationsArr.map((item, i) => (
                         i < 3 &&
                         (
-                            <div className="menu-item" key={i}>
+                            <div className="menu-item pb-0" key={i}>
                                 <Dropdown.Item href={getAction(item.action)} onClick={() => { updateCheckedNotifications(item._id, notificationsArr, auth, dispatch) }}>
                                     <div style={{ whiteSpace: 'break-spaces' }}>
                                         {item.createdAt &&
@@ -64,20 +64,12 @@ function MenuNotifications() {
     }
     return (
         <>
-            <Menu title=
+            <Menu className={'notification-icon'} title=
                 {
                     <>
-                        <i className="fas fa-bell" aria-hidden="true" >
-                            {(notificationsArr && notificationsArr.length) > 0 ?
-                                <>
-                                    <span className="count-badge count-badge-notification">
-                                        {(notificationsArr && notificationsArr.length)}
-                                    </span>
-                                    <span className="navbar-menu-text" style={{ paddingLeft: (notificationsArr && notificationsArr.length) > 9 ? '25px' : '20px' }}>Notifications</span>
-                                </>
-                                :
-                                <span className="navbar-menu-text">Notifications</span>
-                            }
+                        <i className="fas fa-bell notification-icon" aria-hidden="true" >
+                            {notificationsArr && notificationsArr.length > 0 && <span className="count-badge count-badge-notification"> {(notificationsArr && notificationsArr.length)}</span>}
+                            {windowWidth && windowWidth > 576 &&  <span className="navbar-menu-text" style={{ paddingLeft: windowWidth > 576 && !(notificationsArr && notificationsArr.length) ? '5px' : (notificationsArr && notificationsArr.length) > 9 ? '25px' : '20px' }}>Notifications</span> }  
                         </i>
                     </>
                 }

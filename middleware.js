@@ -9,7 +9,7 @@ export async function middleware(request) {
   const path = request.nextUrl.pathname
   const isAdminPath = admin_URIs.indexOf(path) !== -1;
   const adminIdArr = process.env.NEXT_PUBLIC_ADMIN_IDS ? process.env.NEXT_PUBLIC_ADMIN_IDS.split(',') : [];
-
+console.log('Path >>>>>>>>>>>> ', path);
   const isPublicPath = public_URIs.indexOf(path) !== -1;
   if (isPublicPath) return NextResponse.next();
 
@@ -49,8 +49,8 @@ export async function middleware(request) {
   return NextResponse.redirect(new URL('/signin', request.nextUrl))
 }
 
-const public_URIs = ['/', '/signin', '/register', '/cart', '/contactus'];
-const protected_URIs = ['/orders', '/profile', '/productSearch', '/notifications', '/product/[slug]'];
+const public_URIs = ['/', '/signin', '/register', '/productSearch', '/cart', '/contactus'];
+const protected_URIs = ['/orders', '/profile',  '/notifications', '/product/[slug]'];
 const admin_URIs = ['/users', '/productList', '/categories', '/dashboard'];
 
 // See "Matching Paths" below to learn more

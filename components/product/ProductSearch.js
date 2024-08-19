@@ -5,7 +5,7 @@ import { DEFAULT_MAX_PRODUCTS_LIMIT } from "../../utils/constants";
 import { getData } from "../../utils/fetchData";
 import { isAdminRole, isLoading } from "../../utils/util";
 import Filter from "../Filter";
-import ProductItem from "./ProductItem";
+import ProductCard from "./ProductCard";
 
 
 export const ProductSearch = () => {
@@ -94,7 +94,7 @@ export const ProductSearch = () => {
             <div className="products">
                 {
                     products && products.map(product => (
-                        <ProductItem key={product._id} product={product} handleCheck={handleCheck} />
+                        <ProductCard key={product._id} product={product} handleCheck={handleCheck} />
                     ))
                 }
             </div>

@@ -12,6 +12,22 @@
     color: #fff;
 }
 
+.nav-item i{
+    font-size: small;
+}
+
+
+.menu-my-account-pic {
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+}
+
+.nav-item .notification-icon{
+    margin-top: -1px;
+    color: var(--app-header-item-color);
+}
+
 .activateBtn {
     font-weight: 500;
 }
@@ -26,31 +42,47 @@
     position: absolute;
     padding: 3px 6px;
     border-radius: 70%;
-    font-size: 12px;
+    font-size: smaller;
 }
 
 .count-badge-cart {
-    background: rgb(168 200 235 / 45%);
+    background: var(--app-color);
     color: white;
     margin-top: -12px;
     margin-left: 2px;
 }
 
-.my-account {
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
-}
+/* ----------- Mobiles View ------------- */
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
+
+    
+    .navbar-menu-text {
+        font-weight: normal;
+        font-size: xx-small;
+    }
+
+    .count-badge{
+        font-size: xx-small;
+    }
+    .menu-my-account-text{
+        font-size: small;
+    }
+
     .activateBtn {
         margin-top: 10px;
         font-size: x-small;
         font-weight: 700;
     }
 
-    .my-account {
-        margin-top: 5px;
+    .menu-my-account-pic {
+        width: 20px;
+        height: 20px;
     }
+
+    .nav-item .notification-icon{
+        padding-top: 2px;
+    }
+
 }
+

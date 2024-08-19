@@ -1,14 +1,14 @@
 import Slider from "react-slick"
-import ProductItem from "../../product/ProductItem"
+import ProductCard from "../../product/ProductCard";
 
 export const BestSellingProducts = ({ bsProducts }) => {
 
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
-        autoplay: true,
+        autoplay: false,
         speed: 4000,
         autoplaySpeed: 2000,
         cssEase: "linear"
@@ -16,12 +16,12 @@ export const BestSellingProducts = ({ bsProducts }) => {
 
     return (
         <>
-            <h5>Best Selling Products</h5>
+            <h6>Best Selling Products</h6>
             <Slider {...settings}>
                 {
                     bsProducts && bsProducts.length !== 0 ? bsProducts.map(product => (
                         <div key={product._id} className="productsCarousel">
-                            <ProductItem key={product._id} product={product} viewOnly={true} />
+                            <ProductCard key={product._id} product={product} viewOnly={true} />
                         </div>
                     )) : <h2>No Products</h2>
                 }

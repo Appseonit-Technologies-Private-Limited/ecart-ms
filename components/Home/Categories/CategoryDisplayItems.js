@@ -1,33 +1,38 @@
+import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export const CategoryDisplayItems = ({ categories }) => {
 
+    const [advertisements, setAdvertisements] = useState([]);
+
+    useEffect(() => {
+        if (categories) {
+            var advs = [];
+            categories.forEach(cat => {
+                cat.displayItems && cat.displayItems.forEach(item => {
+                    advs.push({ ...item, categoryId: cat._id });
+                });
+            });
+            setAdvertisements(advs);
+        }
+    }, [categories])
+
+
     return (
         <>
-            {categories &&
-                <>
-                    {categories.map((category, i) => (
-                        category.displayItems &&
-                        <Link key={category + i} href={`/productSearch/?category=${category._id}`}>
-                            <div className="row category-display-items">
-                                <div className='col-xl-6'>
-                                    <img className="" src={category.displayItems.img} />
-                                </div>
-                                <div className='col-xl-6 row align-items-center justify-content-center'>
-                                    <div className="category-display-items-text">
-                                        <h1 className="category-display-items-name">
-                                            {category.displayItems.name}
-                                        </h1>
-                                        <h3 className="category-display-items-desc">
-                                            {category.displayItems.description}
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
+            {advertisements && advertisements.map((adv, i) => (
+                <div key={`${adv.title}-${i}`} className="mt-3 adv-card">
+                    <Image className="adv-card-img" src={adv.img} alt={adv.name} layout="fill" objectFit="cover"/>
+                    <div className={`adv-card-content ${i % 2 == 0 ? 'float-right':''}`}>
+                        <div className="adv-card-content-title">{adv.name}</div>
+                        <h3 className="my-2 adv-card-content-desc">{adv.desc}</h3>
+                        <Link href={`/productSearch/?category=${adv.categoryId}`} passHref>
+                            <button className="btn btn-sm btn-outline-primary mt-2 mt-sm-4">Shop Now</button>
                         </Link>
-                    ))
-                    }
-                </>
+                    </div>
+                </div>
+            ))
             }
         </>
     );

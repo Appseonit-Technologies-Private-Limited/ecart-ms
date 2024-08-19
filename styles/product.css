@@ -14,12 +14,12 @@
     border-radius: 1.25rem;
 }
 
-.products .card-img-top {
+.products img {
     height: 250px;
     width: 100%;
 }
 
-.products .card-img-top:hover {
+.products img:hover {
     cursor: pointer;
 }
 
@@ -68,12 +68,12 @@
     width: 71%;
 }
 
-.productsCarousel .card-img-top {
+.productsCarousel img {
     height: 186px;
     width: 100%;
 }
 
-.productsCarousel .card-img-top:hover {
+.productsCarousel img:hover {
     cursor: pointer;
 }
 
@@ -94,7 +94,7 @@
 }
 
 @media (max-width: 767px) {
-    .productsCarousel .card-img-top {
+    .productsCarousel img {
         height: 100px;
     }
     .productsCarousel .card {
@@ -112,7 +112,7 @@
         height: 152px;
         width: 80%;
     }
-    .productsCarousel .card-img-top {
+    .productsCarousel img {
         height: 150px;
     }
 }
