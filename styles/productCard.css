@@ -18,6 +18,7 @@
 }
 
 .product-card .card-img-div{
+    
     display: flex;
     justify-content: center; /* Centers the image horizontally */
     align-items: center; /* Centers the image vertically */
@@ -27,18 +28,21 @@
     height: 200px; /* Set a fixed height for the image container */
     padding: 0; /* Ensure no padding interferes with centering */
     box-sizing: border-box;
-    
+    position: relative;
 }
 
 .product-card .offer-tag {
     position: absolute;
-    background-color: #ef0731;
+    top: 0;
+    left: 0;
+    margin: 10px;
+    background-color: green;
     color: #fff;
-    padding: 1px 15px 1px 5px;
-    font-size: xx-small;
-    opacity: 0.8;
+    padding: 1px 5px 1px 5px;
+    font-size: 0.5rem;
+    opacity: 0.7;
     z-index: 10;
-    margin-top: 15px;
+    border-radius: 3px;
 }
 
 .product-card img {
@@ -91,9 +95,18 @@
 }
 
 .product-card .btn{
-    font-size: x-small;
-    background-color: var(--app-secondary-color);
-    padding: 6px;
+    font-size: xx-small;
+    background: none;
+    font-weight: 600;
+    color: var(--app-header-item-color);
+    border: 1px solid darkgrey;
+    padding: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.product-card .add-btn-container .icon{
+ font-size: medium;
 }
 
 .product-card .out-of-stock{

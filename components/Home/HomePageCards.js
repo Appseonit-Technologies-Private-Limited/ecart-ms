@@ -1,29 +1,33 @@
 import React from 'react';
+import { FaShippingFast } from 'react-icons/fa';
+import { MdGppGood } from 'react-icons/md';
+import { FaArrowUpRightDots } from "react-icons/fa6";
+import { GrMoney } from "react-icons/gr";
 
 const HomePageCards = () => {
   return (
     <div className="row justify-content-between">
       <div className="col-card">
         <div className="card">
-          <h3><i className="fa fa-shipping-fast" aria-hidden="true"></i> <span>Free Shipping</span></h3>
+          <h3><FaShippingFast /><div className='text'>Free Shipping</div></h3>
         </div>
       </div>
 
       <div className="col-card">
         <div className="card">
-          <h3><i className="fa fa-thumbs-up" aria-hidden="true" ></i> <span>Quality Products</span></h3>
+          <h3><FaArrowUpRightDots /><div className='text'>Quality Products</div></h3>
         </div>
       </div>
 
       <div className="col-card">
         <div className="card">
-          <h3><i className="fa fa-rupee-sign" aria-hidden="true"></i> <span>Huge Saving</span></h3>
+          <h3><GrMoney /><div className='text'>Huge Saving</div></h3>
         </div>
       </div>
 
       <div className="col-card">
         <div className="card">
-          <h3><i className="fa fa-check-square-o" aria-hidden="true"></i> <span>100% Genuine</span></h3>
+          <h3><MdGppGood /><div className='text'>100% Genuine</div></h3>
         </div>
       </div>
     </div>

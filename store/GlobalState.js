@@ -7,11 +7,11 @@ export const DataContext = createContext()
 
 export const DataProvider = ({ children }) => {
     const initialState = {
-        notify: {}, auth: {}, cart: [], modal: [], orders: [], users: [], categories: []
+        notify: {}, auth: {}, cart: [], modal: [], orders: [], users: [], categories: [], windowWidth: 300
     }
 
     const [state, dispatch] = useReducer(reducers, initialState)
-    const { cart, auth } = state
+    const { cart, auth } = state;
 
     const redirectToHttps = () => {
         if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_HOSTNAME !== 'localhost') {
@@ -45,6 +45,22 @@ export const DataProvider = ({ children }) => {
                 payload: res.categories
             })
         })
+
+        if (typeof window !== "undefined"){
+         // Function to update the window width
+         const updateWindowWidth = () => dispatch({ type: "WINDOW_WIDTH", payload: window.innerWidth });
+      
+          // Set the initial window width when the component mounts
+          updateWindowWidth();
+      
+          // Listen for window resize events
+          window.addEventListener("resize", updateWindowWidth);
+      
+          // Cleanup the event listener when the component unmounts
+          return () => {
+            window.removeEventListener("resize", updateWindowWidth);
+          };
+        }
     }, [])
 
     useEffect(() => {

@@ -3,31 +3,26 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DataContext } from '../store/GlobalState'
 import { postData, putData } from '../utils/fetchData'
-import Cookie from 'js-cookie'
 import { ACC_ACT_MAIL } from '../utils/constants.js'
 import isEmpty from 'lodash/isEmpty';
 import MenuNotifications from './Notifications/MenuNotifications'
+import { IoMdCart } from "react-icons/io";
+import { MdAccountCircle, MdOutlineAddBusiness } from "react-icons/md";
+import { LuLayoutDashboard, LuPackageSearch } from "react-icons/lu";
+import { TbCategoryPlus } from "react-icons/tb";
+import { FaListUl, FaUsers } from "react-icons/fa";
+import Dropdown from 'react-bootstrap/Dropdown';
+import Menu from './Custom_Components/Menu.js'
+import { IoLogOut, IoNotifications } from 'react-icons/io5'
 
 function NavBar() {
     const router = useRouter()
     const { state, dispatch } = useContext(DataContext)
-    const { auth, cart } = state;
-    const [windowWidth, setWindowWidth] = useState(300);
-     
+    const { auth, cart, windowWidth } = state;
     const [accountActivated, setAccountActivated] = useState(auth && auth.user && auth.user.activated)
     const isAdmin = auth && auth.user && auth.user.role === 'admin';
+    const mobileWidth = 576;
 
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        }
-        // Add event listener for window resize
-        window.addEventListener('resize', handleResize);
-
-        // Cleanup event listener on component unmount
-        return () => window.removeEventListener('resize', handleResize);
-    }, [])
-    
     const isActive = (r) => { return r === router.pathname ? " active" : "" }
     const handleLogout = async () => {
         const res = await putData(`auth/logout`, {}, auth.token)
@@ -36,22 +31,6 @@ function NavBar() {
         dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
         setAccountActivated(null)
         return router.push('/')
-    }
-
-    const adminRouter = () => {
-        return (
-            <>
-                <Link href="/users" className="dropdown-item">Users
-                </Link>
-                <Link href="/productList" className="dropdown-item">
-                    Product List
-                </Link>
-                <Link href="/create" className="dropdown-item">Add Product
-                </Link>
-                <Link href="/categories" className="dropdown-item">Categories
-                </Link>
-            </>
-        )
     }
 
     useEffect(() => {
@@ -69,36 +48,53 @@ function NavBar() {
 
     const MyAccount = () => {
         return (
-            <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img className="menu-my-account-pic" src={auth.user.avatar} alt={auth.user.avatar} />
-                    <span className="navbar-menu-text menu-my-account-text">{auth.user.name}</span>
-                </a>
+            <>
+                {
+                    isEmpty(auth)
+                        ?
+                        <Link href="/signin" className={"nav-link" + isActive('/signin')}>
+                            <MdAccountCircle />
+                            <span className='navbar-menu-text'>Sign in</span>
+                        </Link>
 
-                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <Link href="/profile" className="dropdown-item">Profile
-                    </Link>
-                    {
-                        auth.user.role === 'admin' && adminRouter()
-                    }
-                    <Link href="/orders" className="dropdown-item">Orders
-                    </Link>
-                    <Link href="/notifications" className="dropdown-item">Notifications
-                    </Link>
-                    <div className="dropdown-divider"></div>
-                    <button className="dropdown-item" onClick={handleLogout}>Logout</button>
-                </div>
-            </li>
+                        :
+                        <Menu title={
+                            <>
+                                <MdAccountCircle />
+                                <span className='navbar-menu-text text-capitalize'>{auth.user.name}</span>
+
+                            </>
+                        }
+                            menuItems={
+                                <div>
+                                    <Dropdown.Item href='/profile'>{<><MdAccountCircle /> Profile</>}</Dropdown.Item>
+                                    <Dropdown.Item href='/orders'>{<><LuPackageSearch /> Orders</>}</Dropdown.Item>
+                                    {isAdmin && (
+                                        <>
+                                            <Dropdown.Item href='/users'>{<><FaUsers /> Users</>}</Dropdown.Item>
+                                            <Dropdown.Item href='/productList'>{<><FaListUl /> Product List</>}</Dropdown.Item>
+                                            <Dropdown.Item href='/create'>{<><MdOutlineAddBusiness /> Add Product</>}</Dropdown.Item>
+                                            <Dropdown.Item href='/categories'>{<><TbCategoryPlus /> Categories</>}</Dropdown.Item>
+                                        </>)
+                                    }
+                                    <Dropdown.Item href='/notifications'>{<><IoNotifications /> Notifications</>}</Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Item onClick={handleLogout}>{<><IoLogOut /> Logout</>}</Dropdown.Item>
+                                </div>
+                            }
+                        />
+                }
+            </>
         )
     }
 
     return (
         <nav className="navbar navbar-expand fixed-top">
             <Link href="/">
-                <div className="d-flex align-items-end mb-0" style={{ cursor: 'pointer' }}>
-                    {/* <img src="/assets/images/icon/KFM_Logo_Small_Black.svg" alt="KFM Enterprises" /> */}
+                <div className="d-flex align-items-end" style={{ cursor: 'pointer' }}>
+
                     <h4 className='company-logo'>eCART</h4>
-                    <i className="fas fa-shopping-cart position-relative cart-logo" aria-hidden="true"></i>
+                    <div className='cart-logo'><IoMdCart /></div>
                 </div>
             </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,38 +115,24 @@ function NavBar() {
                     {isAdmin &&
                         <li className="nav-item" >
                             <Link href="/dashboard" className={"nav-link" + isActive('/dashboard')}>
-                                <i className="fas fa-th" aria-hidden="true" ></i>
-                                {windowWidth && windowWidth > 576 && <span className="navbar-menu-text"> Dashboard </span>}
+                                <LuLayoutDashboard />
+                                {windowWidth && windowWidth > mobileWidth && <span className="navbar-menu-text"> Dashboard </span>}
                             </Link>
                         </li>
 
                     }
-
                     {
                         !isAdmin &&
-                                    <li className="nav-item">
-                                        <Link href="/cart" className={"nav-link" + isActive('/cart')}>
-                                            <i className="fas fa-shopping-cart" aria-hidden="true" > 
-                                                {cart && cart.length > 0 && <span className="count-badge count-badge-cart">{cart.length}</span>}
-                                                {windowWidth && windowWidth > 576 && <span className="navbar-menu-text" style={{ paddingLeft:  windowWidth > 576 && !(cart && cart.length) ? '5px' : cart && cart.length > 9 ? '25px' : '20px' }}>Cart</span>}       
-                                            </i>
-                                        </Link>
-                                    </li>
+                        <li className="nav-item">
+                            <Link href="/cart" className={"nav-link" + isActive('/cart')}>
+                                <IoMdCart />
+                                {cart && cart.length > 0 && <span className="count-badge">{cart.length}</span>}
+                                {windowWidth > mobileWidth && <span className='navbar-menu-text'>Cart</span>}
+                            </Link>
+                        </li>
                     }
-
-                    <li className="nav-item" >
-                        <MenuNotifications windowWidth={windowWidth}/>
-                    </li>
-                    {
-                        isEmpty(auth)
-                            ? <li className="nav-item">
-                                <Link href="/signin" className={"nav-link" + isActive('/signin')}>
-                                    <i className="fas fa-user" aria-hidden="true"></i>
-                                    <span className='navbar-menu-text'>Sign in</span>
-                                </Link>
-                            </li>
-                            : MyAccount()
-                    }
+                    <li className="nav-item"><MenuNotifications mobileWidth={mobileWidth} /></li>
+                    <li className="nav-item"><MyAccount /> </li>
                 </ul>
             </div>
         </nav>

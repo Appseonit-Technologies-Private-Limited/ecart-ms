@@ -6,7 +6,7 @@
 /* Style the counter cards */
 .col-card .card {
   /* box-shadow: var(--app-box-shadow); */
-  padding: 25px;
+  padding: 10px;
   text-align: center;
   background-color: #fff;
   /* background: linear-gradient(to right, #092f56, #000000); */
@@ -14,19 +14,20 @@
   border: none;
 }
 
-.col-card i {
-  font-size: large;
+.col-card h3 {
+  font-size: x-large;
   text-align: center;
   vertical-align: middle;
-  color: #0c834e;
+  color: var(--app-color);
 }
 
-.col-card span {
-  color: #3c3c41;
+.col-card .text {
+  color: var(--app-header-item-color);
   font-size: small;
   text-align: center;
   vertical-align: middle;
   font-weight: 600;
+  margin-top: 2px;
 }
 
 
@@ -38,38 +39,15 @@
   }
 
   .col-card .card {
-    height: 80px;
     padding: 5px;
   }
 
-  .col-card i {
+  .col-card h3 {
     font-size: large;
     width: 100%;
   }
 
-  .col-card span {
-    font-size: xx-small;
-  }
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-  /* Styles for small devices */
-  .col-card {
-    width: 22%;
-  }
-
-  .col-card .card {
-    height: 80px;
-    padding: 5px;
-  }
-
-  .col-card i {
-    font-size: large;
-    width: 100%;
-  }
-
-  .col-card span {
+  .col-card .text {
     font-size: xx-small;
   }
 }

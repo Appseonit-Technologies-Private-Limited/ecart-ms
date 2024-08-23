@@ -1,7 +1,10 @@
+.navbar{
+    padding: .5rem .5rem;
+}
+
 .navbar-dark .navbar-nav .nav-link {
     color: #fff;
     font-weight: bolder;
-    font-size: 16px;
 }
 
 .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
@@ -12,20 +15,35 @@
     color: #fff;
 }
 
-.nav-item i{
-    font-size: small;
-}
-
-
-.menu-my-account-pic {
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
-}
-
-.nav-item .notification-icon{
-    margin-top: -1px;
+.company-logo {
+    /* margin-bottom: 0px; */
     color: var(--app-header-item-color);
+    font-weight: 900
+}
+
+.cart-logo {
+    font-size: xx-large;
+    color: var(--app-color);
+}
+
+.nav-item .nav-link {
+    font-size: x-large;
+    text-decoration: none;
+    padding: .375rem .5rem;
+}
+
+/* Navbar Menu button */
+.nav-item button {
+    font-size: x-large;
+    color: var(--app-header-item-color);
+}
+
+.nav-item button:hover, .nav-item button:focus {
+    color: #000;
+}
+
+.dropdown-toggle::after {
+    display: none;
 }
 
 .activateBtn {
@@ -34,39 +52,65 @@
 
 .navbar-menu-text {
     padding-left: 5px;
-    font-family: 'Nunito', sans-serif;
+    /* font-family: 'Nunito', sans-serif; */
     font-weight: bold;
+    font-size: small;
 }
 
 .count-badge {
     position: absolute;
-    padding: 3px 6px;
-    border-radius: 70%;
-    font-size: smaller;
-}
-
-.count-badge-cart {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    text-align: center;
+    justify-content: center;
+    font-size: xx-small;
     background: var(--app-color);
     color: white;
-    margin-top: -12px;
-    margin-left: 2px;
+    margin-top: -5px;
+    margin-left: -8px;
+    padding-top: 3px;
 }
+
+.menu-btn .btn {
+    background: none !important;
+    border: 0 !important;
+}
+
+.menu-btn .btn:focus {
+    box-shadow: none !important;
+}
+
+.menu-item {
+    width: 300px;
+}
+
 
 /* ----------- Mobiles View ------------- */
 
 @media (max-width: 767px) {
 
-    
-    .navbar-menu-text {
-        font-weight: normal;
-        font-size: xx-small;
+
+
+    .company-logo {
+        font-size: large;
     }
 
-    .count-badge{
-        font-size: xx-small;
+    .nav-item .nav-link {
+        font-size: x-large;
+        padding: .375rem .5rem;
     }
-    .menu-my-account-text{
-        font-size: small;
+
+    .navbar-menu-text {
+        font-size: x-small;
+    }
+
+    .count-badge {
+        font-size: 0.5rem;
+        width: 1.1rem;
+        height: 1.1rem;
+        margin-top: -2px;
+        margin-left: -8px;
     }
 
     .activateBtn {
@@ -75,14 +119,11 @@
         font-weight: 700;
     }
 
-    .menu-my-account-pic {
-        width: 20px;
-        height: 20px;
+    .nav-item .dropdown-menu {
+        min-width: 8rem;
     }
-
-    .nav-item .notification-icon{
-        padding-top: 2px;
+    .nav-item .dropdown-item{
+        padding: .25rem 0.5rem;
+        font-size: small;
     }
-
 }
-

@@ -23,7 +23,7 @@ html, body {
 html, body {
   padding: 0;
   margin: 0;
-  font-family: 'Nunito', sans-serif;
+  /* font-family: 'Nunito', sans-serif; */
 }
 
 .main {
@@ -57,33 +57,13 @@ nav {
   box-shadow: var(--app-box-shadow);
   margin-bottom: 0px;
   height: 65px;
-  opacity: 0.95;
-}
-
-.nav-tabs {
-  background: #f1f7f8;
-  box-shadow: var(--app-box-shadow);
-}
-
-.nav-tabs .nav-link {
-  border: none;
-  border-top-left-radius: 2;
-  border-top-right-radius: 2;
-}
-
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-  color: var(--app-header-item-color);
-  background-color: var(--app-color);
-}
-
-.tab-content {
-  background: #fff;
 }
 
 a {
   color: var(--app-header-item-color);
   text-decoration: none;
 }
+
 a:hover{
   color: #000;
   text-decoration: none;
@@ -118,10 +98,6 @@ h6 {
 
 .app-bg-color {
   background-color: var(--app-color);
-}
-
-.app-color {
-  color: var(--app-color);
 }
 
 .card {
@@ -162,7 +138,7 @@ h6 {
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
-  color: var(--app-header-item-color);
+  color: #000;
 }
 
 .text-primary {
@@ -216,17 +192,6 @@ h6 {
   font-size: 13px;
 }
 
-.company-logo {
-  margin-bottom: -3px;
-  color: var(--app-header-item-color);
-  font-weight: 900
-}
-
-.cart-logo {
-  font-size: xx-large;
-  color: var(--app-color);
-}
-
 .timer-bar {
   margin-bottom: 10px;
   padding: 3px;
@@ -255,9 +220,9 @@ h6 {
   /* box-shadow: var(--app-box-shadow); */
   text-align: center;
   cursor: pointer;
-  background-color: aliceblue;
+  background-color: #f1f7f8;
   border: none;
-  font-size: smaller;
+  font-size: x-small;
   /* font-weight: 600; */
 }
 
@@ -306,7 +271,7 @@ h6 {
   color: var(--app-color);
   font-weight: bolder;
   font-size: xx-large;
-  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /* font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
 }
 
 .adv-card-content-desc {
@@ -321,13 +286,6 @@ h6 {
   small {
     font-size: 12px;
     line-height: 1.5;
-  }
-
-  .company-logo{
-    font-size: smaller;
-  }
-  .cart-logo{
-    font-size: x-large;
   }
 
   nav {
@@ -353,7 +311,7 @@ h6 {
   .category-card {
     height: 80px;
     width: 70px;
-    font-size: xx-small;
+    font-size: x-small;
     font-weight: 600;
   }
 
@@ -379,43 +337,6 @@ h6 {
   }
 }
 
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-  /* Styles for small devices */
-  .home_page {
-    margin-top: -4px;
-  }
-
-  .timer-bar {
-    font-size: x-small;
-    width: 100%;
-  }
-
-  .category-card {
-    height: 80px;
-    width: 70px;
-    font-size: xx-small;
-    font-weight: 600;
-  }
-
-  .category-img {
-    height: 50px;
-    width: 90%;
-  }
-
-  .carousel-indicators {
-    display: none;
-  }
-
-  .p-4 {
-    padding: 1.5rem !important;
-  }
-
-  .main {
-    padding-bottom: 768px;
-  }
-}
-
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   /* Styles for medium devices */
@@ -432,7 +353,6 @@ h6 {
   .category-card {
     height: 80px;
     width: 70px;
-    font-size: xx-small;
     font-weight: 600;
   }
 
@@ -546,10 +466,6 @@ h6 {
 /* ----------- Remote Table Grid ------------- */
 
 @import url("./tablegrid.css");
-
-/* ----------- Menu Dropdown ------------- */
-
-@import url("./menu.css");
 
 /* ----------- unauthorized page ------------- */
 @import url("./unauthorized.css");

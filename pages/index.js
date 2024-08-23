@@ -26,7 +26,7 @@ const Home = (props) => {
   return (
     <div className="home_page">
       <Head>
-        <title>KFM Cart - Home</title>
+        <title>eCart - Home</title>
       </Head>
 
       <div className="carousel image img-fluid">

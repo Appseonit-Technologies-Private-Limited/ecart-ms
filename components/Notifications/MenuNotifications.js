@@ -6,10 +6,11 @@ import { getAction, formatDateTime } from '../../utils/util';
 import { isEmpty } from 'lodash';
 import { updateCheckedNotifications } from '../../utils/NotificationHelper';
 import { getData } from '../../utils/fetchData';
+import { IoNotifications } from "react-icons/io5";
 
-function MenuNotifications({windowWidth}) {
+function MenuNotifications({mobileWidth}) {
     const { state, dispatch } = useContext(DataContext);
-    const { auth } = state;
+    const { auth , windowWidth} = state;
     const [notificationsArr, setNotificationsArr] = useState([])
 
     useEffect(() => {
@@ -64,13 +65,14 @@ function MenuNotifications({windowWidth}) {
     }
     return (
         <>
-            <Menu className={'notification-icon'} title=
-                {
+            <Menu 
+                title= {
                     <>
-                        <i className="fas fa-bell notification-icon" aria-hidden="true" >
-                            {notificationsArr && notificationsArr.length > 0 && <span className="count-badge count-badge-notification"> {(notificationsArr && notificationsArr.length)}</span>}
-                            {windowWidth && windowWidth > 576 &&  <span className="navbar-menu-text" style={{ paddingLeft: windowWidth > 576 && !(notificationsArr && notificationsArr.length) ? '5px' : (notificationsArr && notificationsArr.length) > 9 ? '25px' : '20px' }}>Notifications</span> }  
-                        </i>
+                        <IoNotifications />
+                        {notificationsArr && notificationsArr.length > 0 && <span className="count-badge"> {(notificationsArr && notificationsArr.length)}</span>}                       
+                        {windowWidth && windowWidth > mobileWidth &&  <span className="navbar-menu-text ml-1">Notifications</span> }  
+                       
+
                     </>
                 }
                 menuItems={<NotificationList />}

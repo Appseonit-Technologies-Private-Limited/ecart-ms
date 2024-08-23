@@ -2,7 +2,8 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart } from '../../store/Actions'
-import { ProductPrice } from './ProductPrice'
+import { MdShoppingCart } from 'react-icons/md'
+import { FaCartPlus } from 'react-icons/fa'
 
 const ProductCard = ({ product, handleCheck, viewOnly }) => {
     const { state, dispatch } = useContext(DataContext)
@@ -26,9 +27,10 @@ const ProductCard = ({ product, handleCheck, viewOnly }) => {
                     onChange={() => handleCheck(product._id)} />
             }
             <Link href={`/product/${product._id}`}>
-                {product.discount !== '0.0' && <div className="offer-tag">{product.discount}% Off</div>}
+
                 <div className='card-img-div'>
                     <img className="card-img-top" src={product.url} alt={product.title} />
+                    {product.discount !== '0.0' && <span className="offer-tag">{product.discount}% OFF</span>}
                 </div>
             </Link>
             <div className="card-body">
@@ -50,7 +52,7 @@ const ProductCard = ({ product, handleCheck, viewOnly }) => {
                                     disabled={product.inStock === 0 || isAdmin}
                                     onClick={dispatchAddToCart}
                                 >
-                                    Add <i className="fas fa-shopping-cart pl-1" aria-hidden="true"></i>
+                                <span className='icon'><FaCartPlus /></span>
                                 </button>
                                 :
                                 <label className='out-of-stock'>Out of Stock</label>
