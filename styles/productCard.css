@@ -12,7 +12,7 @@
 .product-card {
     border-radius: 10px;
     background-color: white;
-    box-shadow: 0px 0px 7px 0px #7c899a6e;
+    box-shadow: var(--app-box-shadow);
     margin-top: 10px;
     /* background-color: rgb(198, 112, 0); */
 }

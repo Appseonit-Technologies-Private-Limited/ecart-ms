@@ -4,6 +4,7 @@
   --app-header: #fff;
   --app-header-item-color: #3c4043;
   --app-secondary-color:#3c4043;
+  --app-box-shadow: 0px 0px 7px 0px #7c899a6e;
 }
 
 * {
@@ -53,7 +54,7 @@ html, body {
 nav {
    background-color: var(--app-header);
   /* background: linear-gradient(to right, #092f56, #000000); */
-  box-shadow: 0px 2px 22px rgb(59, 58, 58);
+  box-shadow: var(--app-box-shadow);
   margin-bottom: 0px;
   height: 65px;
   opacity: 0.95;
@@ -61,8 +62,7 @@ nav {
 
 .nav-tabs {
   background: #f1f7f8;
-  box-shadow: 1px 1px 10px 0px rgb(0 0 0 / 20%);
-
+  box-shadow: var(--app-box-shadow);
 }
 
 .nav-tabs .nav-link {
@@ -179,7 +179,7 @@ h6 {
 }
 
 .shadow-card {
-  box-shadow: 0px 0px 15px 0px rgb(197 197 197);
+  box-shadow: var(--app-box-shadow);
   border-radius: 10px;
   padding: 20px;
   width: 100%;
@@ -188,7 +188,7 @@ h6 {
 }
 
 .signBtn {
-  box-shadow: 0px 5px 5px 0px rgb(0 0 0 / 20%);
+  box-shadow: var(--app-box-shadow);
 }
 
 /* Term or policy Pages css */
@@ -252,7 +252,7 @@ h6 {
 .category-card {
   height: 100px;
   width: 100px;
-  /* box-shadow: 5px 5px 8px 0px rgb(197 197 197); */
+  /* box-shadow: var(--app-box-shadow); */
   text-align: center;
   cursor: pointer;
   background-color: aliceblue;

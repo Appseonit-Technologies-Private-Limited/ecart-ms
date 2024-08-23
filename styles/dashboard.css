@@ -1,6 +1,6 @@
 .dashboard-cards {
     width: 45%;
-    box-shadow: 3px 3px 8px 1px rgb(165 169 179);
+    box-shadow: var(--app-box-shadow);
     border-radius: 10px;
     padding: 10px;
     margin: 4px;
@@ -9,7 +9,7 @@
 }
 
 .dashboard-charts, .dashboard-analytics-charts {
-    box-shadow: 3px 3px 8px 1px rgb(165 169 179);
+    box-shadow: var(--app-box-shadow);
     border-radius: 10px;
     padding: 10px;
     cursor: pointer;

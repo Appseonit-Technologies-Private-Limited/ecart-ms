@@ -3,10 +3,7 @@ import ProductCard from '../product/ProductCard';
 
 
 function CategoryWiseProducts({ catWiseProducts }) {
-    console.log(catWiseProducts);
-
     return (
-
         <>
             {
                 catWiseProducts && catWiseProducts.map(
@@ -17,7 +14,7 @@ function CategoryWiseProducts({ catWiseProducts }) {
                                 <div className='catwise-prod'>
                                     {
                                         cat.products.map(product => (
-                                            <div className='product-card'>
+                                            <div key={`${product._id}-catwiseProd${i}`} className='product-card'>
                                                 <ProductCard key={product._id} product={product} />
                                             </div>
                                         ))

@@ -5,7 +5,7 @@
 
 /* Style the counter cards */
 .col-card .card {
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9); */
+  /* box-shadow: var(--app-box-shadow); */
   padding: 25px;
   text-align: center;
   background-color: #fff;
