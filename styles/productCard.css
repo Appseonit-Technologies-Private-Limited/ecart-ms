@@ -18,14 +18,14 @@
     /* background-color: rgb(198, 112, 0); */
 }
 
-.product-card .card-img-div{
+.product-card .img-container{
     
     display: flex;
     justify-content: center; /* Centers the image horizontally */
     align-items: center; /* Centers the image vertically */
     overflow: hidden; /* Ensure images don't overflow */
     /* background-color: aqua; This is just for visualization */
-    width: 220px;
+    width: 200px;
     height: 200px; /* Set a fixed height for the image container */
     padding: 0; /* Ensure no padding interferes with centering */
     box-sizing: border-box;
@@ -130,9 +130,9 @@
         padding-top: 0px;
     }
 
-    .product-card .card-img-div{
-        width: 180px;
-        height: 160px
+    .product-card .img-container{
+        width: 150px;
+        height: 150px
     };
 
     .product-card .card-body {
@@ -168,20 +168,12 @@
   /* Small devices (landscape phones, 576px and up) */
   @media (min-width: 576px) {
     /* Styles for small devices */
-    .product-card .card-img-div{
-        height: 200px;
-        height: 180px;
-    }
+   
   }
   
   /* Medium devices (tablets, 768px and up) */
   @media (min-width: 768px) {
     /* Styles for medium devices */
-  
-    .product-card .card-img-div{
-        width: 200px;
-        height: 180px;
-    }
   }
   
   /* Large devices (desktops, 992px and up) */

@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart } from '../../store/Actions'
 import { MdOutlineAddShoppingCart } from 'react-icons/md'
+import Image from 'next/image'
 
 const ProductCard = ({ product, handleCheck, viewOnly }) => {
     const { state, dispatch } = useContext(DataContext)
@@ -26,9 +27,8 @@ const ProductCard = ({ product, handleCheck, viewOnly }) => {
                     onChange={() => handleCheck(product._id)} />
             }
             <Link href={`/product/${product._id}`}>
-
-                <div className='card-img-div'>
-                    <img className="card-img-top" src={product.url} alt={product.title} />
+                <div className='img-container'>
+                    <Image src={product.url} alt={product.title} width={200} height={200}/>
                     {product.discount !== '0.0' && <span className="offer-tag">{product.discount}% OFF</span>}
                 </div>
             </Link>
