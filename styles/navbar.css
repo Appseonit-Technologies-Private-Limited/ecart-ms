@@ -17,29 +17,29 @@
 
 .company-logo {
     /* margin-bottom: 0px; */
-    color: var(--app-header-item-color);
+    color: var( --app-heading-text-color);
     font-weight: 900
 }
 
 .cart-logo {
     font-size: xx-large;
-    color: var(--app-color);
+    color: var( --app-primary-color);
 }
 
-.nav-item .nav-link {
+.nav-item .nav-link, .nav-item button {
     font-size: x-large;
     text-decoration: none;
-    padding: .375rem .5rem;
+    padding: .375rem .3rem;
 }
 
 /* Navbar Menu button */
 .nav-item button {
     font-size: x-large;
-    color: var(--app-header-item-color);
+    color: var(--app-header-color-item-color);
 }
 
 .nav-item button:hover, .nav-item button:focus {
-    color: #000;
+    color: var(--app-hover-color);
 }
 
 .dropdown-toggle::after {
@@ -65,7 +65,7 @@
     text-align: center;
     justify-content: center;
     font-size: xx-small;
-    background: var(--app-color);
+    background: var( --app-primary-color);
     color: white;
     margin-top: -5px;
     margin-left: -8px;
@@ -96,9 +96,8 @@
         font-size: large;
     }
 
-    .nav-item .nav-link {
+    .nav-item .nav-link, .nav-item button {
         font-size: x-large;
-        padding: .375rem .5rem;
     }
 
     .navbar-menu-text {

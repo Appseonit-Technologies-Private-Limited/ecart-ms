@@ -7,13 +7,15 @@ import { ACC_ACT_MAIL } from '../utils/constants.js'
 import isEmpty from 'lodash/isEmpty';
 import MenuNotifications from './Notifications/MenuNotifications'
 import { IoMdCart } from "react-icons/io";
-import { MdAccountCircle, MdOutlineAddBusiness } from "react-icons/md";
+import { MdAccountCircle, MdOutlineAddBusiness, MdOutlineShoppingCart } from "react-icons/md";
 import { LuLayoutDashboard, LuPackageSearch } from "react-icons/lu";
-import { TbCategoryPlus } from "react-icons/tb";
+import { TbCategoryPlus, TbLogout } from "react-icons/tb";
 import { FaListUl, FaUsers } from "react-icons/fa";
 import Dropdown from 'react-bootstrap/Dropdown';
 import Menu from './Custom_Components/Menu.js'
-import { IoLogOut, IoNotifications } from 'react-icons/io5'
+import { IoLogOut } from 'react-icons/io5'
+import { BiBell } from "react-icons/bi";
+import { RiAccountCircleLine } from "react-icons/ri";
 
 function NavBar() {
     const router = useRouter()
@@ -53,21 +55,21 @@ function NavBar() {
                     isEmpty(auth)
                         ?
                         <Link href="/signin" className={"nav-link" + isActive('/signin')}>
-                            <MdAccountCircle />
+                            <RiAccountCircleLine />
                             <span className='navbar-menu-text'>Sign in</span>
                         </Link>
 
                         :
                         <Menu title={
                             <>
-                                <MdAccountCircle />
+                                <RiAccountCircleLine />
                                 <span className='navbar-menu-text text-capitalize'>{auth.user.name}</span>
 
                             </>
                         }
                             menuItems={
                                 <div>
-                                    <Dropdown.Item href='/profile'>{<><MdAccountCircle /> Profile</>}</Dropdown.Item>
+                                    <Dropdown.Item href='/profile'>{<><RiAccountCircleLine /> Profile</>}</Dropdown.Item>
                                     <Dropdown.Item href='/orders'>{<><LuPackageSearch /> Orders</>}</Dropdown.Item>
                                     {isAdmin && (
                                         <>
@@ -77,9 +79,9 @@ function NavBar() {
                                             <Dropdown.Item href='/categories'>{<><TbCategoryPlus /> Categories</>}</Dropdown.Item>
                                         </>)
                                     }
-                                    <Dropdown.Item href='/notifications'>{<><IoNotifications /> Notifications</>}</Dropdown.Item>
+                                    <Dropdown.Item href='/notifications'>{<><BiBell /> Notifications</>}</Dropdown.Item>
                                     <Dropdown.Divider />
-                                    <Dropdown.Item onClick={handleLogout}>{<><IoLogOut /> Logout</>}</Dropdown.Item>
+                                    <Dropdown.Item onClick={handleLogout}>{<><TbLogout /> Logout</>}</Dropdown.Item>
                                 </div>
                             }
                         />
@@ -125,7 +127,7 @@ function NavBar() {
                         !isAdmin &&
                         <li className="nav-item">
                             <Link href="/cart" className={"nav-link" + isActive('/cart')}>
-                                <IoMdCart />
+                                <MdOutlineShoppingCart />
                                 {cart && cart.length > 0 && <span className="count-badge">{cart.length}</span>}
                                 {windowWidth > mobileWidth && <span className='navbar-menu-text'>Cart</span>}
                             </Link>

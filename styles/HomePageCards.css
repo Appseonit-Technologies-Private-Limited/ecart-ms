@@ -10,7 +10,7 @@
   text-align: center;
   background-color: #fff;
   /* background: linear-gradient(to right, #092f56, #000000); */
-  opacity: 85%;
+  /* opacity: 85%; */
   border: none;
 }
 
@@ -18,11 +18,11 @@
   font-size: x-large;
   text-align: center;
   vertical-align: middle;
-  color: var(--app-color);
+  color: var( --app-primary-color);
 }
 
 .col-card .text {
-  color: var(--app-header-item-color);
+  color: var(--app-heading-text-color);
   font-size: small;
   text-align: center;
   vertical-align: middle;
@@ -43,7 +43,6 @@
   }
 
   .col-card h3 {
-    font-size: large;
     width: 100%;
   }
 

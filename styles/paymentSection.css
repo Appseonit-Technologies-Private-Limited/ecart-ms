@@ -8,6 +8,6 @@
 }
 
 .payment-loading-icon {
-  color: #144271;
-  font-size: 40px;
+  color: var(--app-primary-color);
+  font-size: xx-large;
 }

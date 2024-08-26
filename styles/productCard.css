@@ -1,4 +1,4 @@
-.catwise-prod {
+.catwise-prod-container {
     display: flex;
     white-space: nowrap;
     overflow-x: auto;
@@ -6,7 +6,8 @@
     align-items: flex-start; /* Aligns all cards at the top */
     gap: 16px; /* Space between cards */
     /* overflow: hidden; */
-    padding: 10px;
+    padding: 20px;
+    padding-top: 0px;
 }
 
 .product-card {
@@ -57,7 +58,7 @@
 }
 
 .product-card .card-body {
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     padding: 12px;
 }
 
@@ -73,6 +74,7 @@
     font-size: small;
     margin: 0;
     text-align: center; /* Aligns the title to the center */
+    font-weight: 500;
 }
 
 .product-card .price {
@@ -98,11 +100,9 @@
     font-size: xx-small;
     background: none;
     font-weight: 600;
-    color: var(--app-header-item-color);
-    border: 1px solid darkgrey;
-    padding: 3px;
-    padding-left: 8px;
-    padding-right: 8px;
+    color: var(--app-muted-text-color);
+    border: 1px solid #7c899a6e;
+    padding: 0px 5px 3px 5px;
 }
 
 .product-card .add-btn-container .icon{
@@ -124,8 +124,10 @@
 /* Extra small devices (phones, less than 576px) */
 @media (max-width: 575.98px) {
     /* Styles for small devices */
-    .catwise-prod {
+    .catwise-prod-container {
         gap: 14px;
+        padding: 15px;
+        padding-top: 0px;
     }
 
     .product-card .card-img-div{
@@ -159,6 +161,7 @@
 
     .product-card .btn{
         font-size: xx-small;
+        padding: 0px 6px 3px 5px;
     }
   }
   

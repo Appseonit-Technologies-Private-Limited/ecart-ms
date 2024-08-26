@@ -1,6 +1,6 @@
 .table-grid thead {
 
-    background: var(--app-color);
+    background: var( --app-primary-color);
     color: white;
 }
 

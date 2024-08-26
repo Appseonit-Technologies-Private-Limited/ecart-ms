@@ -2,8 +2,7 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart } from '../../store/Actions'
-import { MdShoppingCart } from 'react-icons/md'
-import { FaCartPlus } from 'react-icons/fa'
+import { MdOutlineAddShoppingCart } from 'react-icons/md'
 
 const ProductCard = ({ product, handleCheck, viewOnly }) => {
     const { state, dispatch } = useContext(DataContext)
@@ -52,7 +51,7 @@ const ProductCard = ({ product, handleCheck, viewOnly }) => {
                                     disabled={product.inStock === 0 || isAdmin}
                                     onClick={dispatchAddToCart}
                                 >
-                                <span className='icon'><FaCartPlus /></span>
+                                <span className='icon'><MdOutlineAddShoppingCart  /></span>
                                 </button>
                                 :
                                 <label className='out-of-stock'>Out of Stock</label>

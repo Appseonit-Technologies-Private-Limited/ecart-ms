@@ -137,8 +137,8 @@
 }
 
 .steps .step.completed .step-icon {
-    border-color: #0da9ef;
-    background-color: #0da9ef;
+    border-color: var(--app-primary-color);
+    background-color: var(--app-primary-color);
     color: #fff
 }
 
@@ -432,7 +432,7 @@
 
 .order-step-header {
     border-radius: 5px;
-    background: linear-gradient(to right, var(--app-color), white);
+    background: linear-gradient(to right, var( --app-primary-color), white);
 }
 
 .order-step-header h6 {

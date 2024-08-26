@@ -36,7 +36,7 @@ const Home = (props) => {
         </div>
 
       </div>
-      <div className='row mt-5 m-3 pt-2 pb-3 card justify-content-center'>
+      <div className='m-3'>
         <ShopByCategories categories={categories} />
       </div>
       <div className='m-3'>

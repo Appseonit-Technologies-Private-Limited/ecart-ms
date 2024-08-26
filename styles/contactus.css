@@ -17,7 +17,8 @@
     margin-bottom: 15px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #999;}
+    color: #999;
+}
 
     @media (max-width: 768px) {
         .contact i {

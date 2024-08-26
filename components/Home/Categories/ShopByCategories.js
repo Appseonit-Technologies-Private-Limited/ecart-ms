@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export const ShopByCategories = ({ categories }) => {
@@ -5,14 +6,17 @@ export const ShopByCategories = ({ categories }) => {
     return (
         <>
             {categories &&
-                <>
+                <div className="card">
                     <h6>Shop By Category</h6>
-                    <div className='row justify-content-center'>
+                    <div className='category-cards-container'>
                         {categories.map((category, i) => (
                             <Link key={category + i} href={`/productSearch/?category=${category._id}`}>
-                                <div className="m-1 category-card">
-                                    <div className='pt-2 category-img-div'>
-                                        <img className="category-img" src={category.img} />
+                                <div className="category-card">
+                                    <div className='img-container'>
+                                        <Image src={category.img} alt={category.name}
+                                            width={50}
+                                            height={50}
+                                        ></Image>
                                     </div>
                                     <label>{category.name}</label>
                                 </div>
@@ -20,7 +24,7 @@ export const ShopByCategories = ({ categories }) => {
                         ))
                         }
                     </div>
-                </>
+                </div>
             }
         </>
     );

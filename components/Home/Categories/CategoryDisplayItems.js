@@ -22,7 +22,7 @@ export const CategoryDisplayItems = ({ categories }) => {
     return (
         <>
             {advertisements && advertisements.map((adv, i) => (
-                <div key={`${adv.title}-${i}`} className="mt-3 adv-card">
+                <div key={`${adv.title}-${i}`} className="adv-card">
                     <Image className="adv-card-img" src={adv.img} alt={adv.name} layout="fill" objectFit="cover"/>
                     <div className={`adv-card-content ${i % 2 == 0 ? 'float-right':''}`}>
                         <div className="adv-card-content-title">{adv.name}</div>

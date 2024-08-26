@@ -10,8 +10,8 @@ function CategoryWiseProducts({ catWiseProducts }) {
                     (cat, i) => (
                         cat.products && (
                             <div key={`${cat.name}-catwiseProd${i}`} className='my-3 card'>
-                                <h6 className='my-2'>{cat.name}</h6>
-                                <div className='catwise-prod'>
+                                <h6>{cat.name}</h6>
+                                <div className='catwise-prod-container'>
                                     {
                                         cat.products.map(product => (
                                             <div key={`${product._id}-catwiseProd${i}`} className='product-card'>

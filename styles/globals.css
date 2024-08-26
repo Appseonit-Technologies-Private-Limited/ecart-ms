@@ -1,10 +1,15 @@
 :root {
-  --app-color: #144271;
-  --app-heading: #2C2C2C;
-  --app-header: #fff;
-  --app-header-item-color: #3c4043;
+  --app-primary-color: #7B22B7;
   --app-secondary-color:#3c4043;
+  --app-background-color: #f1f7f8;
+  --app-header-color: #fff;
+  --app-footer-color: var(--app-primary-color);
+  --app-heading-text-color: var(--app-secondary-color);
+  --app-font-color: #000;
+  --app-muted-text-color: #8b9dab;
+  --app-header-color-item-color: var(--app-muted-text-color);
   --app-box-shadow: 0px 0px 7px 0px #7c899a6e;
+  --app-hover-color: #000;
 }
 
 * {
@@ -34,7 +39,7 @@ html, body {
   position: relative;
   padding-bottom: 350px;
   /* height of your footer */
-  background-color: #f1f7f8;
+  background-color: var(--app-background-color);
 }
 
 .footer {
@@ -52,7 +57,7 @@ html, body {
 }
 
 nav {
-   background-color: var(--app-header);
+   background-color: var(--app-header-color);
   /* background: linear-gradient(to right, #092f56, #000000); */
   box-shadow: var(--app-box-shadow);
   margin-bottom: 0px;
@@ -60,12 +65,12 @@ nav {
 }
 
 a {
-  color: var(--app-header-item-color);
+  color: var( --app-heading-text-color);
   text-decoration: none;
 }
 
 a:hover{
-  color: #000;
+  color: var(--app-secondary-color);
   text-decoration: none;
 }
 
@@ -82,8 +87,8 @@ img {
   object-position: 0 30%;
 }
 
-h1, h2, h3, h5 {
-  color: var(--app-heading);
+h1, h2, h3, h5, h6 {
+  color: var( --app-heading-text-color);
 }
 
 h5, h6{
@@ -91,13 +96,13 @@ h5, h6{
 }
 
 h6 {
-  padding-top: 10px;
-  padding-left: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
 .app-bg-color {
-  background-color: var(--app-color);
+  background-color: var( --app-primary-color);
 }
 
 .card {
@@ -112,37 +117,48 @@ h6 {
 
 .btn-primary {
   color: #fff;
-  background-color: var(--app-secondary-color);
-  border-color: var(--app-secondary-color);
+  background-color: var(--app-primary-color);
+  border-color: var(--app-primary-color);
 }
-
-.btn-outline-primary {
-  color: var(--app-color);
-  border-color: var(--app-color);
-}
-
-.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:focus {
-  border-color: var(--app-color);
-  background-color: var(--app-color);
-}
-
-/* .btn-success {
-  background-color: var(--app-color);
-  border-color: #0f1f2e;
-} */
 
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
   color: #fff;
-  background-color: #000;
-  border-color: #000;
+  background-color: var(--app-primary-color);
+  border-color: var(--app-primary-color);
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
-  color: #000;
+  color: var(--app-secondary-color);
+}
+
+.btn-outline-primary {
+  color: var( --app-primary-color);
+  border-color: var( --app-primary-color);
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:focus {
+  border-color: var( --app-primary-color);
+  background-color: var( --app-primary-color);
+  color: #fff;
+  box-shadow: none;
+}
+
+btn-outline-primary:not(:disabled):not(.disabled).active:focus, .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-outline-primary.dropdown-toggle:focus {
+  border-color: var( --app-primary-color);
+  background-color: var( --app-primary-color);
+  color: #fff;
+  box-shadow: none;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle{
+  border-color: var( --app-primary-color);
+  background-color: var( --app-primary-color);
+  color: #fff;
+  box-shadow: none;
 }
 
 .text-primary {
-  color: var(--app-color);
+  color: var( --app-primary-color);
 }
 
 .text-black {
@@ -150,7 +166,7 @@ h6 {
 }
 
 .home_page {
-  background-color: #f1f7f8;
+  background-color: var(--app-background-color);
   margin-top: -4px;
 }
 
@@ -214,31 +230,41 @@ h6 {
   font-weight: bold;
 }
 
+.category-cards-container{
+  gap:10px;
+  display: flex;
+  white-space: nowrap;
+  overflow-x: auto;
+  justify-content: center; /* Align cards at the start horizontally */
+  align-items: flex-start;
+  padding-bottom: 20px;
+}
+
 .category-card {
+  border-radius: 10px;
   height: 100px;
   width: 100px;
-  /* box-shadow: var(--app-box-shadow); */
   text-align: center;
   cursor: pointer;
-  background-color: #f1f7f8;
-  border: none;
-  font-size: x-small;
-  /* font-weight: 600; */
+  background-color: white;
+  padding: 10px;
 }
 
-.category-img-div {
-  height: 60px;
-  width: 60px;
+.category-card:hover{
+  background-color: var(--app-background-color);
+}
+
+.category-card .img-container{
+  width: 50px;
+  height: 50px;
   margin: 0 auto;
-}
-
-.category-img {
-  height: 60px;
-  width: 100%;
 }
 
 .category-card label{
   padding-top: 4px;
+  font-weight: 600;
+  font-size: x-small;
+  margin: 0;
 }
 
 .adv-card {
@@ -268,14 +294,14 @@ h6 {
 }
 
 .adv-card-content-title {
-  color: var(--app-color);
+  color: var( --app-primary-color);
   font-weight: bolder;
   font-size: xx-large;
   /* font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
 }
 
 .adv-card-content-desc {
-  color: #000;
+  color: var(--app-heading-text-color);
   font-size: smaller;
 }
 
@@ -288,9 +314,6 @@ h6 {
     line-height: 1.5;
   }
 
-  nav {
-    height: 50px;
-  }
   .terms h1 {
     font-size: 22px;
   }
@@ -301,22 +324,39 @@ h6 {
   }
 
   h6 {
-    padding-top: 10px;
-    padding-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
     font-weight: 600;
     text-align: left;
     font-size: smaller;
   }
 
-  .category-card {
+  .category-cards-container{
+    justify-content: flex-start; /* Align cards at the start horizontally */
+    align-items: flex-start;
+    padding: 15px;
+    padding-top: 0px;
+  }
+
+  .category-card{
     height: 80px;
-    width: 70px;
+    width: 80px;
+  }
+
+  .category-card .img-container{
+    width: 40px;
+    height: 40px;
+  }
+
+  .category-card label{
+    padding-top: 0px;
     font-size: x-small;
     font-weight: 600;
   }
 
-  .category-img {
-    height: 50px;
+  .category-card img{
+    height: 90%;
     width: 90%;
   }
 
@@ -341,24 +381,9 @@ h6 {
 @media (min-width: 768px) {
   /* Styles for medium devices */
 
-  .home_page {
-    margin-top: -4px;
-  }
-
   .timer-bar {
     font-size: x-small;
     width: 100%;
-  }
-
-  .category-card {
-    height: 80px;
-    width: 70px;
-    font-weight: 600;
-  }
-
-  .category-img {
-    height: 50px;
-    width: 90%;
   }
 
   .carousel-indicators {

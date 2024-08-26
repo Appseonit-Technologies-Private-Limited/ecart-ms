@@ -86,10 +86,10 @@
 }
 
 .upload-img-btn {
-    border: 1px Solid var(--app-color);
+    border: 1px Solid var( --app-primary-color);
     border-radius: 3px;
     text-align: center;
-    color: var(--app-color);
+    color: var( --app-primary-color);
 }
 
 .upload-img-btn label {

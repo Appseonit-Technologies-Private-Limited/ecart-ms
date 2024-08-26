@@ -6,7 +6,7 @@ import { getAction, formatDateTime } from '../../utils/util';
 import { isEmpty } from 'lodash';
 import { updateCheckedNotifications } from '../../utils/NotificationHelper';
 import { getData } from '../../utils/fetchData';
-import { IoNotifications } from "react-icons/io5";
+import { BiBell } from "react-icons/bi";
 
 function MenuNotifications({mobileWidth}) {
     const { state, dispatch } = useContext(DataContext);
@@ -68,11 +68,9 @@ function MenuNotifications({mobileWidth}) {
             <Menu 
                 title= {
                     <>
-                        <IoNotifications />
+                        <BiBell />
                         {notificationsArr && notificationsArr.length > 0 && <span className="count-badge"> {(notificationsArr && notificationsArr.length)}</span>}                       
                         {windowWidth && windowWidth > mobileWidth &&  <span className="navbar-menu-text ml-1">Notifications</span> }  
-                       
-
                     </>
                 }
                 menuItems={<NotificationList />}
