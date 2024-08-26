@@ -30,11 +30,6 @@
     font-size: x-large;
     text-decoration: none;
     padding: .375rem .3rem;
-}
-
-/* Navbar Menu button */
-.nav-item button {
-    font-size: x-large;
     color: var(--app-header-color-item-color);
 }
 

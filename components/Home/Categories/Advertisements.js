@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export const CategoryDisplayItems = ({ categories }) => {
+export const Advertisements = ({ categories }) => {
 
     const [advertisements, setAdvertisements] = useState([]);
 
@@ -22,7 +22,7 @@ export const CategoryDisplayItems = ({ categories }) => {
     return (
         <>
             {advertisements && advertisements.map((adv, i) => (
-                <div key={`${adv.title}-${i}`} className="adv-card">
+                <div key={`${adv.title}-${i}`} className="adv-card my-3">
                     <Image className="adv-card-img" src={adv.img} alt={adv.name} layout="fill" objectFit="cover"/>
                     <div className={`adv-card-content ${i % 2 == 0 ? 'float-right':''}`}>
                         <div className="adv-card-content-title">{adv.name}</div>

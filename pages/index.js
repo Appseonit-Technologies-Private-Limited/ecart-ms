@@ -8,8 +8,8 @@ import "slick-carousel/slick/slick-theme.css";
 import HomePageCards from '../components/Home/HomePageCards'
 import { ShopByCategories } from '../components/Home/Categories/ShopByCategories'
 import { BestSellingProducts } from '../components/Home/BestSellingProducts/BestSellingProducts'
-import { CategoryDisplayItems } from '../components/Home/Categories/CategoryDisplayItems'
 import CategoryWiseProducts from '../components/Home/CategoryWiseProducts'
+import { Advertisements } from '../components/Home/Categories/Advertisements'
 
 const Home = (props) => {
 
@@ -40,7 +40,7 @@ const Home = (props) => {
         <ShopByCategories categories={categories} />
       </div>
       <div className='m-3'>
-        <CategoryDisplayItems categories={categories} />
+        <Advertisements categories={categories} />
       </div>
       <div className='m-3'>
         <HomePageCards />
