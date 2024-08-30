@@ -75,12 +75,12 @@ export const deleteImagesFromCloudinary = (imgsTodelete, auth, productId, isAttr
     }
 }
 
-export const uploadImagesToCloudinary = async (imgs) => {
+export const uploadImagesToCloudinary = async (imgs, token) => {
     let newUploadedImgsURLs = [];
-    const imgsToUpload = imgs.filter(img => !img.url)
-    const oldImgsURLs = imgs.filter(img => img.url)
+    const imgsToUpload = imgs.filter(img => !img.url);
+    const oldImgsURLs = imgs.filter(img => img.url);
     if (imgsToUpload.length > 0) {
-        newUploadedImgsURLs = await imageUpload(imgsToUpload, 'product');
+        newUploadedImgsURLs = await imageUpload(imgsToUpload, 'products', token);
         return [...oldImgsURLs, ...newUploadedImgsURLs];
     }
     return imgs;

@@ -33,7 +33,7 @@
     color: var(--app-header-color-item-color);
 }
 
-.nav-item button:hover, .nav-item button:focus {
+.nav-item a:hover, .nav-item button:hover, .nav-item button:focus {
     color: var(--app-hover-color);
 }
 

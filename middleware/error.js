@@ -10,7 +10,7 @@ export const handleServerError = (methodName, err, errStatusCode, res) => {
         errStatusCode = ERRCODE_408;
         errMsg = err.msg;
     }
-    return res.status(errStatusCode).json({ code: errStatusCode, err: errMsg })
+    return res.status(errStatusCode).json({ err: errMsg })
 }
 
 export const handleUIError = (err, errStatusCode, auth, dispatch) => {

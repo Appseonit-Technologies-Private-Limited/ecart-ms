@@ -27,7 +27,7 @@ const Cart = () => {
   //   const getCart = async () => {
   //     if (cart) {
   //       const res = await postData('cart?type=GC', cart);
-  //       if (res.code) return handleUIError(res.err, res.code, undefined, dispatch);
+  //       if (res.status) return handleUIError(res.err, res.status, undefined, dispatch);
   //       else if (res.cart) {
 
   //       }

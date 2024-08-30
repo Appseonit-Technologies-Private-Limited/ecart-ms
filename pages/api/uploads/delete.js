@@ -1,6 +1,6 @@
 import auth from '../../../middleware/auth';
 import { CONTACT_ADMIN_ERR_MSG, ERROR_403 } from '../../../utils/constants';
-import { cloud_delete } from './cloudinary';
+import { cloud_delete } from './uploadUtil';
 
 
 /*

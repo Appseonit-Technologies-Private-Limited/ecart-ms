@@ -28,7 +28,7 @@ export const displayProduct = product => {
         // This will wor for non attr products.
         disProduct = {
             ...disProduct,
-            url: product.images ? product.images[0].url : '/public/assets/images/product/no_product_img.png',
+            url: product.images && product.images.length > 0 ? product.images[0].url : '/public/assets/images/product/no_product_img.png',
             title: product.title,
         }
         //log.info('Display product non attr type: '+disProduct.title);

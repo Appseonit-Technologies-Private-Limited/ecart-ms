@@ -91,7 +91,9 @@ const ProductsManager = () => {
     const handleCloudinaryImages = async (imgs) => {
         deleteImagesFromCloudinary(delImages.current, auth, productId, false, product.attributes);
         delImages.current = [];
-        const handledImgs = await uploadImagesToCloudinary(imgs);
+        const handledImgs = await uploadImagesToCloudinary(imgs, auth.token);
+        console.log('Handled Images : ',handledImgs);
+        
         setImages(handledImgs);
         return handledImgs;
     }
@@ -130,12 +132,13 @@ const ProductsManager = () => {
         const data = { ...product, discount, categories, images: handledImages, attributesRequired};
         if (onEdit) res = await putData(`product/${productId}`, data, auth.token)
         else res = await postData('product?type=CP', data, auth.token);
-        if (res.code) return handleUIError(res.err, res.code, undefined, dispatch);
+        if (res.status) return handleUIError(res.err, res.status, undefined, dispatch);
         else if (res.msg) {
             //console.log('res.productId : ', res.productId)
             dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
             if (res.productId) router.push('/create/' + res.productId);
         }
+        dispatch({ type: 'NOTIFY', payload: { loading: false } })
     }
 
     //This line should be always below useEffect hooks

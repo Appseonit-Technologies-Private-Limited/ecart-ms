@@ -58,7 +58,7 @@
 }
 
 .product-card .card-body {
-    /* background-color: aliceblue; */
+    background-color: var(--glass-color);
     padding: 12px;
 }
 

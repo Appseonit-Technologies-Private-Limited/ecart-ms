@@ -29,8 +29,8 @@ function Notifications() {
                     
                     const res = await getData('notifications', auth.token);
                     isLoading(false, dispatch)
-                    if (res.code) {
-                        return handleUIError(res.err, res.code, auth, dispatch);
+                    if (res.status) {
+                        return handleUIError(res.err, res.status, auth, dispatch);
                     }
                     if (!isEmpty(res.notifications)) {
                         setNotificationsArr(res.notifications);

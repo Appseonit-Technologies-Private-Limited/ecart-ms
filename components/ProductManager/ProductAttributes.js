@@ -102,7 +102,7 @@ const ProductAtrributes = ({ attrData, existingAttrs, callBack }) => {
         callBack(updatedAttrs);
         const res = await putData(`product/attributes/${productId}`, { attributes: updatedAttrs }, auth.token);
         setIsLoading(false);
-        if (res.code) return handleUIError(res.err, res.code, undefined, dispatch);
+        if (res.status) return handleUIError(res.err, res.status, undefined, dispatch);
         else if (res.msg) return dispatch({ type: 'NOTIFY', payload: { success: res.msg } });
     }
 

@@ -10,6 +10,7 @@
   --app-header-color-item-color: var(--app-muted-text-color);
   --app-box-shadow: 0px 0px 7px 0px #7c899a6e;
   --app-hover-color: #000;
+  --glass-color: #40576d12;
 }
 
 * {

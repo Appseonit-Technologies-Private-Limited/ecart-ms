@@ -18,7 +18,7 @@ function MenuNotifications({mobileWidth}) {
             setInterval(() => {
                 getData('notifications', auth.token)
                     .then(res => {
-                        if (res.code) return handleUIError(res.err, res.code, auth, dispatch);
+                        if (res.status) return handleUIError(res.err, res.status, auth, dispatch);
                         if (!isEmpty(res.notifications)) setNotificationsArr(res.notifications)
                     })
             }, 10000);
