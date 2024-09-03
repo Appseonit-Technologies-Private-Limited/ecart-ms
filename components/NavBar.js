@@ -6,16 +6,9 @@ import { postData, putData } from '../utils/fetchData'
 import { ACC_ACT_MAIL } from '../utils/constants.js'
 import isEmpty from 'lodash/isEmpty';
 import MenuNotifications from './Notifications/MenuNotifications'
-import { IoMdCart } from "react-icons/io";
-import { MdAccountCircle, MdOutlineAddBusiness, MdOutlineShoppingCart } from "react-icons/md";
-import { LuLayoutDashboard, LuPackageSearch } from "react-icons/lu";
-import { TbCategoryPlus, TbLogout } from "react-icons/tb";
-import { FaListUl, FaUsers } from "react-icons/fa";
 import Dropdown from 'react-bootstrap/Dropdown';
 import Menu from './Custom_Components/Menu.js'
-import { IoLogOut } from 'react-icons/io5'
-import { BiBell } from "react-icons/bi";
-import { RiAccountCircleLine } from "react-icons/ri";
+import { CartIcon, NotificationIcon, AddProductIcon, ProductListIcon , UsersIcon, OrderHistoryIcon, UserIcon, CategoryIcon, LogoutIcon, DashboardIcon} from './Icons/Icon.js'
 
 function NavBar() {
     const router = useRouter()
@@ -55,33 +48,33 @@ function NavBar() {
                     isEmpty(auth)
                         ?
                         <Link href="/signin" className={"nav-link" + isActive('/signin')}>
-                            <RiAccountCircleLine />
+                            <UserIcon />
                             <span className='navbar-menu-text'>Sign in</span>
                         </Link>
 
                         :
                         <Menu title={
                             <>
-                                <RiAccountCircleLine />
+                                <UserIcon />
                                 <span className='navbar-menu-text text-capitalize'>{auth.user.name}</span>
 
                             </>
                         }
                             menuItems={
                                 <div>
-                                    <Dropdown.Item href='/profile'>{<><RiAccountCircleLine /> Profile</>}</Dropdown.Item>
-                                    <Dropdown.Item href='/orders'>{<><LuPackageSearch /> Orders</>}</Dropdown.Item>
+                                    <Dropdown.Item href='/profile'>{<><UserIcon /> Profile</>}</Dropdown.Item>
+                                    <Dropdown.Item href='/orders'>{<><OrderHistoryIcon /> Orders</>}</Dropdown.Item>
                                     {isAdmin && (
                                         <>
-                                            <Dropdown.Item href='/users'>{<><FaUsers /> Users</>}</Dropdown.Item>
-                                            <Dropdown.Item href='/productList'>{<><FaListUl /> Product List</>}</Dropdown.Item>
-                                            <Dropdown.Item href='/create'>{<><MdOutlineAddBusiness /> Add Product</>}</Dropdown.Item>
-                                            <Dropdown.Item href='/categories'>{<><TbCategoryPlus /> Categories</>}</Dropdown.Item>
+                                            <Dropdown.Item href='/users'>{<><UsersIcon/> Users</>}</Dropdown.Item>
+                                            <Dropdown.Item href='/productList'>{<><ProductListIcon /> Product List</>}</Dropdown.Item>
+                                            <Dropdown.Item href='/create'>{<><AddProductIcon /> Add Product</>}</Dropdown.Item>
+                                            <Dropdown.Item href='/categories'>{<><CategoryIcon /> Categories</>}</Dropdown.Item>
                                         </>)
                                     }
-                                    <Dropdown.Item href='/notifications'>{<><BiBell /> Notifications</>}</Dropdown.Item>
+                                    <Dropdown.Item href='/notifications'>{<><NotificationIcon/> Notifications</>}</Dropdown.Item>
                                     <Dropdown.Divider />
-                                    <Dropdown.Item onClick={handleLogout}>{<><TbLogout /> Logout</>}</Dropdown.Item>
+                                    <Dropdown.Item onClick={handleLogout}>{<><LogoutIcon /> Logout</>}</Dropdown.Item>
                                 </div>
                             }
                         />
@@ -96,7 +89,7 @@ function NavBar() {
                 <div className="d-flex align-items-end" style={{ cursor: 'pointer' }}>
 
                     <h4 className='company-logo'>{process.env.NEXT_PUBLIC_APP_TITLE}</h4>
-                    <div className='cart-logo'><IoMdCart /></div>
+                    <div className='cart-logo'><CartIcon/></div>
                 </div>
             </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,7 +110,7 @@ function NavBar() {
                     {isAdmin &&
                         <li className="nav-item" >
                             <Link href="/dashboard" className={"nav-link" + isActive('/dashboard')}>
-                                <LuLayoutDashboard />
+                                <DashboardIcon />
                                 {windowWidth && windowWidth > mobileWidth && <span className="navbar-menu-text"> Dashboard </span>}
                             </Link>
                         </li>
@@ -127,7 +120,7 @@ function NavBar() {
                         !isAdmin &&
                         <li className="nav-item">
                             <Link href="/cart" className={"nav-link" + isActive('/cart')}>
-                                <MdOutlineShoppingCart />
+                            <CartIcon/>
                                 {cart && cart.length > 0 && <span className="count-badge">{cart.length}</span>}
                                 {windowWidth > mobileWidth && <span className='navbar-menu-text'>Cart</span>}
                             </Link>

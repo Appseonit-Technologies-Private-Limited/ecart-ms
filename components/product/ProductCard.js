@@ -2,9 +2,9 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart } from '../../store/Actions'
-import { MdOutlineAddShoppingCart } from 'react-icons/md'
 import Image from 'next/image'
 import { DEFAULT_PROD_IMG } from '../../utils/constants'
+import { AddCartIcon } from '../Icons/Icon'
 
 const ProductCard = ({ product, handleCheck, viewOnly }) => {
     const { state, dispatch } = useContext(DataContext)
@@ -52,7 +52,7 @@ const ProductCard = ({ product, handleCheck, viewOnly }) => {
                                     disabled={product.inStock === 0 || isAdmin}
                                     onClick={dispatchAddToCart}
                                 >
-                                <span className='icon'><MdOutlineAddShoppingCart  /></span>
+                                <span className='icon'><AddCartIcon /></span>
                                 </button>
                                 :
                                 <label className='out-of-stock'>Out of Stock</label>
