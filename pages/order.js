@@ -7,7 +7,7 @@ const Order = () => {
     return (
         <div className="container-fluid my-3">
             <Head>
-                <title>KFM Cart - Order Detail</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Order Detail`}</title>
             </Head>
             <OrderDetail />
         </div>

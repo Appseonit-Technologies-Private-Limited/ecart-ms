@@ -1,10 +1,10 @@
 export const restPasswordMail = (req) => {
     return `<p>Hi ${req.body.userName},</p>
-    <p><span style="color: #000000;">&nbsp;You recently requested to reset your password for your KFM Cart account. Click on 'Change Password' to reset it. <br><strong><span style="color: #FF0000;">Note: This password reset is only valid for the next 20 Minutes. </span></strong></span></p>
+    <p><span style="color: #000000;">&nbsp;You recently requested to reset your password for your process.env.NEXT_PUBLIC_APP_TITLE account. Click on 'Change Password' to reset it. <br><strong><span style="color: #FF0000;">Note: This password reset is only valid for the next 20 Minutes. </span></strong></span></p>
     <table style="height: 127px; width: 90%; border: none;">
     <tbody>
     <tr style="height: 21px;">
-    <td style="width: 99.1342%; height: 43px; background: black; color: white; text-align: left;"><strong>&nbsp;KFM Cart</strong></td>
+    <td style="width: 99.1342%; height: 43px; background: black; color: white; text-align: left;"><strong>&nbsp;process.env.NEXT_PUBLIC_APP_TITLE</strong></td>
     </tr>
     <tr style="height: 21px;">
     <td style="width: 99.1342%; text-align: left; height: 21px;">
@@ -23,5 +23,5 @@ export const restPasswordMail = (req) => {
     </tr>
     </tbody>
     </table>
-    <p>For security, this request was received from a ${req.body.hostName} device using ${req.body.type}. If you did not request a password reset, please report us &nbsp;<a href="${req.body.baseUrl}/contactus">contact support</a>&nbsp; or we suggest changing your password right away from the application.</p><p>Thanks,<br />The KFM Cart Team</p>`;
+    <p>For security, this request was received from a ${req.body.hostName} device using ${req.body.type}. If you did not request a password reset, please report us &nbsp;<a href="${req.body.baseUrl}/contactus">contact support</a>&nbsp; or we suggest changing your password right away from the application.</p><p>Thanks,<br />The process.env.NEXT_PUBLIC_APP_TITLE Team</p>`;
 }

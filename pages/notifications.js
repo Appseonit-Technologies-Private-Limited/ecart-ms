@@ -7,7 +7,7 @@ const notifications = () => {
     return (
         <div className="container justify-content-between">
             <Head>
-                <title>KFM Cart - Notifications</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Notifications`}</title>
             </Head>
             <Notifications />
         </div>

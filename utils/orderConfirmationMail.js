@@ -4,7 +4,7 @@ return`<p>Hi ${req.body.userName},</p>
 <table style="height: 127px; width: 90%; border: none;">
 <tbody>
 <tr style="height: 21px;">
-<td style="width: 594px; height: 43px; background: black; color: white; text-align: left;"><strong>&nbsp;KFM Cart</strong></td>
+<td style="width: 594px; height: 43px; background: black; color: white; text-align: left;"><strong>&nbsp;process.env.NEXT_PUBLIC_APP_TITLE</strong></td>
 </tr>
 <tr style="height: 21px;">
 <td style="width: 594px; height: 10px; text-align: center;">

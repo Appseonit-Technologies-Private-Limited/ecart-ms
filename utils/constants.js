@@ -83,3 +83,5 @@ export const AUTO_CANCEL_ORDER_JOB = "auto_cancel_order_job";
 
 
 export const DEFAULT_MAX_PRODUCTS_LIMIT = 10;
+
+export const DEFAULT_PROD_IMG = '/assets/images/product/no_product_img.png';

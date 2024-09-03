@@ -7,7 +7,7 @@ const Profile = () => {
     return (
         <div className="container-fluid row profile_page">
             <Head>
-                <title>KFM Cart - Profile</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Profile`}</title>
             </Head>
             <div className='col-md-4'>
                 <MyAccount />

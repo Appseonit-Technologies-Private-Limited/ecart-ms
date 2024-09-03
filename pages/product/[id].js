@@ -4,6 +4,7 @@ import { getData } from '../../utils/fetchData'
 import { DataContext } from '../../store/GlobalState'
 import { addToCart } from '../../store/Actions'
 import { ProductPrice } from '../../components/product/ProductPrice'
+import { DEFAULT_PROD_IMG } from '../../utils/constants'
 
 const DetailProduct = (props) => {
     const [product] = useState(props.product)
@@ -27,13 +28,13 @@ const DetailProduct = (props) => {
     return (
         <div className="container-fluid row detail_page">
             <Head>
-                <title>KFM Cart - Product Detail</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Product Detail`}</title>
             </Head>
             <h4 className="col-xl-12 text-center mt-2 mb-0 text-capitalize" title={product.title}>
                 {product.title}
             </h4>
             <div className="col-xl-5 col-xs-12">
-                <img src={product.images[tab].url} alt={product.title}
+                <img src={product.images.length && product.images[tab].url || DEFAULT_PROD_IMG} alt={product.title}
                     className="d-block img-thumbnail rounded mt-2 w-100 prodDetailImg" />
                 <div className="prodDetialmultiImgs row mx-0 mt-1" style={{ cursor: 'pointer' }} >
                     {product.images.map((img, index) => (

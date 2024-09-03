@@ -31,8 +31,8 @@ export default async (req, res) => {
 }
 
 const sendMail = async (req, res) => {
-    let fromMailId = process.env.NEXT_PUBLIC_MAIL_SENDER;
-    let toMailId = process.env.NEXT_PUBLIC_MAIL_SENDER;
+    let fromMailId = process.env.MAIL_SENDER;
+    let toMailId = process.env.MAIL_SENDER;
     try {
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
@@ -41,7 +41,7 @@ const sendMail = async (req, res) => {
             secure: true, // true for 465, false for other ports
             auth: {
                 user: fromMailId,
-                pass: process.env.NEXT_PUBLIC_MAIL_AUTH
+                pass: process.env.MAIL_AUTH
             },
             tls: {
                 rejectUnauthorized: false
@@ -69,7 +69,7 @@ const sendMail = async (req, res) => {
             case ORDER_ADMIN_MAIL:
                 await auth(req, res);
                 output = orderAdminMail(req);
-                toMailId = req.body.email;
+                toMailId = process.env.ADMIN_PAY_MAIL_ADDRESS;
                 break;
             case ORDER_CONFIRMATION_MAIL:
                 await auth(req, res);
@@ -93,7 +93,7 @@ const sendMail = async (req, res) => {
         let mailOptions = {
             from: fromMailId, // sender address
             to: toMailId, // list of receivers
-            subject: `KFM Cart - ${req.body.subject}`, // Subject line
+            subject: `process.env.NEXT_PUBLIC_APP_TITLE - ${req.body.subject}`, // Subject line
             // text: 'Hello world?', // plain text body
             html: output // html body
         };

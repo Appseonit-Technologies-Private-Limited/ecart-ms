@@ -4,12 +4,13 @@ import { DataContext } from '../../store/GlobalState'
 import { addToCart } from '../../store/Actions'
 import { MdOutlineAddShoppingCart } from 'react-icons/md'
 import Image from 'next/image'
+import { DEFAULT_PROD_IMG } from '../../utils/constants'
 
 const ProductCard = ({ product, handleCheck, viewOnly }) => {
     const { state, dispatch } = useContext(DataContext)
     const { cart, auth } = state
     const isAdmin = auth && auth.user && auth.user.role === 'admin'
-    const currencyType = process.env.NEXT_PUBLIC_RAZORPAY_CURRENCY === 'INR' ? '₹' : '$';
+    const currencyType = process.env.NEXT_PUBLIC_CURRENCY_TYPE === 'INR' ? '₹' : '$';
 
     const dispatchAddToCart = () => {
         const res = addToCart(product, cart);
@@ -28,7 +29,7 @@ const ProductCard = ({ product, handleCheck, viewOnly }) => {
             }
             <Link href={`/product/${product._id}`}>
                 <div className='img-container'>
-                    <Image src={product.url} alt={product.title} width={200} height={200}/>
+                    <Image src={product.url || DEFAULT_PROD_IMG} alt={product.title} width={200} height={200}/>
                     {product.discount !== '0.0' && <span className="offer-tag">{product.discount}% OFF</span>}
                 </div>
             </Link>

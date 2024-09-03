@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { decrease, increase } from '../store/Actions'
 import { getData } from '../utils/fetchData'
 import { calculatePrice } from '../utils/util'
+import { DEFAULT_PROD_IMG } from '../utils/constants'
 
 const plusProductCountClick = async (cart, itemId, quantity, dispatch) => {
     const res = await getData(`product/${itemId}?count=true`)
@@ -14,7 +15,7 @@ const CartItem = ({ item, dispatch, cart, isAdmin }) => {
     return (
         <tr>
             <td className='product-img'>
-                <img src={item.url} alt={item.title}
+                <img src={item.url || DEFAULT_PROD_IMG} alt={item.title}
                     className="img-thumbnail w-100"
                     style={{ minWidth: '70px', height: '70px' }} />
             </td>

@@ -6,7 +6,7 @@ export const info = (msg) => {
 }
 
 export const debug = (msg) => {
-    if (process.env.NEXT_PUBLIC_SHOW_DEBUG_LOG) {
+    if (process.env.SHOW_DEBUG_LOG) {
         return console.error(` ${formatDateTime(new Date(), 'LTS ll')} : [DEBUG] - ${msg}`);
     } else return;
 }

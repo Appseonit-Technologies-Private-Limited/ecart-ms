@@ -53,7 +53,7 @@ const EditUser = () => {
     return (
         <div className="edit_user my-3">
             <Head>
-                <title>KFM Cart - Edit User</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Edit User`}</title>
             </Head>
 
             {/* <div>

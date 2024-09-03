@@ -8,6 +8,6 @@ export const accountActivationMail = (req) =>{
     <h3>Happy Shopping</h3>
     </br>
     <p>Cheers</p>
-    <p>KFM Cart Team</p>
+    <p>process.env.NEXT_PUBLIC_APP_TITLE Team</p>
 `;
 }

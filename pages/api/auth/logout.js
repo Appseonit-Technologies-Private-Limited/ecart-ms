@@ -41,7 +41,7 @@ const logout = async (req, res) => {
 const blacklistRefreshToken = async (refreshToken, res) => {
     try {
         if (!refreshToken) return res.status(401).json({ err: PLEASE_LOG_IN })
-            const result = await verifyToken(refreshToken, process.env.NEXT_PUBLIC_REFRESH_TOKEN_SECRET);
+            const result = await verifyToken(refreshToken, process.env.REFRESH_TOKEN_SECRET);
         return result.refreshTokenId;
     } catch (err) {
         console.error('Error occurred while blacklistRefreshToken: ' + err);

@@ -8,8 +8,8 @@ export async function middleware(request) {
  
   const path = request.nextUrl.pathname
   const isAdminPath = admin_URIs.indexOf(path) !== -1;
-  const adminIdArr = process.env.NEXT_PUBLIC_ADMIN_IDS ? process.env.NEXT_PUBLIC_ADMIN_IDS.split(',') : [];
-console.log('Path >>>>>>>>>>>> ', path);
+  const adminIdArr = process.env.ADMIN_IDS ? process.env.ADMIN_IDS.split(',') : [];
+//console.log('Path >>>>>>>>>>>> ', path);
   const isPublicPath = public_URIs.indexOf(path) !== -1;
   if (isPublicPath) return NextResponse.next();
 
@@ -19,7 +19,7 @@ console.log('Path >>>>>>>>>>>> ', path);
   const accessToken = cookies && cookies.com1 || '';
   try {
     // Verify the access token
-    const decodedAccessToken = await verifyToken(accessToken, process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET);
+    const decodedAccessToken = await verifyToken(accessToken, process.env.ACCESS_TOKEN_SECRET);
     if(decodedAccessToken.err) throw new Error(decodedAccessToken.err);   
     if(isProtectedPage(path, protected_URIs)){      
       return NextResponse.next();

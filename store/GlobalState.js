@@ -13,19 +13,23 @@ export const DataProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducers, initialState)
     const { cart, auth } = state;
 
-    const redirectToHttps = () => {
-        if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_HOSTNAME !== 'localhost') {
-            if (window.location.protocol == 'http:') {
-                window.location.href = window.location.href.replace('http:', 'https:');
-            }
-        }
-    }
-
     useEffect(() => {
-        redirectToHttps();
-        console.log(auth);
+        /**
+         * This is the main initial render useEffect
+         * 1. Redirecting http to https
+         * 2. Calculating window dimensions
+         * 3. Checking & authenticating user token (Auto-login if token present).
+         * 4. Fetching categories
+         */
+        if (typeof window !== "undefined"){
+            redirectToHttps(window);
+            const updateWindowWidth = () => dispatch({ type: "WINDOW_WIDTH", payload: window.innerWidth });
+            updateWindowWidth();
+            window.addEventListener("resize", updateWindowWidth);
+        }
+
         if (!auth.token) {
-            console.log('Fetching access_token........');
+            //console.log('Fetching access_token........');
             getData('auth/accessToken').then(res => {
                 if (res.err) return;
                 
@@ -44,24 +48,15 @@ export const DataProvider = ({ children }) => {
                 type: "ADD_CATEGORIES",
                 payload: res.categories
             })
-        })
+        });
 
-        if (typeof window !== "undefined"){
-         // Function to update the window width
-         const updateWindowWidth = () => dispatch({ type: "WINDOW_WIDTH", payload: window.innerWidth });
-      
-          // Set the initial window width when the component mounts
-          updateWindowWidth();
-      
-          // Listen for window resize events
-          window.addEventListener("resize", updateWindowWidth);
-      
-          // Cleanup the event listener when the component unmounts
-          return () => {
-            window.removeEventListener("resize", updateWindowWidth);
-          };
-        }
-    }, [])
+        // Cleanup the event listener when the component unmounts
+        return () => {
+            if (typeof window !== "undefined" && updateWindowWidth != undefined){
+                window.removeEventListener("resize", updateWindowWidth);
+            }
+        };
+    }, []);
 
     useEffect(() => {
         const __next__cart01 = JSON.parse(localStorage.getItem('__next__cart01'))
@@ -87,6 +82,14 @@ export const DataProvider = ({ children }) => {
             dispatch({ type: 'ADD_USERS', payload: [] })
         }
     }, [auth.token])
+
+    const redirectToHttps = (window) => {
+        if (window.location && window.location.hostname !== 'localhost') {
+            if (window.location.protocol == 'http:') {
+                window.location.href = window.location.href.replace('http:', 'https:');
+            }
+        }
+    }
 
     return (
         <DataContext.Provider value={{ state, dispatch }}>

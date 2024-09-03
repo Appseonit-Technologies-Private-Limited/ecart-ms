@@ -19,11 +19,11 @@ export const saveAndGenerateRazorPayOrder = async (res, orderId) => {
             console.log("Order is: ", order.total);
 
             let totalAmount = order.total;
-            if (process.env.NEXT_PUBLIC_RAZORPAY_CURRENCY === 'INR') totalAmount = convertINRPaise(totalAmount);// This is because in razorpay accepts lowest currency value, for INR its paise, where 1 rupee = 100 paise.
+            if (process.env.NEXT_PUBLIC_CURRENCY_TYPE === 'INR') totalAmount = convertINRPaise(totalAmount);// This is because in razorpay accepts lowest currency value, for INR its paise, where 1 rupee = 100 paise.
 
             var options = {
                 amount: totalAmount,  // amount in the smallest currency unit
-                currency: process.env.NEXT_PUBLIC_RAZORPAY_CURRENCY,
+                currency: process.env.NEXT_PUBLIC_CURRENCY_TYPE,
                 receipt: orderId
             };
             const rPayOrder = await rPay.orders.create(options).catch(err => { throw err });

@@ -6,7 +6,7 @@ const products = () => {
     return (
         <div className="container-fluid justify-content-between">
             <Head>
-                <title>KFM Cart - Product List</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Product List`}</title>
             </Head>
             <ProductList />
         </div>

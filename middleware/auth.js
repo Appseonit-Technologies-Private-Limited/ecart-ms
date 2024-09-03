@@ -9,7 +9,7 @@ const auth = async (req, res) => {
     const token = req.headers.authorization;
     if(!token) return res.status(401).json({err: PLEASE_LOG_IN})
    
-    const decoded = await verifyToken(token, process.env.NEXT_PUBLIC_ACCESS_TOKEN_SECRET);
+    const decoded = await verifyToken(token, process.env.ACCESS_TOKEN_SECRET);
     if(!decoded) return res.status(401).json({err: PLEASE_LOG_IN})
 
     const user = await Users.findOne({_id: decoded.id})

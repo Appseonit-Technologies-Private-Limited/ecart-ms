@@ -17,7 +17,7 @@ const Footer = () => {
                   <i className="fas fa-shopping-cart position-relative cart-logo" aria-hidden="true"></i>
                 </div>
               </Link>
-              <p className='pt-2'>KFM Cart, Purity is our priority, an ecommerce service, a part of KFM Enterprises Private Limited. We believe in hygienic, efficient and smooth delivery of all the items listed on our website. You are only a click away to place your order with KFM CART.</p>
+              <p className='pt-2'>process.env.NEXT_PUBLIC_APP_TITLE, Purity is our priority, an ecommerce service, a part of KFM Enterprises Private Limited. We believe in hygienic, efficient and smooth delivery of all the items listed on our website. You are only a click away to place your order with process.env.NEXT_PUBLIC_APP_TITLE.</p>
               <p style={{ fontSize: '12px' }}><strong>Address:</strong> Hyderabad, Telangana-500028, India <br></br><strong>Phone:</strong> +91 8247732147<br></br><strong>Email:</strong> kfmcart@gmail.com</p>
             </div> */}
 
@@ -80,7 +80,7 @@ const Footer = () => {
 
         <div className='p-1 row justify-content-center'>
 
-          <a className='text-light'> &copy; {new Date().getFullYear()}{' '} eCart All Rights Reserved.</a>
+          <a className='text-light'> &copy; {new Date().getFullYear()}{' '} {`${process.env.NEXT_PUBLIC_APP_TITLE} All Rights Reserved.`}</a>
 
           <a className='text-light ml-2 text-hover' style={{ paddingTop: '0px' }} href='https://appseonit.com'>
             Designed By Appseonit Technologies Private Limited.

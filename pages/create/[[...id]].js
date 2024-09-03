@@ -147,7 +147,7 @@ const ProductsManager = () => {
     return (
         <div className="container-fluid products_manager">
             <Head>
-                <title>KFM Cart - Product Manager</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Product Manager`}</title>
             </Head>
             <ProductForm
                 product={product}

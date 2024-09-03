@@ -44,7 +44,7 @@ const Register = () => {
   return (
     <div className="container-fluid">
       <Head>
-        <title>KFM Cart - Register</title>
+        <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Register`}</title>
       </Head>
 
       <form className="container-fluid mx-auto my-4 shadow-card" style={{ maxWidth: '500px' }} onSubmit={handleSubmit}>

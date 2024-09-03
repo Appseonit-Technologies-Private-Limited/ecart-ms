@@ -39,7 +39,7 @@ export const isLoading = (loading, dispatch) => {
 export const getCurrencyFormattedValue = (value) => {
     const currencyFormat = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: process.env.NEXT_PUBLIC_RAZORPAY_CURRENCY
+        currency: process.env.NEXT_PUBLIC_CURRENCY_TYPE
     })
     return currencyFormat.format(value);
 }

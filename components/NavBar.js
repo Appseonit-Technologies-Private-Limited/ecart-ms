@@ -95,7 +95,7 @@ function NavBar() {
             <Link href="/">
                 <div className="d-flex align-items-end" style={{ cursor: 'pointer' }}>
 
-                    <h4 className='company-logo'>eCART</h4>
+                    <h4 className='company-logo'>{process.env.NEXT_PUBLIC_APP_TITLE}</h4>
                     <div className='cart-logo'><IoMdCart /></div>
                 </div>
             </Link>

@@ -62,11 +62,11 @@ export const orderMail = (req) =>{
     <p style="font-size: 10px;"><br />In case you have further queries, please feel free to reach out to us on&nbsp; +91 8247732147 &nbsp;or mail us at&nbsp;<a href="mailto:kfmcart@gmail.com" target="_blank" rel="noopener">kfmcart@gmail.<wbr />com</a>.</p>
     <p style="font-size: 10px;">&nbsp;</p>
     <p style="font-size: 10px;">Warm Regards,</p>
-    <p style="font-size: 10px;"><strong>Team KFM Cart</strong></p>
+    <p style="font-size: 10px;"><strong>Team process.env.NEXT_PUBLIC_APP_TITLE</strong></p>
     <table style="border-collapse: collapse; width: 100%; height: 17px;" border="1">
     <tbody>
     <tr style="height: 17px;">
-    <td style="width: 100%; height: 17px; font-size: 10px; background-color: black; color: white;">&copy; 2021. All Right Reserved @KFM Cart</td>
+    <td style="width: 100%; height: 17px; font-size: 10px; background-color: black; color: white;">&copy; 2021. All Right Reserved @process.env.NEXT_PUBLIC_APP_TITLE</td>
     </tr>
     </tbody>
     </table>

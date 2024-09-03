@@ -44,7 +44,7 @@ const Categories = () => {
     return (
         <div className="container mx-auto my-3">
             <Head>
-                <title>KFM Cart - Categories</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Categories`}</title>
             </Head>
             <h5 className="text-uppercase">Categories</h5>
             <div className="input-group mb-3">

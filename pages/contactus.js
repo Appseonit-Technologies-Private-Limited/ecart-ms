@@ -38,7 +38,7 @@ const ContactUs = () => {
     return(
       <div className="container-fluid">
         <Head>
-          <title>KFM Cart - Contact Us</title>
+          <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Contact Us`}</title>
         </Head>
 
         <form className="container mx-auto my-4 shadow-card contform" onSubmit={handleSubmit}>

@@ -18,7 +18,7 @@ const Signin = () => {
   return (
     <div className="container-fluid">
       <Head>
-        <title>KFM Cart - Sign in</title>
+        <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Sign in`}</title>
       </Head>
       <SignInCard loadingMsg = {PROCESSING_MSG}/>
     </div>

@@ -2,6 +2,7 @@ import { isEmpty } from "lodash";
 import { calculateDiscountedPercentage } from "./util";
 import Products from '../models/productModel';
 import * as log from "../middleware/log"
+import { DEFAULT_PROD_IMG } from "./constants";
 
 
 export const displayProduct = product => {
@@ -28,7 +29,7 @@ export const displayProduct = product => {
         // This will wor for non attr products.
         disProduct = {
             ...disProduct,
-            url: product.images && product.images.length > 0 ? product.images[0].url : '/public/assets/images/product/no_product_img.png',
+            url: product.images && product.images.length > 0 ? product.images[0].url : DEFAULT_PROD_IMG,
             title: product.title,
         }
         //log.info('Display product non attr type: '+disProduct.title);

@@ -26,7 +26,7 @@ const Home = (props) => {
   return (
     <div className="home_page">
       <Head>
-        <title>eCart - Home</title>
+        <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Home`}</title>
       </Head>
 
       <div className="carousel image img-fluid">

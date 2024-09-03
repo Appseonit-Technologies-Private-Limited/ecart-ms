@@ -11,7 +11,7 @@ const Users = () => {
     return (
         <div className="table-responsive">
             <Head>
-                <title>KFM Cart - Users</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Users`}</title>
             </Head>
 
             <table className="table w-100">

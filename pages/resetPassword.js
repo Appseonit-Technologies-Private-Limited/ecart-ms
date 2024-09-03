@@ -54,7 +54,7 @@ const ResetPassword = (props) => {
     return (
         <div className="profile_page ">
             <Head>
-                <title>KFM Cart - Account recovery</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Account recovery`}</title>
             </Head>
 
             <form className="container-fluid mx-auto my-4 shadow-card" style={{ maxWidth: '500px' }} onSubmit={handleSubmit}>

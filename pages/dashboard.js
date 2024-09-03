@@ -7,7 +7,7 @@ const dashboard = () => {
     return (
         <>
             <Head>
-                <title>KFM Cart - Dashboard</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Dashboard`}</title>
             </Head>
             <Dashboard />
         </>

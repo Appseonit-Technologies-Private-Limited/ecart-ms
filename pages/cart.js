@@ -113,7 +113,7 @@ const Cart = () => {
   return (
     <div className="container-fluid row justify-content-md-between">
       <Head>
-        <title>KFM Cart - Cart Page</title>
+        <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Cart`}</title>
       </Head>
       <h5 className="text-uppercase mt-3" >My Cart</h5>
       <div className="col-md-6 text-secondary table-responsive my-3 colHeight">

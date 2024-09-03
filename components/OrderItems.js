@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { DEFAULT_PROD_IMG } from '../utils/constants'
 
 const OrderItems = (props) => {
     return (
@@ -10,7 +11,7 @@ const OrderItems = (props) => {
                 props.order.cart.map((item,i) => (
                     <div className="row border-bottom mx-0 pt-4 pb-1 justify-content-between
                                         align-items-center orderInfoFontSize" key={item._id+i}>
-                        <img src={item.url}
+                        <img src={item.url || DEFAULT_PROD_IMG}
                             style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
                         <div className="flex-fill font-weight-normal px-3 m-0">
                             <Link href={`/product/${item._id}`} className='order-item-title' style={{ wordWrap: 'break-word' }}>{item.title}
