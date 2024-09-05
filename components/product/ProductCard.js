@@ -19,20 +19,28 @@ const ProductCard = ({ product, handleCheck, viewOnly }) => {
     }
 
     return (
-        <div className="">
-            {
+        <>
+            {/* {
                 (isAdmin && !viewOnly) &&
                 <input type="checkbox" checked={product.checked}
                     className="position-absolute"
                     style={{ height: '20px', width: '20px' }}
                     onChange={() => handleCheck(product._id)} />
-            }
+            } */}
             <Link href={`/product/${product._id}`}>
                 <div className='img-container'>
                     <Image src={product.url || DEFAULT_PROD_IMG} alt={product.title} width={200} height={200}/>
-                    {product.discount !== '0.0' && <span className="offer-tag">{product.discount}% OFF</span>}
                 </div>
             </Link>
+            <span className="add-btn-container">
+                {product.inStock > 0 ?
+                    <button className="btn btn-primary" disabled={product.inStock === 0 || isAdmin} onClick={dispatchAddToCart}>
+                        <span className='icon'><AddCartIcon /></span>
+                    </button>
+                    :
+                    <label className='out-of-stock'>Out of Stock</label>
+                }
+            </span>
             <div className="card-body">
                 <div className="d-flex flex-column">
                     <div className="title-container">
@@ -43,25 +51,14 @@ const ProductCard = ({ product, handleCheck, viewOnly }) => {
                             <label className="price">
                                 {`${currencyType}${product.totalPrice}`}
                                 {product.discount !== '0.0' && <span className="mrp-price">{`${currencyType}${product.mrpPrice}`}</span>}
+                                {product.discount !== '0.0' && <span className="offer-tag">{product.discount}%</span>}
                             </label>
                         </div>
-                        <div className="add-btn-container">
-                            {product.inStock > 0 ?
-                                <button
-                                    className="btn btn-primary"
-                                    disabled={product.inStock === 0 || isAdmin}
-                                    onClick={dispatchAddToCart}
-                                >
-                                <span className='icon'><AddCartIcon /></span>
-                                </button>
-                                :
-                                <label className='out-of-stock'>Out of Stock</label>
-                            }
-                        </div>
+                       
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
