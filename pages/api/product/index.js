@@ -61,7 +61,7 @@ const getProducts = async (req, res) => {
         })
     } catch (err) {
         console.error('Error occurred while getProducts: ' + err);
-        return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
+        return res.status(500).json({ products: []})
     }
 }
 
@@ -113,7 +113,6 @@ const getProductsCategoryWise = async (req, res) =>{
         })
     } catch (err) {
         console.error('Error occurred while getProductsCategoryWise: ' + err);
-        return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
     return catWiseProducts;
 }

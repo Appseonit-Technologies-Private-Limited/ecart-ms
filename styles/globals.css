@@ -11,6 +11,8 @@
   --app-box-shadow: 0px 0px 7px 0px #7c899a6e;
   --app-hover-color: #000;
   --glass-color: #40576d12;
+
+  --bs-toast-bg:white;
 }
 
 * {
@@ -102,6 +104,37 @@ h6 {
   background-color: var( --app-primary-color);
 }
 
+.toast{
+  background-color: whitesmoke !important;
+  position: fixed;
+  top: 80px;
+  right: 5px;
+  z-index: 9999;
+  min-width: 280px;
+  opacity: 0.93;
+  border: none;
+}
+
+.toast-header{
+  background-color: var( --app-primary-color);
+  color: white;
+  padding: 3px 10px;
+}
+
+.toast-body{
+  padding-top: 0px;
+}
+
+.toast-msg-icon{
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.toast-msg{
+  font-size: small;
+  padding-left: 5px;
+}
+
 .card {
   border: none;
   overflow: hidden;
@@ -118,8 +151,8 @@ h6 {
   border-color: var(--app-primary-color);
 }
 
-.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
-  color: #fff;
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active{
+  color: white;
   background-color: var(--app-primary-color);
   border-color: var(--app-primary-color);
 }

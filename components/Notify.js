@@ -1,7 +1,8 @@
 import { useContext } from 'react'
 import { DataContext } from '../store/GlobalState'
-import Loading from './Loading'
 import Toast from './Toast'
+import { SuccessIcon, WarnIcon } from './Icons/Icon'
+import { CONTACT_ADMIN_ERR_MSG } from '../utils/constants'
 
 const Notify = () => {
     const { state, dispatch } = useContext(DataContext)
@@ -15,20 +16,16 @@ const Notify = () => {
 
     return (
         <>
-            {notify.loading && <Loading msg={notify.msg} isPay={notify.isPay}/>}
-            {notify.error &&
+            {(notify.error || notify.success) &&
                 <Toast
-                    msg={{ msg: notify.error, title: "Error" }}
+                    msg={
+                            { 
+                                msg: notify.error || notify.success || CONTACT_ADMIN_ERR_MSG, 
+                                type: notify.error ? "error" : "success",
+                                icon: notify.error ? <WarnIcon/> : <SuccessIcon/>
+                            }
+                        }   
                     handleShow={() => dispatch({ type: 'NOTIFY', payload: {} })}
-                    bgColor="bg-danger"
-                />
-            }
-
-            {notify.success &&
-                <Toast
-                    msg={{ msg: notify.success, title: "Success" }}
-                    handleShow={() => dispatch({ type: 'NOTIFY', payload: {} })}
-                    bgColor="bg-success"
                 />
             }
         </>

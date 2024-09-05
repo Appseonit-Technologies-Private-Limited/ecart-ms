@@ -115,7 +115,7 @@ const Cart = () => {
       <Head>
         <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Cart`}</title>
       </Head>
-      <h5 className="text-uppercase mt-3" >My Cart</h5>
+      <h5 className="mt-3" >My Cart</h5>
       <div className="col-md-6 text-secondary table-responsive my-3 colHeight">
         <table className="table my-3">
           <tbody>

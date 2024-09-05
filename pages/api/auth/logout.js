@@ -31,7 +31,7 @@ const logout = async (req, res) => {
         // Set the cookies with expired timestamps to delete them
         res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
         
-        res.status(200).json({ msg: 'Logged out successfully!' });
+        res.status(200).json({ msg: 'You have signed out.' });
     } catch (err) {
         console.error('Error occurred while logout: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })

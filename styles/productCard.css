@@ -176,9 +176,15 @@
 
     .product-card .btn{
         font-size: xx-small;
-        padding: 0px 6px 3px 5px;
+        padding: 0px 4px 2px 5px;
+    }
+
+    .product-card .add-btn-container{
+        right: 5px;
+        bottom: 32px;
     }
   }
+
   
   /* Small devices (landscape phones, 576px and up) */
   @media (min-width: 576px) {

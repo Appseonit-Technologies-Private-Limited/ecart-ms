@@ -42,7 +42,7 @@ const login = async (req, res) => {
         res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
 
         res.json({
-            msg: "Login successful.",
+            msg: `Welcome back, ${user.name}`,
             refresh_token,
             access_token,
             user: {

@@ -22,7 +22,7 @@ const DeleteAllProductsButton = (props) => {
                 <input type="checkbox" checked={props.isCheck} onChange={props.handleCheckALL}
                     style={{ width: '25px', height: '25px', transform: 'translateY(8px)' }} />
                 <button className="btn btn-danger ml-1"
-                    data-toggle="modal" data-target="#confirmModal"
+                    data-bs-toggle="modal" data-bs-target="#confirmModal"
                     onClick={handleDeleteAll}>
                     Delete All Products
                 </button>

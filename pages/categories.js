@@ -69,7 +69,7 @@ const Categories = () => {
                                     onClick={() => handleEditCategory(catogory)}></i>
 
                                 <i className="fas fa-trash-alt text-danger"
-                                    data-toggle="modal" data-target="#confirmModal"
+                                    data-bs-toggle="modal" data-bs-target="#confirmModal"
                                     onClick={() => dispatch({
                                         type: 'ADD_MODAL',
                                         payload: {

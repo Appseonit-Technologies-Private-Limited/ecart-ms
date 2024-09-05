@@ -15,13 +15,13 @@ function MenuNotifications({mobileWidth}) {
 
     useEffect(() => {
         if (!isEmpty(auth.token)) {
-            setInterval(() => {
-                getData('notifications', auth.token)
-                    .then(res => {
-                        if (res.status) return handleUIError(res.err, res.status, auth, dispatch);
-                        if (!isEmpty(res.notifications)) setNotificationsArr(res.notifications)
-                    })
-            }, 10000);
+            // setInterval(() => {
+            //     getData('notifications', auth.token)
+            //         .then(res => {
+            //             if (res.status) return handleUIError(res.err, res.status, auth, dispatch);
+            //             if (!isEmpty(res.notifications)) setNotificationsArr(res.notifications)
+            //         })
+            // }, 10000);
         }
     }, [auth.token])
 

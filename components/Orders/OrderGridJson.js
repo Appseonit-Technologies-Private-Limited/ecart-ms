@@ -63,7 +63,7 @@ export const orderStatusFormatter = (order, isAdmin) => {
             ? <label className="text-success italic-text"> Paid</label>
             : (
                 <Link href={`/order?id=${order._id}`} style={{ cursor: 'pointer' }}>
-                    <button className="btn btn-primary" style={{fontSize:'11px'}} data-toggle="tooltip" data-placement="bottom" title="Go to payment page">{isAdmin ? 'Go to order page' : 'Pay Now'}</button>
+                    <button className="btn btn-primary" style={{fontSize:'11px'}} data-bs-toggle="tooltip" data-bs-placement="bottom" title="Go to payment page">{isAdmin ? 'Go to order page' : 'Pay Now'}</button>
                 </Link>
             )
     )

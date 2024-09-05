@@ -15,7 +15,7 @@ const ProductCard = ({ product, handleCheck, viewOnly }) => {
     const dispatchAddToCart = () => {
         const res = addToCart(product, cart);
         dispatch(res)
-        if (res.type === "ADD_CART") dispatch({ type: 'NOTIFY', payload: { success: 'Product is added to cart.' } })
+        if (res.type === "ADD_CART") dispatch({ type: 'NOTIFY', payload: { success: 'Item added to your cart!' } })
     }
 
     return (

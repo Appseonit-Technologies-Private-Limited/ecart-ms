@@ -39,6 +39,14 @@
     padding-right: 0px !important;
 }
 
+.product-quantity button{
+    padding: 0px 5px 0px 5px;
+    margin: 0px;
+    background-color: var(--app-primary-color);
+    color: white;
+    border: none;
+}
+
 .product-delete {
     padding-left: 20px;
     cursor: pointer;

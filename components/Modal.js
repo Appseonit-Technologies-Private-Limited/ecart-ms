@@ -67,9 +67,7 @@ const Modal = () => {
                         <h5 className="modal-title text-capitalize" id="confirmModalLabel">
                             {modal.title}
                         </h5>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
                     </div>
                     <div className="modal-body">
                         {modal.content}
@@ -77,8 +75,8 @@ const Modal = () => {
                     {
                         (modal.type !== SIGN_IN && modal.type !== ADDRESS_EDIT && modal.type !== PRODUCT_ATTR) && (
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleSubmit}>Yes</button>
-                                <button type="button" className="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleSubmit}>Yes</button>
+                                <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         )}
                 </div>

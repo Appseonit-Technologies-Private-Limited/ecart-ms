@@ -45,7 +45,7 @@ export default function SignInCard({ loadingMsg, delay, executeSignInCallback })
             setLoadingText(SIGNING_MSG);
             const res = await postData('auth/login', {...userData, cookieConsent: localStorage.getItem('cookieConsent')})
             if (res.err) throw res.err;
-            //dispatch({ type: 'NOTIFY', payload: { success: res.msg, delay: 1000 } })
+            dispatch({ type: 'NOTIFY', payload: { success: res.msg, delay: 1000 } })
             dispatch({ type: 'AUTH', payload: { token: res.access_token, user: res.user } })
             
             setIsLoading(false);
