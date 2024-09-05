@@ -24,7 +24,7 @@ export const Advertisements = ({ categories }) => {
             {advertisements && advertisements.map((adv, i) => (
                 <div key={`${adv.title}-${i}`} className="adv-card my-3">
                     <Image className="adv-card-img" src={adv.img} alt={adv.name} layout="fill" objectFit="cover"/>
-                    <div className={`adv-card-content ${i % 2 == 0 ? 'float-right':''}`}>
+                    <div className={`adv-card-content ${i % 2 == 0 ? 'float-end':''}`}>
                         <div className="adv-card-content-title">{adv.name}</div>
                         <h3 className="my-2 adv-card-content-desc">{adv.desc}</h3>
                         <Link href={`/productSearch/?category=${adv.categoryId}`} passHref>

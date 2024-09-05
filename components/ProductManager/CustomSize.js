@@ -66,7 +66,7 @@ const CustomSize = ({ dataArr, handleSizes }) => {
                         />
                     </div>
                     <div className="col-6 col-lg-8">
-                        <div className="float-right size-del-btn" onClick={() => { deleteSize(index) }}>x</div>
+                        <div className="float-end size-del-btn" onClick={() => { deleteSize(index) }}>x</div>
                     </div>
                     <PriceQuantiity product={size} handleChangeInput={(e) => { handleChangeInput(e, index) }} />
                     <div className="col-6 col-lg-6 pt-2 display-product">

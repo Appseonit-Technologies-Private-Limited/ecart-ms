@@ -60,7 +60,7 @@ export default function Orders() {
             <h5 className="text-uppercase mt-3" >Orders</h5>
             <div className="my-3">
                 <div>
-                    <div className="float-right">
+                    <div className="float-end">
                         <Filters isAdmin={isAdmin} isUser={isUser} handleFilter={handleFilter} lengths={filterLengths} />
                     </div>
                     <div className="float-left">
