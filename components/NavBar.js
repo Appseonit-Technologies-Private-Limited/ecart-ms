@@ -8,7 +8,7 @@ import isEmpty from 'lodash/isEmpty';
 import MenuNotifications from './Notifications/MenuNotifications'
 import Dropdown from 'react-bootstrap/Dropdown';
 import Menu from './Custom_Components/Menu.js'
-import { CartIcon, NotificationIcon, AddProductIcon, ProductListIcon , UsersIcon, OrderHistoryIcon, UserIcon, CategoryIcon, LogoutIcon, DashboardIcon} from './Icons/Icon.js'
+import { CartLogoIcon, CartIcon, NotificationIcon, AddProductIcon, ProductListIcon , UsersIcon, OrderHistoryIcon, UserIcon, CategoryIcon, LogoutIcon, DashboardIcon} from './Icons/Icon.js'
 
 function NavBar() {
     const router = useRouter()
@@ -89,7 +89,7 @@ function NavBar() {
                 <div className="d-flex align-items-end" style={{ cursor: 'pointer' }}>
 
                     <h4 className='company-logo'>{process.env.NEXT_PUBLIC_APP_TITLE}</h4>
-                    <div className='cart-logo'><CartIcon/></div>
+                    <div className='cart-logo'><CartLogoIcon /></div>
                 </div>
             </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
