@@ -4,7 +4,7 @@
   --app-background-color: #f1f7f8;
   --app-header-color: #fff;
   --app-footer-color: var(--app-primary-color);
-  --app-heading-text-color: var(--app-secondary-color);
+  --app-heading-text-color: #3c4043;;
   --app-font-color: #000;
   --app-muted-text-color: #8b9dab;
   --app-header-color-item-color: var(--app-muted-text-color);
@@ -13,6 +13,7 @@
   --glass-color: #40576d12;
 
   --bs-toast-bg:white;
+  --bs-btn-disabled-color: var(--app-muted-text-color);
 }
 
 * {
@@ -139,6 +140,25 @@ h6 {
   border: none;
   overflow: hidden;
   border-radius: 10px;
+}
+
+.btn {
+  font-size: x-small;
+  font-weight: 600;
+  display: inline-block;
+  color: #fff;
+  border: none;
+  border-radius: 50px; /* Fully rounded corners */
+  padding: 6px 14px; /* Comfortable padding */
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  color: #fff;
+  transform: translateY(-5px); /* Slight raise on hover */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
 }
 
 .btn-sm{
@@ -333,6 +353,7 @@ btn-outline-primary:not(:disabled):not(.disabled).active:focus, .btn-outline-pri
 .adv-card-content-desc {
   color: var(--app-heading-text-color);
   font-size: smaller;
+  font-weight: 400;
 }
 
 /* Extra small devices (phones, less than 576px) */
@@ -360,6 +381,11 @@ btn-outline-primary:not(:disabled):not(.disabled).active:focus, .btn-outline-pri
     font-weight: 600;
     text-align: left;
     font-size: smaller;
+  }
+
+  .btn{
+    padding: 4px 10px;
+    font-size: 0.5rem;
   }
 
   .category-cards-container{

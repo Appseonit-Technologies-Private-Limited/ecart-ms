@@ -28,7 +28,7 @@ export const Advertisements = ({ categories }) => {
                         <div className="adv-card-content-title">{adv.name}</div>
                         <h3 className="my-2 adv-card-content-desc">{adv.desc}</h3>
                         <Link href={`/productSearch/?category=${adv.categoryId}`} passHref>
-                            <button className="btn btn-sm btn-outline-primary mt-2 mt-sm-4">Shop Now</button>
+                            <button className="btn btn-primary mt-2 mt-sm-4">Shop Now</button>
                         </Link>
                     </div>
                 </div>

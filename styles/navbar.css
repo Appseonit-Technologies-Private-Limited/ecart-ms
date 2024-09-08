@@ -70,6 +70,17 @@
 .menu-btn .btn {
     background: none !important;
     border: 0 !important;
+
+    border: none;
+    transform: none;
+    transition: background 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.menu-btn .btn:hover{
+    transform: none;
+    box-shadow: none;
 }
 
 .menu-btn .btn:focus {

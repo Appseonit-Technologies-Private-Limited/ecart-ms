@@ -11,6 +11,7 @@ import { getAddressObj, validateAddress } from '../components/Cart/util'
 import { isAdminRole, isLoading } from '../utils/util'
 import { ERROR_403 } from '../utils/constants'
 import { handleUIError } from '../middleware/error'
+import EmptyCart from '../components/Cart/EmptyCart'
 
 const Cart = () => {
   const { state, dispatch } = useContext(DataContext)
@@ -99,44 +100,34 @@ const Cart = () => {
       })
   }
 
-  if (cart.length === 0) {
-    return (
-      <div className='text-alingn-center'>
-        <div className="sorry_and_continue_msg">
-          Sorry, your <i className="fas fa-shopping-cart position-relative" aria-hidden="true"></i>cart is empty. Please add an item to place an order : <a href='/' style={{ fontWeight: '800' }}>
-            Continue Shopping <i className="fas fa-home" aria-hidden="true" ></i></a>.
-        </div>
-      </div>
-    )
-  }
-
+  if (cart.length === 0) return <EmptyCart />
   return (
-    <div className="container-fluid row justify-content-md-between">
+    <>
       <Head>
         <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Cart`}</title>
       </Head>
-      <h5 className="mt-3" >My Cart</h5>
-      <div className="col-md-6 text-secondary table-responsive my-3 colHeight">
-        <table className="table my-3">
-          <tbody>
-            {
-              cart && cart.map(item => (
-                <CartItem key={item._id} item={item} dispatch={dispatch} cart={cart} isAdmin={isAdmin} />
-              ))
-            }
-          </tbody>
-        </table>
+      <div className="container-fluid cart">
+        <h5>Review Your Cart</h5>
+        <div className="row">
+          <div className="col-md-7">
+            {cart && cart.map((item, index) => (
+              <CartItem key={item._id} item={item} dispatch={dispatch} cart={cart} isAdmin={isAdmin} />
+            ))}
+          </div>
+          <div className="col-md-5">
+            <div className="card p-3">
+              <h5>Select a Delivery Address</h5>
+              <Address />
+              <h5 style={{ color: 'black' }}>Total: <span>₹{total}</span></h5>
+              <Link href={'#!'} className="btn btn-primary my-2 cartPayBtn" 
+              onClick={handlePayment}>
+                Proceed To Pay
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div className="shipping-card col-md-4 my-3 mx-md-3 text-left text-secondary shadow-card">
-        <h5>Select a Delivery Address</h5>
-        <Address />
-        <h5 style={{ color: 'black' }}>Total: <span>₹{total}</span></h5>
-
-        <Link href={auth.user ? '#!' : '/signin'} className="btn btn-primary my-2 cartPayBtn" onClick={handlePayment}>Proceed To Pay
-        </Link>
-      </div>
-    </div>
+    </>
   )
 }
 
