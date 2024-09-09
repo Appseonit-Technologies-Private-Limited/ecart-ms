@@ -8,7 +8,7 @@ import { debounce } from 'lodash'
 
 const currencyType = process.env.NEXT_PUBLIC_CURRENCY_TYPE === 'INR' ? '₹' : '$';
 
-const plusProductCountClick = debounce(async (cart, itemId, quantity, dispatch) => {
+const plusProductCountClick = async (cart, itemId, quantity, dispatch) => {
     if (!itemId || !quantity) return;
     if (typeof itemId !== 'string' || typeof quantity !== 'number' || quantity < 0) {
         console.error('Invalid itemId or quantity provided.');
@@ -22,7 +22,7 @@ const plusProductCountClick = debounce(async (cart, itemId, quantity, dispatch) 
     } catch (error) {
         console.error(`Error in plusProductCountClick:`, error);
     }
-}, 200);
+}
 
 const CartItem = ({ item, dispatch, cart, isAdmin }) => {
     const handleDecrease = () => {

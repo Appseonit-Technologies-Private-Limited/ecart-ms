@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <DataProvider>
       <Layout>
-        {loading && <div className="loading-spinner">Loading...</div>}
+        {loading && <div className="loading-spinner"><div className="loader"></div></div>}
         <Component className={roboto.className} {...pageProps} />
         <CookieConsent />
       </Layout>
