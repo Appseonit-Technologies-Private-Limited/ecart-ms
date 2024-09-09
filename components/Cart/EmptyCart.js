@@ -1,13 +1,14 @@
 import React from 'react';
-import { IoMdCart } from "react-icons/io";
 import Link from 'next/link'; // Assuming Next.js routing
+import { CartLogoIcon } from '../Icons/Icon';
 
 const EmptyCart = () => {
     return (
         <div className="container text-center my-5">
             {/* Cart Icon */}
-            <IoMdCart  size={100} style={{color: 'var(--app-primary-color)'}}/>
-
+            <div style={{ fontSize:'100px', color: 'var(--app-primary-color)' }}>
+                <CartLogoIcon />
+            </div>
             {/* Empty Cart Message */}
             <h1 className="mt-4">Your Cart is Empty</h1>
             <p className="text-muted mb-4">
@@ -15,7 +16,7 @@ const EmptyCart = () => {
             </p>
 
             {/* Recommended Actions */}
-            <Link href="/" className="btn btn-primary btn-lg px-5 py-3">Start Shopping
+            <Link href="/" className="btn btn-primary px-5 py-3">Start Shopping
             </Link>
 
             {/* Additional UX Enhancements */}
