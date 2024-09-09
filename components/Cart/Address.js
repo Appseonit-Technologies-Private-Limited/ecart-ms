@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../store/GlobalState";
 import { ADDRESS_DEL, ADDRESS_EDIT, ADDRESS_GET, ADDRESS_NEW } from "../../utils/constants";
-import { patchData, postData } from "../../utils/fetchData";
+import { getData, patchData, postData } from "../../utils/fetchData";
 import isEmpty from 'lodash/isEmpty';
 import { useRouter } from "next/router";
 import { isLoading } from "../../utils/util";
@@ -10,35 +10,23 @@ import { AddressFormPopup } from "../AddressForm/AddressFormPopup";
 import { updateAddress } from "../AddressForm/util";
 
 
-const Address = ({ isProfilePage }) => {
+const Address = ({ isProfilePage, addressData }) => {
 
 
-    const [addresses, setAddresses] = useState([])
+    const [addresses, setAddresses] = useState(addressData)
     const { state, dispatch } = useContext(DataContext)
     const { auth } = state
     const [newAddPanelVisible, setNewAddPanelVisible] = useState(false)
     const router = useRouter()
 
+
+
     useEffect(() => {
-        if (auth && auth.user && auth.user.id) {
-            isLoading(true, dispatch);
-            postData(`user/${auth.user.id}`, { dataType: ADDRESS_GET }, auth.token)
-                .then(res => {
-                    isLoading(false, dispatch);
-                    if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-                    if (!isEmpty(res.addresses)) {
-                        setAddresses(res.addresses);
-                        res.addresses.every(address => {
-                            if (address.default) {
-                                dispatch({ type: 'ADD_ADDRESS', payload: address })
-                                return false
-                            }
-                            return true;
-                        });
-                    }
-                })
+        if (addresses) {
+          const defaultAddress = addresses.find(address => address.default);
+          if (defaultAddress) dispatch({ type: 'ADD_ADDRESS', payload: defaultAddress });
         }
-    }, [auth])
+      }, [addresses]);
 
     const handleSelectAddress = (selectedAddressIndex) => {
         if (selectedAddressIndex >= 0) {

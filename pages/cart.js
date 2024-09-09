@@ -13,9 +13,21 @@ import { ERROR_403 } from '../utils/constants'
 import { handleUIError } from '../middleware/error'
 import EmptyCart from '../components/Cart/EmptyCart'
 
-const Cart = () => {
+export async function getServerSideProps({ req }) {
+  let addressData = [];
+  // Fetch Addresses from the server
+  if (req.cookies && req.cookies.com1) {
+    const res = await getData('user/address', req.cookies.com1);
+    if (res.addresses) addressData = res.addresses;
+  }
+
+  // Pass data to the page via props
+  return { props: { addressData: addressData } };
+}
+
+const Cart = ({ addressData }) => {
   const { state, dispatch } = useContext(DataContext)
-  const { cart, auth, address } = state
+  const { cart, auth, address: selectedAddress } = state
   const [total, setTotal] = useState(0)
   const [callback, setCallback] = useState(false)
   const router = useRouter()
@@ -69,7 +81,7 @@ const Cart = () => {
     e.preventDefault();
     if (!isLoggedInPopup(auth, dispatch)) return;
     if (isAdmin) return dispatch({ type: 'NOTIFY', payload: { error: ERROR_403 } })
-    var shippingAddress = address;
+    var shippingAddress = selectedAddress;
     if (shippingAddress && shippingAddress.new && shippingAddress.new === '-1') shippingAddress = getAddressObj(document.getElementById('addressForm'));
     const validateAddressMsg = validateAddress(shippingAddress);
     if (validateAddressMsg) return dispatch({ type: 'NOTIFY', payload: { error: validateAddressMsg } });
@@ -107,7 +119,7 @@ const Cart = () => {
         <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Cart`}</title>
       </Head>
       <div className="container-fluid cart">
-        <h5>Review Your Cart</h5>
+        <h5>Review Your Cart <span className="cart-items"> - ({cart.length} {cart.length === 1 ? 'item' : 'items'})</span></h5>
         <div className="row">
           <div className="col-md-7">
             {cart && cart.map((item, index) => (
@@ -115,12 +127,17 @@ const Cart = () => {
             ))}
           </div>
           <div className="col-md-5">
-            <div className="card p-3">
-              <h5>Select a Delivery Address</h5>
-              <Address />
+            <div className="card p-3 mx-2 mx-sm-0 me-md-3">
+
+              <h5>Order Summary</h5>
+
+              Deliver to - <Address addressData={addressData} />
+
+
+
               <h5 style={{ color: 'black' }}>Total: <span>₹{total}</span></h5>
-              <Link href={'#!'} className="btn btn-primary my-2 cartPayBtn" 
-              onClick={handlePayment}>
+              <Link href={'#!'} className="btn btn-primary my-2 cartPayBtn"
+                onClick={handlePayment}>
                 Proceed To Pay
               </Link>
             </div>

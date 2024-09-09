@@ -7,9 +7,11 @@ export const getData = async (url, token) => {
             'Authorization': token
         }
     })
-
-    const data = await res.json()
-    return data
+    if(res.status === 200){
+        return await res.json();
+    }else{
+        return res;
+    }
 }
 
 export const postData = async (url, post, token) => {

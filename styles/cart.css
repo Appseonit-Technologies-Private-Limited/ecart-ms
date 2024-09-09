@@ -2,6 +2,10 @@
     width: 100%;
     box-shadow: var(--app-box-shadow);
 }
+.cart-items{
+    font-size: small;
+    color: var( --app-muted-text-color);
+}
 
 .cart-item-img-div {
     width: 70px;

@@ -52,7 +52,7 @@ export const DataProvider = ({ children }) => {
 
         // Cleanup the event listener when the component unmounts
         return () => {
-            if (typeof window !== "undefined" && updateWindowWidth != undefined){
+            if (typeof window !== "undefined" && !updateWindowWidth){
                 window.removeEventListener("resize", updateWindowWidth);
             }
         };

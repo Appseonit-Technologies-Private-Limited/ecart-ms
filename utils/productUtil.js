@@ -57,15 +57,15 @@ export const populateProductPrices = (product, sizeObj) => {
 }
 
 export const updateStockAndSoldFromProd = async (cart, products) => {
-    log.info('Inside updateStockAndSoldFromProd...');
+    //log.info('Inside updateStockAndSoldFromProd...');
     if (isEmpty(products) || isEmpty(cart)) return;
     let updatedCart = [];
     cart.forEach(cartItem => {
         let product = products[cartItem._id];
-        log.info('cartItem : '+JSON.stringify(cartItem));
-        log.info('product.attributesRequired : '+product.attributesRequired);
+        //log.info('cartItem : '+JSON.stringify(cartItem));
+        //log.info('product.attributesRequired : '+product.attributesRequired);
         if (!product.attributesRequired) {// Without attrs - work as old behaviour
-            log.info('product.inStock : '+product.inStock+ ', product.sold: '+product.sold);
+            //log.info('product.inStock : '+product.inStock+ ', product.sold: '+product.sold);
             cartItem.inStock = Math.abs(product.inStock - cartItem.quantity);
             cartItem.sold = Math.abs(product.sold + cartItem.quantity);
             updateInStockAndSoldById(cartItem._id, cartItem.inStock, cartItem.sold);
@@ -96,7 +96,7 @@ export const updateStockAndSoldFromProd = async (cart, products) => {
 }
 
 const updateAttributes = async (_id, attributes) =>{
-    log.info('Inside updateAttributes... ID : '+_id);
+    //log.info('Inside updateAttributes... ID : '+_id);
     if (!isEmpty(attributes)) {
         await Products.findOneAndUpdate({ _id}, { attributes });
         return true;
@@ -104,6 +104,6 @@ const updateAttributes = async (_id, attributes) =>{
 }
 
 const updateInStockAndSoldById = async (_id, inStock, sold) => {
-    log.info('Inside updateInStockAndSoldById...ID : '+_id);
+    //log.info('Inside updateInStockAndSoldById...ID : '+_id);
     await Products.findOneAndUpdate({ _id }, { inStock, sold });
 }

@@ -47,7 +47,7 @@ const CartItem = ({ item, dispatch, cart, isAdmin }) => {
     };
 
     return (
-        <div className='card cart-item-card mx-sm-3 mb-sm-3 mx-2 mb-2'>
+        <div className='card cart-item-card ms-sm-3 mx-2 mb-2'>
             <div className="row m-2">
                 {/* Product Image */}
                 <div className='col-1 cart-item-img-div'>
@@ -57,7 +57,7 @@ const CartItem = ({ item, dispatch, cart, isAdmin }) => {
                 </div>
 
                 {/* Product Details */}
-                <div className="col-5 col-md-6 mx-2">
+                <div className="col-5 mx-2">
                     <div>
                         <Link href={`/product/${item._id}`} className="text-capitalize product-title">
                             {item.title}
@@ -74,7 +74,7 @@ const CartItem = ({ item, dispatch, cart, isAdmin }) => {
 
                         {/* Price (One line) */}
                         <div className="text-end mb-2">
-                            <span className='product-price-quantity'>{`${item.totalPrice} x ${item.quantity} = `}</span><span className='product-price'>{`${currencyType} ${calculatePrice(item.quantity, item.totalPrice)}`}</span>
+                            <span className='product-price-quantity'>{`${item.totalPrice} x ${item.quantity} = `}</span><span className='product-price'>{`${currencyType}${calculatePrice(item.quantity, item.totalPrice)}`}</span>
                         </div>
 
                         {/* Quantity Controls and Delete (Second line) */}
