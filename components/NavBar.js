@@ -4,11 +4,10 @@ import { useRouter } from 'next/router'
 import { DataContext } from '../store/GlobalState'
 import { postData, putData } from '../utils/fetchData'
 import { ACC_ACT_MAIL } from '../utils/constants.js'
-import isEmpty from 'lodash/isEmpty';
 import MenuNotifications from './Notifications/MenuNotifications'
 import Dropdown from 'react-bootstrap/Dropdown';
 import Menu from './Custom_Components/Menu.js'
-import { CartLogoIcon, CartIcon, NotificationIcon, AddProductIcon, ProductListIcon , UsersIcon, OrderHistoryIcon, UserIcon, CategoryIcon, LogoutIcon, DashboardIcon} from './Icons/Icon.js'
+import { CartLogoIcon, CartIcon, NotificationIcon, AddProductIcon, ProductListIcon, UsersIcon, OrderHistoryIcon, UserIcon, CategoryIcon, LogoutIcon, DashboardIcon } from './Icons/Icon.js'
 
 function NavBar() {
     const router = useRouter()
@@ -45,7 +44,7 @@ function NavBar() {
         return (
             <>
                 {
-                    isEmpty(auth)
+                    (!auth || !auth.user || !auth.user.name)
                         ?
                         <Link href="/signin" className={"nav-link" + isActive('/signin')}>
                             <UserIcon />
@@ -66,13 +65,13 @@ function NavBar() {
                                     <Dropdown.Item href='/orders'>{<><OrderHistoryIcon /> Orders</>}</Dropdown.Item>
                                     {isAdmin && (
                                         <>
-                                            <Dropdown.Item href='/users'>{<><UsersIcon/> Users</>}</Dropdown.Item>
+                                            <Dropdown.Item href='/users'>{<><UsersIcon /> Users</>}</Dropdown.Item>
                                             <Dropdown.Item href='/productList'>{<><ProductListIcon /> Product List</>}</Dropdown.Item>
                                             <Dropdown.Item href='/create'>{<><AddProductIcon /> Add Product</>}</Dropdown.Item>
                                             <Dropdown.Item href='/categories'>{<><CategoryIcon /> Categories</>}</Dropdown.Item>
                                         </>)
                                     }
-                                    <Dropdown.Item href='/notifications'>{<><NotificationIcon/> Notifications</>}</Dropdown.Item>
+                                    <Dropdown.Item href='/notifications'>{<><NotificationIcon /> Notifications</>}</Dropdown.Item>
                                     <Dropdown.Divider />
                                     <Dropdown.Item onClick={handleLogout}>{<><LogoutIcon /> Logout</>}</Dropdown.Item>
                                 </div>
@@ -120,7 +119,7 @@ function NavBar() {
                         !isAdmin &&
                         <li className="nav-item">
                             <Link href="/cart" className={"nav-link" + isActive('/cart')}>
-                            <CartIcon/>
+                                <CartIcon />
                                 {cart && cart.length > 0 && <span className="count-badge">{cart.length}</span>}
                                 {windowWidth > mobileWidth && <span className='navbar-menu-text'>Cart</span>}
                             </Link>

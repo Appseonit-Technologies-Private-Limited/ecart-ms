@@ -24,22 +24,11 @@ if (consent === null) {
 if (consent) return null;
 
   return (
-    <div style={bannerStyle}>
+    <div className='cookie-consent'>
       <p>We use cookies to improve your experience. By continuing, you agree to our use of cookies.</p>
       <button className="btn btn-primary"  onClick={handleAccept}>Accept</button>
     </div>
   );
-};
-
-const bannerStyle = {
-  position: 'fixed',
-  bottom: '0',
-  left: '0',
-  width: '100%',
-  backgroundColor: '#000',
-  color: '#fff',
-  padding: '10px',
-  textAlign: 'center',
 };
 
 export default CookieConsent;

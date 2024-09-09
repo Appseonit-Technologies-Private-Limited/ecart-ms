@@ -21,19 +21,15 @@ export const DataProvider = ({ children }) => {
          * 3. Checking & authenticating user token (Auto-login if token present).
          * 4. Fetching categories
          */
-        if (typeof window !== "undefined"){
-            redirectToHttps(window);
-            const updateWindowWidth = () => dispatch({ type: "WINDOW_WIDTH", payload: window.innerWidth });
-            updateWindowWidth();
-            window.addEventListener("resize", updateWindowWidth);
-        }
+        
 
         if (!auth.token) {
             //console.log('Fetching access_token........');
             getData('auth/accessToken').then(res => {
                 if (res.err) return;
-                
-                dispatch({type: "AUTH",
+
+                dispatch({
+                    type: "AUTH",
                     payload: {
                         token: res.access_token,
                         user: res.user
@@ -50,17 +46,22 @@ export const DataProvider = ({ children }) => {
             })
         });
 
-        // Cleanup the event listener when the component unmounts
-        return () => {
-            if (typeof window !== "undefined" && !updateWindowWidth){
+        if (typeof window !== "undefined") {
+            redirectToHttps(window);
+            const updateWindowWidth = () => dispatch({ type: "WINDOW_WIDTH", payload: window.innerWidth });
+            updateWindowWidth();
+            window.addEventListener("resize", updateWindowWidth);
+            // Cleanup the event listener when the component unmounts
+            return () => {
                 window.removeEventListener("resize", updateWindowWidth);
-            }
-        };
+            };
+        }
+        
     }, []);
 
     useEffect(() => {
         const __next__cart01 = JSON.parse(localStorage.getItem('__next__cart01'))
-      
+
         if (__next__cart01) dispatch({ type: 'ADD_CART', payload: __next__cart01 })
     }, [])
 
@@ -75,7 +76,7 @@ export const DataProvider = ({ children }) => {
                     .then(res => {
                         if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
                         dispatch({ type: 'ADD_USERS', payload: res.users })
-                })
+                    })
             }
         } else {
             dispatch({ type: 'ADD_ORDERS', payload: [] })
