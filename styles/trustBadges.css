@@ -1,52 +1,63 @@
 /* Float four columns side by side */
-.col-card {
+.trust-badge {
   width: 20%;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.trust-badge:hover{
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 /* Style the counter cards */
-.col-card .card {
+.trust-badge .card {
   /* box-shadow: var(--app-box-shadow); */
   padding: 10px;
   text-align: center;
   background-color: #fff;
-  /* background: linear-gradient(to right, #092f56, #000000); */
-  /* opacity: 85%; */
   border: none;
 }
 
-.col-card h3 {
+.trust-badge h3 {
   font-size: x-large;
   text-align: center;
   vertical-align: middle;
-  color: var( --app-primary-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  /* color: var( --app-primary-color); */
 }
 
-.col-card .text {
+.trust-badge .text {
   color: var(--app-heading-text-color);
-  font-size: small;
+  font-size: 0.8rem;
   text-align: center;
   vertical-align: middle;
-  font-weight: 600;
-  margin-top: 2px;
+  font-weight: normal;
+  margin-top: 5px;
+  transition: color 0.3s ease-in-out;
+}
+
+.trust-badge:hover .text, .trust-badge:hover h3{
+  color: var(--app-primary-color);
 }
 
 
 /* Extra small devices (phones, less than 576px) */
 @media (max-width: 575.98px) {
   /* Styles for small devices */
-  .col-card {
+  .trust-badge {
     width: 25%;
   }
 
-  .col-card .card {
+  .trust-badge .card {
     padding: 5px;
   }
 
-  .col-card h3 {
+  .trust-badge h3 {
     width: 100%;
   }
 
-  .col-card .text {
+  .trust-badge .text {
     font-size: xx-small;
   }
 }

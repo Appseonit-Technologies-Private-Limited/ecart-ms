@@ -8,7 +8,7 @@ export const ACTIONS = {
     ADD_ADDRESS: 'ADD_ADDRESS',
     ADD_CATEGORIES: 'ADD_CATEGORIES',
     NOTIFICATIONS: 'NOTIFICATIONS',
-    WINDOW_WIDTH: 'WINDOW_WIDTH'
+    WINDOW_WIDTH: 'WINDOW_WIDTH',
 }
 
 export const addToCart = (product, cart) => {

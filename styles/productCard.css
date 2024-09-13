@@ -66,6 +66,7 @@
     font-size: small;
     margin: 0;
     /* font-weight: 500; */
+    line-height: 0.98rem;
 }
 
 .product-card .price {

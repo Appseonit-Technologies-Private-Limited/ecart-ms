@@ -84,7 +84,7 @@ const TableGrid = ({ columns, rows, totalCount, isOrderPage, isAdmin, isDbPagina
     return (
         <>
             <table className="table-bordered table-hover w-100 table-grid" style={{ minWidth: '600px' }}>
-                <thead className="font-weight-bold app-bg-color">
+                <thead className="font-weight-bold">
                     <tr>
                         {
                             columns && columns.map(column => (

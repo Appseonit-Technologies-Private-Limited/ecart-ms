@@ -5,7 +5,7 @@ import { getData } from '../utils/fetchData'
 import ControlledCarousel from '../components/Carousel'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import HomePageCards from '../components/Home/HomePageCards'
+import TrustBadges from '../components/Home/TrustBadges'
 import { ShopByCategories } from '../components/Home/Categories/ShopByCategories'
 // import { BestSellingProducts } from '../components/Home/BestSellingProducts/BestSellingProducts'
 import CategoryWiseProducts from '../components/Home/CategoryWiseProducts'
@@ -36,18 +36,23 @@ const Home = (props) => {
         </div> */}
 
       </div>
+      <div className='m-5'>
+        <TrustBadges />
+      </div>
       <div className='m-3'>
         <ShopByCategories categories={categories} />
       </div>
       <div className='m-3'>
         <Advertisements categories={categories} />
       </div>
-      <div className='m-3'>
-        <HomePageCards />
-      </div>
+      
       <div className='m-3'>
         <CategoryWiseProducts catWiseProducts={catWiseProducts}/>
       </div>
+      {/* <div className='m-3'>
+        <HomePageCards />
+      </div> */}
+     
     </div>
   )
 }

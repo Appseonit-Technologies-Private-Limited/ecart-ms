@@ -12,6 +12,8 @@ import { isAdminRole, isLoading } from '../utils/util'
 import { ERROR_403 } from '../utils/constants'
 import { handleUIError } from '../middleware/error'
 import EmptyCart from '../components/Cart/EmptyCart'
+import TrustBadges from '../components/Home/TrustBadges'
+import BackButton from '../components/Custom_Components/BackButton'
 
 export async function getServerSideProps({ req }) {
   let addressData = [];
@@ -118,6 +120,8 @@ const Cart = ({ addressData }) => {
       <Head>
         <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Cart`}</title>
       </Head>
+      <BackButton/>
+
       <div className="container-fluid cart">
         <h5>Review Your Cart <span className="cart-items"> - ({cart.length} {cart.length === 1 ? 'item' : 'items'})</span></h5>
         <div className="row">
@@ -142,6 +146,9 @@ const Cart = ({ addressData }) => {
               </Link>
             </div>
           </div>
+        </div>
+        <div className='my-4 my-sm-5'>
+          <TrustBadges />
         </div>
       </div>
     </>

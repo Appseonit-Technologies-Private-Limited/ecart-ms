@@ -1,37 +1,25 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DataContext } from '../store/GlobalState'
-import { postData, putData } from '../utils/fetchData'
-import { ACC_ACT_MAIL } from '../utils/constants.js'
+import { postData } from '../utils/fetchData'
+import { ACC_ACT_MAIL, MOBILE_MAX_WIDTH } from '../utils/constants.js'
 import MenuNotifications from './Notifications/MenuNotifications'
-import Dropdown from 'react-bootstrap/Dropdown';
-import Menu from './Custom_Components/Menu.js'
-import { CartLogoIcon, CartIcon, NotificationIcon, AddProductIcon, ProductListIcon, UsersIcon, OrderHistoryIcon, UserIcon, CategoryIcon, LogoutIcon, DashboardIcon } from './Icons/Icon.js'
+import { CartLogoIcon, CartIcon, DashboardIcon, HomeIcon } from './Icons/Icon.js'
+import { useMediaQuery } from 'react-responsive'
+import { isAdminRole } from '../utils/util.js'
+import MyAccount from './MyAccount/MyAccount.js'
+import ProductSearchBar from './ProductSearchBar/ProductSearchBar.js'
 
 function NavBar() {
     const router = useRouter()
     const { state, dispatch } = useContext(DataContext)
-    const { auth, cart, windowWidth } = state;
-    const [accountActivated, setAccountActivated] = useState(auth && auth.user && auth.user.activated)
-    const isAdmin = auth && auth.user && auth.user.role === 'admin';
-    const mobileWidth = 576;
+    const { auth, cart } = state;
+    const isAdmin = isAdminRole(auth && auth.user && auth.user.role);
+    const isMobile = useMediaQuery({ maxWidth: MOBILE_MAX_WIDTH });
 
-    const isActive = (r) => { return r === router.pathname ? " active" : "" }
-    const handleLogout = async () => {
-        const res = await putData(`auth/logout`, {}, auth.token)
-        if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
-        dispatch({ type: 'AUTH', payload: {} })
-        dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
-        setAccountActivated(null)
-        return router.push('/')
-    }
 
-    useEffect(() => {
-        if (auth && auth.user && !auth.user.activated) {
-            setAccountActivated(false)
-        }
-    }, [auth])
+    const isActivePath = (r) => { return r === router.pathname ? " active" : "" }
 
     const triggerAccountActivationMail = () => {
         if (auth && auth.user && auth.user.email) {
@@ -40,77 +28,39 @@ function NavBar() {
         }
     }
 
-    const MyAccount = () => {
-        return (
-            <>
-                {
-                    (!auth || !auth.user || !auth.user.name)
-                        ?
-                        <Link href="/signin" className={"nav-link" + isActive('/signin')}>
-                            <UserIcon />
-                            <span className='navbar-menu-text'>Sign in</span>
-                        </Link>
-
-                        :
-                        <Menu title={
-                            <>
-                                <UserIcon />
-                                <span className='navbar-menu-text text-capitalize'>{auth.user.name}</span>
-
-                            </>
-                        }
-                            menuItems={
-                                <div>
-                                    <Dropdown.Item href='/profile'>{<><UserIcon /> Profile</>}</Dropdown.Item>
-                                    <Dropdown.Item href='/orders'>{<><OrderHistoryIcon /> Orders</>}</Dropdown.Item>
-                                    {isAdmin && (
-                                        <>
-                                            <Dropdown.Item href='/users'>{<><UsersIcon /> Users</>}</Dropdown.Item>
-                                            <Dropdown.Item href='/productList'>{<><ProductListIcon /> Product List</>}</Dropdown.Item>
-                                            <Dropdown.Item href='/create'>{<><AddProductIcon /> Add Product</>}</Dropdown.Item>
-                                            <Dropdown.Item href='/categories'>{<><CategoryIcon /> Categories</>}</Dropdown.Item>
-                                        </>)
-                                    }
-                                    <Dropdown.Item href='/notifications'>{<><NotificationIcon /> Notifications</>}</Dropdown.Item>
-                                    <Dropdown.Divider />
-                                    <Dropdown.Item onClick={handleLogout}>{<><LogoutIcon /> Logout</>}</Dropdown.Item>
-                                </div>
-                            }
-                        />
-                }
-            </>
-        )
-    }
-
     return (
-        <nav className="navbar navbar-expand fixed-top">
-            <Link href="/">
-                <div className="d-flex align-items-end" style={{ cursor: 'pointer' }}>
-
-                    <h4 className='company-logo'>{process.env.NEXT_PUBLIC_APP_TITLE}</h4>
-                    <div className='cart-logo'><CartLogoIcon /></div>
+        <nav className={`navbar navbar-expand ${isMobile ? 'fixed-bottom' : 'fixed-top'}`}>
+            
+            {!isMobile &&
+                <div className='company-logo-container'>
+                    <Link href="/">
+                        <div className="d-flex align-items-end" style={{ cursor: 'pointer' }}>
+                            <h4 className='company-logo'>{process.env.NEXT_PUBLIC_APP_TITLE}</h4>
+                            <div className='cart-logo'><CartLogoIcon /></div>
+                        </div>
+                    </Link>
                 </div>
-            </Link>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                {accountActivated === false &&
-                    <button onClick={() => { triggerAccountActivationMail() }} className="btn btn-warning activateBtn">Activate Your Account</button>
-                }
+            }
 
+            {!isMobile && <div className='d-flex justify-content-center flex-grow-1 px-5'><ProductSearchBar/></div>}
+
+            {auth && auth.user && !auth.user.activated &&
+                <button onClick={() => { triggerAccountActivationMail() }} className="btn btn-warning activateBtn">Activate Your Account</button>
+            }
+            <div className="navbar-menu-btns-container">
                 <ul className="navbar-nav">
-                    {/* <li className="nav-item" >
-                        <Link href="/" className={"nav-link" + isActive('/')}>
-                            <i className="fas fa-home" aria-hidden="true" ></i> 
-                            <span className='navbar-menu-text'>Home</span>
+                    {isMobile && <li className="nav-item" >
+                        <Link href="/" className={"nav-link" + isActivePath('/')}>
+                            <HomeIcon />
+                            {!isMobile && <span className="navbar-menu-text"> Home </span>}
                         </Link>
-                    </li> */}
+                    </li>}
+
                     {isAdmin &&
                         <li className="nav-item" >
-                            <Link href="/dashboard" className={"nav-link" + isActive('/dashboard')}>
+                            <Link href="/dashboard" className={"nav-link" + isActivePath('/dashboard')}>
                                 <DashboardIcon />
-                                {windowWidth && windowWidth > mobileWidth && <span className="navbar-menu-text"> Dashboard </span>}
+                                {!isMobile && <span className="navbar-menu-text"> Dashboard </span>}
                             </Link>
                         </li>
 
@@ -118,15 +68,15 @@ function NavBar() {
                     {
                         !isAdmin &&
                         <li className="nav-item">
-                            <Link href="/cart" className={"nav-link" + isActive('/cart')}>
+                            <Link href="/cart" className={"nav-link" + isActivePath('/cart')}>
                                 <CartIcon />
                                 {cart && cart.length > 0 && <span className="count-badge">{cart.length}</span>}
-                                {windowWidth > mobileWidth && <span className='navbar-menu-text'>Cart</span>}
+                                {!isMobile && <span className='navbar-menu-text'> Cart </span>}
                             </Link>
                         </li>
                     }
-                    <li className="nav-item"><MenuNotifications mobileWidth={mobileWidth} /></li>
-                    <li className="nav-item"><MyAccount /> </li>
+                    <li className="nav-item"><MenuNotifications isMobile={isMobile} /></li>
+                    <li className="nav-item"><MyAccount isAdmin={isAdmin} isMobile={isMobile} isActivePath={isActivePath}/></li>
                 </ul>
             </div>
         </nav>

@@ -1,17 +1,20 @@
 import { createContext, useReducer, useEffect } from 'react'
 import reducers from './Reducers'
 import { getData } from '../utils/fetchData'
+import { useMediaQuery } from 'react-responsive'
 
 export const DataContext = createContext()
 
 
 export const DataProvider = ({ children }) => {
     const initialState = {
-        notify: {}, auth: {}, cart: [], modal: [], orders: [], users: [], categories: [], windowWidth: 300
+        notify: {}, auth: {}, cart: [], modal: [], orders: [], users: [], categories: [], windowWidth: 768
     }
 
     const [state, dispatch] = useReducer(reducers, initialState)
     const { cart, auth } = state;
+
+    const isMobile = useMediaQuery({ maxWidth: initialState.windowWidth });
 
     useEffect(() => {
         /**
@@ -51,12 +54,12 @@ export const DataProvider = ({ children }) => {
             const updateWindowWidth = () => dispatch({ type: "WINDOW_WIDTH", payload: window.innerWidth });
             updateWindowWidth();
             window.addEventListener("resize", updateWindowWidth);
+            
             // Cleanup the event listener when the component unmounts
             return () => {
                 window.removeEventListener("resize", updateWindowWidth);
             };
         }
-        
     }, []);
 
     useEffect(() => {

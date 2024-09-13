@@ -48,11 +48,11 @@ const reducers = (state, action) => {
                 ...state,
                 notifications: action.payload
             };
-            case ACTIONS.WINDOW_WIDTH:
-                return {
-                    ...state,
-                    windowWidth: action.payload
-                };
+        case ACTIONS.WINDOW_WIDTH:
+            return {
+                ...state,
+                windowWidth: action.payload
+            };
         default:
             return state;
     }
