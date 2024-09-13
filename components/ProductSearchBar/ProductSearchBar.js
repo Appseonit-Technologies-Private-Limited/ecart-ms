@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
-import { TbSearch } from "react-icons/tb";
+import {SearchIcon} from '../Icons/Icon';
+
 const ProductSearchBar = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -13,7 +14,7 @@ const ProductSearchBar = () => {
         <Form className='d-flex w-100'>
             <InputGroup className="product-search-bar justify-content-center">
                 <InputGroup.Text className="search-icon">
-                    <TbSearch />
+                    <SearchIcon/>
                 </InputGroup.Text>
                 <Form.Control
                     className="search-text-area"
