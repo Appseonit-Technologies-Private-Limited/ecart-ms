@@ -64,10 +64,10 @@
 
 /* Button Styling */
 .cart-item-card .btn {
-    width: 25px;
+    width: 30px;
     /* Ensure buttons have a uniform width */
-    height: 25px;
-    font-size: x-small;
+    height: 30px;
+    font-size: small;
     padding: 0px;
     padding-bottom: 2px;
     box-shadow: var(--app-box-shadow);

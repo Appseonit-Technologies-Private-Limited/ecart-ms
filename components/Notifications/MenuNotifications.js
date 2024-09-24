@@ -8,7 +8,7 @@ import { updateCheckedNotifications } from '../../utils/NotificationHelper';
 import { getData } from '../../utils/fetchData';
 import { NotificationIcon } from '../Icons/Icon';
 
-function MenuNotifications({isMobile}) {
+function MenuNotifications({isMobile, isActivePath}) {
     const { state, dispatch } = useContext(DataContext);
     const { auth } = state;
     const [notificationsArr, setNotificationsArr] = useState([])
@@ -67,11 +67,11 @@ function MenuNotifications({isMobile}) {
         <>
             <Menu 
                 title= {
-                    <>
+                    <div className="nav-icon-text">
                         <NotificationIcon />
                         {notificationsArr && notificationsArr.length > 0 && <span className="count-badge"> {(notificationsArr && notificationsArr.length)}</span>}                       
-                        {!isMobile &&  <span className="navbar-menu-text ml-1">Notifications</span> }  
-                    </>
+                        {<span className="navbar-menu-text ml-1">Notifications</span> }  
+                   </div>
                 }
                 menuItems={<NotificationList />}
             />

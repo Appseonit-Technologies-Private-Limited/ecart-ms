@@ -10,6 +10,7 @@ import { useMediaQuery } from 'react-responsive'
 import { isAdminRole } from '../utils/util.js'
 import MyAccount from './MyAccount/MyAccount.js'
 import ProductSearchBar from './ProductSearchBar/ProductSearchBar.js'
+import Logo from './Logo/Logo.js'
 
 function NavBar() {
     const router = useRouter()
@@ -29,57 +30,63 @@ function NavBar() {
     }
 
     return (
-        <nav className={`navbar navbar-expand ${isMobile ? 'fixed-bottom' : 'fixed-top'}`}>
-            
-            {!isMobile &&
-                <div className='company-logo-container'>
-                    <Link href="/">
-                        <div className="d-flex align-items-end" style={{ cursor: 'pointer' }}>
-                            <h4 className='company-logo'>{process.env.NEXT_PUBLIC_APP_TITLE}</h4>
-                            <div className='cart-logo'><CartLogoIcon /></div>
-                        </div>
-                    </Link>
+        <>
+            {isMobile && (
+                <>
+                    <nav className={`navbar navbar-expand fixed-top`}>
+                        <Logo isMobile={isMobile} />
+                        <div className='d-flex justify-content-center flex-grow-1 px-5'><ProductSearchBar /></div>
+                    </nav>
+                </>
+            )}
+            <nav className={`navbar navbar-expand ${isMobile ? 'fixed-bottom' : 'fixed-top'}`}>
+                {!isMobile && <Logo isMobile={isMobile} />}
+
+                {!isMobile && <div className='d-flex justify-content-center flex-grow-1 px-5'><ProductSearchBar /></div>}
+
+                {auth && auth.user && !auth.user.activated &&
+                    <button onClick={() => { triggerAccountActivationMail() }} className="btn btn-warning activateBtn">Activate Your Account</button>
+                }
+                <div className="navbar-menu-btns-container">
+                    <ul className="navbar-nav">
+                        {isMobile && <li className="nav-item" >
+                            <Link href="/" className={"nav-link" + isActivePath('/')}>
+                                <div className="nav-icon-text">
+                                    <HomeIcon />
+                                    {<span className="navbar-menu-text"> Home </span>}
+                                </div>
+                            </Link>
+
+                        </li>}
+
+                        {isAdmin &&
+                            <li className="nav-item" >
+                                <Link href="/dashboard" className={"nav-link" + isActivePath('/dashboard')}>
+                                    <DashboardIcon />
+                                    {<span className="navbar-menu-text"> Dashboard </span>}
+                                </Link>
+                            </li>
+
+                        }
+                        {
+                            !isAdmin &&
+                            <li className="nav-item">
+                                <Link href="/cart" className={"nav-link" + isActivePath('/cart')}>
+                                    <div className="nav-icon-text">
+                                        <CartIcon />
+                                        {cart && cart.length > 0 && <span className="count-badge">{cart.length}</span>}
+                                        {<span className='navbar-menu-text'> Cart </span>}
+
+                                    </div>
+                                </Link>
+                            </li>
+                        }
+                        <li className="nav-item"><MenuNotifications isMobile={isMobile} isActivePath={isActivePath} /></li>
+                        <li className="nav-item"><MyAccount isAdmin={isAdmin} isMobile={isMobile} isActivePath={isActivePath} /></li>
+                    </ul>
                 </div>
-            }
-
-            {!isMobile && <div className='d-flex justify-content-center flex-grow-1 px-5'><ProductSearchBar/></div>}
-
-            {auth && auth.user && !auth.user.activated &&
-                <button onClick={() => { triggerAccountActivationMail() }} className="btn btn-warning activateBtn">Activate Your Account</button>
-            }
-            <div className="navbar-menu-btns-container">
-                <ul className="navbar-nav">
-                    {isMobile && <li className="nav-item" >
-                        <Link href="/" className={"nav-link" + isActivePath('/')}>
-                            <HomeIcon />
-                            {!isMobile && <span className="navbar-menu-text"> Home </span>}
-                        </Link>
-                    </li>}
-
-                    {isAdmin &&
-                        <li className="nav-item" >
-                            <Link href="/dashboard" className={"nav-link" + isActivePath('/dashboard')}>
-                                <DashboardIcon />
-                                {!isMobile && <span className="navbar-menu-text"> Dashboard </span>}
-                            </Link>
-                        </li>
-
-                    }
-                    {
-                        !isAdmin &&
-                        <li className="nav-item">
-                            <Link href="/cart" className={"nav-link" + isActivePath('/cart')}>
-                                <CartIcon />
-                                {cart && cart.length > 0 && <span className="count-badge">{cart.length}</span>}
-                                {!isMobile && <span className='navbar-menu-text'> Cart </span>}
-                            </Link>
-                        </li>
-                    }
-                    <li className="nav-item"><MenuNotifications isMobile={isMobile} /></li>
-                    <li className="nav-item"><MyAccount isAdmin={isAdmin} isMobile={isMobile} isActivePath={isActivePath}/></li>
-                </ul>
-            </div>
-        </nav>
+            </nav>
+        </>
     )
 }
 

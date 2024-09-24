@@ -1,6 +1,11 @@
 /* Float four columns side by side */
 .trust-badge {
   width: 20%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 20px;
   transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
@@ -19,8 +24,10 @@
 }
 
 .trust-badge h3 {
-  font-size: x-large;
+  /* font-size: x-large; */
   text-align: center;
+  display: flex;
+  align-items: center;
   vertical-align: middle;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -33,20 +40,43 @@
   text-align: center;
   vertical-align: middle;
   font-weight: normal;
-  margin-top: 5px;
   transition: color 0.3s ease-in-out;
+  margin-left: 10px;
 }
 
 .trust-badge:hover .text, .trust-badge:hover h3{
   color: var(--app-primary-color);
 }
 
+/* Divider styling */
+.with-divider {
+  position: relative;
+}
+
+.with-divider::after {
+  content: '';
+  position: absolute;
+  right: -15px; /* Adjust this depending on spacing between divs */
+  top: 50%;
+  width: 2px;
+  height: 60%; /* Adjust this to change divider length */
+  background-color: var(--app-heading-text-color);
+  border-radius: 10px; /* Rounded edges */
+  transform: translateY(-50%);
+}
+
+.with-divider:last-child::after {
+  display: none; /* Remove the divider for the last element */
+}
+
+
 
 /* Extra small devices (phones, less than 576px) */
 @media (max-width: 575.98px) {
   /* Styles for small devices */
   .trust-badge {
-    width: 25%;
+    /* width: 30%; */
+    padding: 0px;
   }
 
   .trust-badge .card {
@@ -54,13 +84,25 @@
   }
 
   .trust-badge h3 {
-    width: 100%;
+    /* width: 100%; */
+    flex-direction: column;
   }
 
   .trust-badge .text {
     font-size: xx-small;
+    margin-top: 5px;
+    margin-left: 0px;
+  }
+
+  .with-divider::after {
+    
+    right: -10px; /* Adjust this depending on spacing between divs */
+    height: 50%; /* Adjust this to change divider length */
+   
+    transform: translateY(-50%);
   }
 }
+
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {

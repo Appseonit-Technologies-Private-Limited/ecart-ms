@@ -7,7 +7,7 @@
   --app-heading-text-color: #3c4043;
   --app-font-color: #000;
   --app-muted-text-color: #8b9dab;
-  --app-header-color-item-color: var(--app-muted-text-color);
+  --app-header-color-item-color: #767a80;
   --app-box-shadow: 0px 0px 7px 0px #7c899a6e;
   --app-hover-color: #000;
   --glass-color: #40576d12;
@@ -36,6 +36,7 @@ html, body {
 }
 
 .main {
+  top: 65px;
   min-height: 100vh;
   /* will cover the 100% of viewport */
   overflow: hidden;
@@ -189,7 +190,7 @@ h6 {
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-  color: var(--app-secondary-color);
+  color: var(--app-header-color-item-color);
 }
 
 .btn-outline-primary {
@@ -434,6 +435,9 @@ btn-outline-primary:not(:disabled):not(.disabled).active:focus, .btn-outline-pri
     padding: 4px 16px;
   }
 
+  .product-search-bar .search-text-area{
+    font-size: small;
+  }
   .category-cards-container {
     justify-content: flex-start;
     /* Align cards at the start horizontally */

@@ -36,7 +36,7 @@ const Home = (props) => {
         </div> */}
 
       </div>
-      <div className='m-5'>
+      <div className='m-4 m-sm-5'>
         <TrustBadges />
       </div>
       <div className='m-3'>

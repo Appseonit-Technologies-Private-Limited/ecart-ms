@@ -7,13 +7,13 @@ import { NotificationIcon, AddProductIcon, ProductListIcon, UsersIcon, OrderHist
 import { putData } from '../../utils/fetchData.js';
 import { useRouter } from 'next/router.js';
 
-function MyAccount({ isAdmin, isMobile , isActivePath}) {
+function MyAccount({ isAdmin, isMobile, isActivePath }) {
 
     const { state, dispatch } = useContext(DataContext);
     const router = useRouter()
     const { auth } = state;
 
-    
+
     const handleLogout = async () => {
         const res = await putData(`auth/logout`, {}, auth.token)
         if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } })
@@ -27,18 +27,19 @@ function MyAccount({ isAdmin, isMobile , isActivePath}) {
             {
                 (!auth || !auth.user || !auth.user.name)
                     ?
-                    <Link href="/signin" className={"nav-link" + isActivePath('/signin')}>
-                        <UserIcon />
-                        <span className='navbar-menu-text'>Sign in</span>
-                    </Link>
 
+                    <Link href="/signin" className={"nav-link" + isActivePath('/signin')}>
+                        <div className="nav-icon-text">
+                            <UserIcon />
+                            <span className='navbar-menu-text'>Sign in</span>
+                        </div>
+                    </Link>
                     :
                     <Menu title={
-                        <>
+                        <div className="nav-icon-text">
                             <UserIcon />
-                            {!isMobile && <span className='navbar-menu-text text-capitalize'>{auth.user.name}</span>}
-
-                        </>
+                            {<span className='navbar-menu-text text-capitalize'>{auth.user.name}</span>}
+                        </div>
                     }
                         menuItems={
                             <div>

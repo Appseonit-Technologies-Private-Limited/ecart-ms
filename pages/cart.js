@@ -147,7 +147,7 @@ const Cart = ({ addressData }) => {
             </div>
           </div>
         </div>
-        <div className='my-4 my-sm-5'>
+        <div className='m-4 m-sm-5'>
           <TrustBadges />
         </div>
       </div>

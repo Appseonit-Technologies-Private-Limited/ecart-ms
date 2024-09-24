@@ -8,9 +8,6 @@ function Layout({children}) {
     return (
         <div className="main">
             <NavBar />
-            <br></br>
-            <br></br>
-            <br></br>
             <Notify />
             <Modal />
             {children}
