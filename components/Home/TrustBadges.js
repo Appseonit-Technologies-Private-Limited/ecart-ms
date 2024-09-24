@@ -1,6 +1,5 @@
 import React from 'react';
 import { FreeShippingIcon, GenuineIcon, HugeSavingIcon, QualityProductIcon } from '../Icons/Icon';
-import { LuPackageCheck } from "react-icons/lu";
 
 const TrustBadges = () => {
   return (
@@ -13,7 +12,7 @@ const TrustBadges = () => {
       </div>
       <div className="trust-badge with-divider">
         <h3>
-          <LuPackageCheck />
+          <QualityProductIcon />
           <div className='text'>Quality Products</div>
         </h3>
       </div>
