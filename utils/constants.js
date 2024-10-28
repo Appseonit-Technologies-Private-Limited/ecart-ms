@@ -89,4 +89,5 @@ export const DEFAULT_PROD_IMG = '/assets/images/product/no_product_img.png';
 export const PRODUCT_API_ENDPOINT = 'product/';
 
 
-export const MOBILE_MAX_WIDTH = 768;
+export const TABLET_WIDTH = 768;
+export const MOBILE_WIDTH = 425;

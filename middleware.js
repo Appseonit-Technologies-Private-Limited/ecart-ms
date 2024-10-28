@@ -20,7 +20,7 @@ export async function middleware(request) {
   try {
     // Verify the access token
     const decodedAccessToken = await verifyToken(accessToken, process.env.ACCESS_TOKEN_SECRET);
-    if(decodedAccessToken.err) throw new Error(decodedAccessToken.err);   
+    if(!decodedAccessToken || decodedAccessToken.err) throw new Error(decodedAccessToken ? decodedAccessToken.err : 'Unexpected access token!');   
     if(isProtectedPage(path, protected_URIs)){      
       return NextResponse.next();
     }else if (isAdminPage(isAdminPath, adminIdArr, decodedAccessToken)){
@@ -30,7 +30,7 @@ export async function middleware(request) {
   } catch (error) {
     console.log('ERROR getting access token:', error);
     // Access token is invalid or expired, redirect to refresh endpoint
-    const refreshToken = cookies.refreshToken || '';
+    const refreshToken = cookies.com2 || '';
     if (refreshToken) {
       // Redirect to refresh token endpoint to get a new access token
       getData('auth/accessToken').then(res => {
@@ -42,11 +42,14 @@ export async function middleware(request) {
           }
           return NextResponse.redirect(new URL('/unauthorized', request.nextUrl)); 
         }
+      }).error(err => {
+        console.error('Error occurred while getting new access token: ', err);
+        return NextResponse.redirect(new URL('/signin', request.nextUrl));  // Redirect to signin page
       });
+    }else{
+      return NextResponse.redirect(new URL('/signin', request.nextUrl));  // Redirect to signin page
     }
   }
-  //Default to signin page for accessToken and refreshToken not available at any moment.
-  return NextResponse.redirect(new URL('/signin', request.nextUrl))
 }
 
 const public_URIs = ['/', '/signin', '/register', '/productSearch', '/cart', '/contactus'];

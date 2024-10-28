@@ -6,5 +6,6 @@ export const verifyToken = async (token, secret) =>{
         return payload;
    } catch (err) {
         console.log('Error while verifyToken : ',err);
+        return {err};
    } 
 }

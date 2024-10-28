@@ -1,64 +1,115 @@
-.profile_page .avatar{
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-    position: relative;
-    margin: 15px auto;
-    border: 1px solid #ddd;
-    border-radius: 50%;
+
+.profile-menu{
+    background-color: white;
+    border-radius: 10px;
+    /* height: 80vh; */
+}
+
+
+.profile-menu h6{
+    font-weight: normal;
+    font-size: smaller;
+    padding-left: 0;
+    margin-top: 0;
+    text-align: start;
+}
+
+.profile-menu-body{
+    background-color: white;
+    border-radius: 10px;
+}
+
+.profile-menu-body button, .profile-menu-body a{
+    width: fit-content !important;
     cursor: pointer;
 }
 
-.profile_page .avatar img{
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-}
-
-.profile_page .avatar span{
-    position: absolute;
-    bottom: -100%;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background: #fff8;
-    text-align: center;
-    font-weight: 400;
-    color: rgb(255, 140, 45);
-    transition: 0.3 ease-in-out;
-}
-
-.profile_page .avatar:hover span{
-    bottom: -15%;
-}
-
-.profile_page .row{
-    margin-right:0px;
-    margin-left:0px;
-}
-
-.profile_page #file_up{
-    position: absolute;
-    top:0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-}
-::-webkit-file-upload-button{
-    cursor: pointer;
-}
-
-.profile_page .userProfileCol{
-    padding-right:10px;
-}
-
-@media (max-width: 768px) {
-    .profile_page .userProfileCol{
-        padding-right:0px;
-    }
-    
-    .profile_page .mgtop{margin-top:15px;}
+.profile-nav {
+    display: flex;
+    flex-direction: column;
+    box-shadow: none !important;
   }
+
+  .profile-menu .nav-item {
+    border: none;
+    text-align: justify;
+    background-color: white;
+    padding: 8px;
+  }
+
+  .nav-item-active{
+    background-color: var(--app-background-color) !important;
+  }
+
+  .profile-menu .nav-item:hover {
+    background-color: var(--app-background-color);
+  }
+
+  .address-container{
+    border: 1px Solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .address-container label{
+    /* font-size: medium; */
+    font-weight: bold;
+  }
+
+  .address-container span{
+    font-size: small;
+    color: var(--app-primary-color);
+  }
+
+  .address-container p{
+    margin-bottom: 0;
+    font-size: medium;
+    color: black;
+  }
+
+  .default-address{
+    border: 2px Solid var(--app-primary-color) !important;
+  }
+
+  .address-container:hover{
+    border: 1px solid;
+    cursor: pointer;
+  }
+  
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+    /* Styles for small devices */
+    .profile-menu-body button{
+        width: 100%;
+    }
+}
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    /* Styles for small devices */
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    /* Styles for medium devices */
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    /* Styles for large devices */
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    /* Styles for extra large devices */
+
+}
+
+/* Extra extra large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+    /* Styles for extra extra large devices */
+
+}

@@ -6,35 +6,49 @@ import { DataContext } from '../store/GlobalState'
 import CartItem from '../components/CartItem'
 import { getData, postData } from '../utils/fetchData'
 import { isLoggedInPopup } from '../components/SignIn/SignInCardFunctionalComponent'
-import Address from '../components/Cart/Address'
 import { getAddressObj, validateAddress } from '../components/Cart/util'
 import { isAdminRole, isLoading } from '../utils/util'
-import { ERROR_403 } from '../utils/constants'
-import { handleUIError } from '../middleware/error'
+import { ADDRESS_EDIT, ERROR_403 } from '../utils/constants'
 import EmptyCart from '../components/Cart/EmptyCart'
 import TrustBadges from '../components/Home/TrustBadges'
 import BackButton from '../components/Custom_Components/BackButton'
+import { IoIosArrowForward } from "react-icons/io";
+import { AddressFormPopup } from '../components/AddressForm/AddressFormPopup'
 
 export async function getServerSideProps({ req }) {
   let addressData = [];
+  let defaultAddress = {};
   // Fetch Addresses from the server
   if (req.cookies && req.cookies.com1) {
     const res = await getData('user/address', req.cookies.com1);
-    if (res.addresses) addressData = res.addresses;
+    if (res.addresses) {
+      addressData = res.addresses;
+      console.log('addressData: ', addressData);
+
+      defaultAddress = addressData.find(address => address.default);
+      console.log('defaultAddress : ', defaultAddress);
+
+    }
   }
 
   // Pass data to the page via props
-  return { props: { addressData: addressData } };
+  return { props: { addressData: addressData, defaultAddress } };
 }
 
-const Cart = ({ addressData }) => {
+const Cart = ({ defaultAddress }) => {
   const { state, dispatch } = useContext(DataContext)
-  const { cart, auth, address: selectedAddress } = state
+  const { cart, auth, address } = state
   const [total, setTotal] = useState(0)
+  const [selectedAddress, setSelectedAddress] = useState(defaultAddress)
   const [callback, setCallback] = useState(false)
   const router = useRouter()
   const isAdmin = auth && auth.user && isAdminRole(auth.user.role)
 
+  useEffect(() => {
+    if (address) {
+      setSelectedAddress(address);
+    }
+  }, [address])
 
   // useEffect(() => {
   //   console.log('cart : ', cart);
@@ -120,7 +134,7 @@ const Cart = ({ addressData }) => {
       <Head>
         <title>{`${process.env.NEXT_PUBLIC_APP_TITLE} - Cart`}</title>
       </Head>
-      <BackButton/>
+      <BackButton />
 
       <div className="container-fluid cart">
         <h5>Review Your Cart <span className="cart-items"> - ({cart.length} {cart.length === 1 ? 'item' : 'items'})</span></h5>
@@ -132,16 +146,26 @@ const Cart = ({ addressData }) => {
           </div>
           <div className="col-md-5">
             <div className="card p-3 mx-2 mx-sm-0 me-md-3">
-
               <h5>Order Summary</h5>
-
-              Deliver to - <Address addressData={addressData} />
-
-
-
+              <div class="my-4 cart-deliver-to-container d-flex align-items-center" onClick={() =>{AddressFormPopup(dispatch, {}, ADDRESS_EDIT, false)}} data-bs-toggle="modal" data-bs-target="#confirmModal">
+                <div class="d-flex align-items-center">
+                  <span class="deliver-to">Deliver to </span>
+                  <div class="cart-deliver-address">
+                    {selectedAddress && selectedAddress.fullName && selectedAddress.address ?
+                      (<>
+                        <span class="delivery-name">{`${selectedAddress.fullName} , `}</span>
+                        <span class="delivery-location ps-1">{selectedAddress.address}, sHARJAH, uae</span>
+                      </>)
+                      : <span class="delivery-name">Please choose or enter address</span>
+                    }
+                  </div>
+                </div>
+                <div class="arrow-container">
+                  <IoIosArrowForward />
+                </div>
+              </div>
               <h5 style={{ color: 'black' }}>Total: <span>₹{total}</span></h5>
-              <Link href={'#!'} className="btn btn-primary my-2 cartPayBtn"
-                onClick={handlePayment}>
+              <Link href={'#!'} className="btn btn-primary my-2 cartPayBtn" onClick={handlePayment}>
                 Proceed To Pay
               </Link>
             </div>

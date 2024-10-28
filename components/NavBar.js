@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DataContext } from '../store/GlobalState'
 import { postData } from '../utils/fetchData'
-import { ACC_ACT_MAIL, MOBILE_MAX_WIDTH } from '../utils/constants.js'
+import { ACC_ACT_MAIL, TABLET_WIDTH } from '../utils/constants.js'
 import MenuNotifications from './Notifications/MenuNotifications'
 import { CartLogoIcon, CartIcon, DashboardIcon, HomeIcon } from './Icons/Icon.js'
 import { useMediaQuery } from 'react-responsive'
@@ -17,7 +17,7 @@ function NavBar() {
     const { state, dispatch } = useContext(DataContext)
     const { auth, cart } = state;
     const isAdmin = isAdminRole(auth && auth.user && auth.user.role);
-    const isMobile = useMediaQuery({ maxWidth: MOBILE_MAX_WIDTH });
+    const isMobile = useMediaQuery({ maxWidth: TABLET_WIDTH });
 
 
     const isActivePath = (r) => { return r === router.pathname ? " active" : "" }

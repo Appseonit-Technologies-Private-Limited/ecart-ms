@@ -1,15 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../store/GlobalState";
-import { ADDRESS_DEL, ADDRESS_EDIT, ADDRESS_GET, ADDRESS_NEW } from "../../utils/constants";
-import { getData, patchData, postData } from "../../utils/fetchData";
+import { ADDRESS_DEL, ADDRESS_EDIT, ADDRESS_NEW } from "../../utils/constants";
 import isEmpty from 'lodash/isEmpty';
 import { useRouter } from "next/router";
-import { isLoading } from "../../utils/util";
 import AddressForm from "../AddressForm/AddressForm";
 import { AddressFormPopup } from "../AddressForm/AddressFormPopup";
 import { updateAddress } from "../AddressForm/util";
-
-
+import { DeleteIcon, EditAddressIcon, PlusIcon } from "../Icons/Icon";
+import { MdOutlineEditLocationAlt } from "react-icons/md";
 const Address = ({ isProfilePage, addressData }) => {
 
 
@@ -19,25 +17,12 @@ const Address = ({ isProfilePage, addressData }) => {
     const [newAddPanelVisible, setNewAddPanelVisible] = useState(false)
     const router = useRouter()
 
-
-
     useEffect(() => {
         if (addresses) {
-          const defaultAddress = addresses.find(address => address.default);
-          if (defaultAddress) dispatch({ type: 'ADD_ADDRESS', payload: defaultAddress });
+            const defaultAddress = addresses.find(address => address.default);
+            if (defaultAddress) dispatch({ type: 'ADD_ADDRESS', payload: defaultAddress });
         }
-      }, [addresses]);
-
-    const handleSelectAddress = (selectedAddressIndex) => {
-        if (selectedAddressIndex >= 0) {
-            setNewAddPanelVisible(false);
-            dispatch({ type: 'ADD_ADDRESS', payload: addresses[selectedAddressIndex] });
-        }
-        else {
-            setNewAddPanelVisible(true);
-            dispatch({ type: 'ADD_ADDRESS', payload: { new: '-1' } })
-        }
-    }
+    }, [addresses]);
 
     const handleAddressChange = (i, saveType) => {
         if (saveType === ADDRESS_EDIT) return AddressFormPopup(dispatch, addresses[i], saveType, isProfilePage);
@@ -48,52 +33,46 @@ const Address = ({ isProfilePage, addressData }) => {
     }
 
     return (
-        <div>
+        <>
             {
-                !isEmpty(addresses) &&
-                <>
-                    {
-                        addresses.map((item, i) => (
-                            <div key={i}>
-                                <div className={`row ${isProfilePage ? 'justify-content-between' : ''} `}>
-                                    {!isProfilePage && <input className="mt-1" type="radio" value={i} name="rg-address" defaultChecked={item.default} onChange={e => { handleSelectAddress(e.target.value) }} />}
-                                    <div className="col-8 pl-3">
-                                        <label style={{ fontSize: '14px' }} className="mb-0 font-weight-bold text-black"> {item.fullName} {isProfilePage && <span className="font-weight-light text-success">{item.default ? '(Default)' : ''}</span>}</label>
-                                        <p className="text-black" style={{ fontSize: '12px' }}>
-                                            <span>
+                !isEmpty(addresses) ?
+                    <>
+                        {
+                            addresses.map((item, i) => (
+                                <div key={i} className={`row my-3 justify-content-between address-container ${item.default && 'default-address'}`}
+                                    onClick={() => { handleAddressChange(i, ADDRESS_EDIT) }}>
+                                    <div className="col">
+                                        <label>
+                                            {item.fullName}
+                                            {isProfilePage && <span className="mx-1">{item.default && '(Default)'}</span>}
+                                        </label>
+                                        <p>
+                                            <span className="text-black">
                                                 {item.address},<br />
                                                 {item.city}, {item.countryState},<br />
-                                                {item.country}, {item.pincode}.<br />
-                                                Phone number: {item.phoneNumber}.
+                                                {item.country}, Pin Code: {item.pincode}<br />
+                                                Phone number: {item.phoneNumber}
                                             </span>
                                         </p>
                                     </div>
-                                    {isProfilePage && <div>
 
-                                        <a onClick={() => { handleAddressChange(i, ADDRESS_EDIT) }}><i className="fas fa-edit text-info mr-2" title="Edit"></i></a>
-                                        <a onClick={() => { handleAddressChange(i, ADDRESS_DEL) }}><i className="fas fa-trash-alt text-info mr-2" title="Delete"></i></a>
+                                    <div className="col-4 d-flex justify-content-end align-items-center">
+                                        <a onClick={() => { handleAddressChange(i, ADDRESS_EDIT) }}><EditAddressIcon /></a>
+                                        <a className='mx-2' onClick={() => { handleAddressChange(i, ADDRESS_DEL) }}><DeleteIcon /></a>
                                     </div>
-                                    }
+
                                 </div>
-                            </div>
-                        ))
-                    }
-                    {!isProfilePage ? <h6 className="font-weight-bold text-black">-or-</h6> : <hr />}
-                </>
+                            ))
+                        }
+                    </> : <p className="text-center fst-italic fw-light text-muted"> No Address saved yet!</p>
             }
             <>
-                <div className="pt-1 pb-2 row">
-                    {!isProfilePage && <input type="radio" value="-1" name="rg-address" onClick={e => { handleSelectAddress(e.target.value) }}></input>}
-                    {!isProfilePage ?
-                        <p className="pl-3 mb-0 font-weight-bold text-black">Add a New Address</p>
-                        :
-                        <h5>Add a New Address</h5>
-                    }
+                <div className="row pt-3 my-3 justify-content-center">
+                    <button className="btn btn-primary px-5" onClick={e => { setNewAddPanelVisible(true) }}>Add a New Address</button>
                 </div>
                 {newAddPanelVisible && <AddressForm addressObj={{}} saveType={ADDRESS_NEW} isProfilePage={isProfilePage} />}
-                <hr />
             </>
-        </div>
+        </>
     );
 }
 

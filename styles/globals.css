@@ -155,7 +155,7 @@ h6 {
   font-weight: 600;
   display: inline-block;
   color: #fff;
-  border: none;
+  /* border: none; */
   border-radius: 50px;
   /* Fully rounded corners */
   padding: 6px 14px;

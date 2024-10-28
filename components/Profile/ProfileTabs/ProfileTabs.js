@@ -5,7 +5,7 @@ import { isAdminRole } from '../../../utils/util';
 import { useContext } from 'react';
 import { DataContext } from '../../../store/GlobalState';
 
-const ProfileTabs = () => {
+const ProfileTabs = ({addressData}) => {
 
     const { state } = useContext(DataContext)
     const { auth } = state
@@ -17,8 +17,8 @@ const ProfileTabs = () => {
                 <Tabs defaultActiveKey="addresses">
                     <Tab eventKey="addresses" title="Addresses">
                         <div className='container pl-4 pt-4'>
-                            <h5>Saved Addresses</h5>
-                            <Address isProfilePage={true} />
+                            {/* <h5>Saved Address List</h5> */}
+                            <Address isProfilePage={true} addressData={addressData}/>
                         </div>
                     </Tab>
                 </Tabs>

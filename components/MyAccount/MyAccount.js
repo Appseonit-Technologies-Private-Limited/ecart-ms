@@ -36,10 +36,10 @@ function MyAccount({ isAdmin, isMobile, isActivePath }) {
                     </Link>
                     :
                     <Menu title={
-                        <div className="nav-icon-text">
+                        <Link href='/profile' className="nav-icon-text">
                             <UserIcon />
                             {<span className='navbar-menu-text text-capitalize'>{auth.user.name}</span>}
-                        </div>
+                        </Link>
                     }
                         menuItems={
                             <div>

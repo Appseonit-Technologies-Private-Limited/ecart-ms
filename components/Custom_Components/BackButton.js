@@ -1,12 +1,12 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { useMediaQuery } from 'react-responsive';
-import { MOBILE_MAX_WIDTH } from '../../utils/constants';
+import { TABLET_WIDTH } from '../../utils/constants';
 
 const BackButton = () => {
     const router = useRouter();
 
-    const isMobile = useMediaQuery({ maxWidth: MOBILE_MAX_WIDTH });
+    const isMobile = useMediaQuery({ maxWidth: TABLET_WIDTH });
 
     return (
         <>

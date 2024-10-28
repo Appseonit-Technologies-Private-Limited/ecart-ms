@@ -58,7 +58,7 @@ const AddressForm = ({ addressObj, saveType, isProfilePage }) => {
                 className="form-control mb-2" value={address}
                 onChange={e => setAddress(e.target.value)} />
 
-            <div className="row">
+            <div className="row gx-2">
                 <div className="col-xl-4">
                     <label htmlFor="cities">City</label>
                     <select id="city" className="form-control mb-2 custom-select text-capitalize" onChange={e => setCity(e.target.value)}>
@@ -89,7 +89,7 @@ const AddressForm = ({ addressObj, saveType, isProfilePage }) => {
                     </select>
                 </div>
             </div>
-            <div className="row">
+            <div className="row gx-2">
                 <div className="col-xl-6 pl-md-1">
                     <label htmlFor="pincode">Pin Code</label>
                     <input type="text" name="pincode" id="pincode"
