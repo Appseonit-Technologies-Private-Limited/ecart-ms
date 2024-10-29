@@ -7,7 +7,6 @@ import AddressForm from "../AddressForm/AddressForm";
 import { AddressFormPopup } from "../AddressForm/AddressFormPopup";
 import { updateAddress } from "../AddressForm/util";
 import { DeleteIcon, EditAddressIcon, PlusIcon } from "../Icons/Icon";
-import { MdOutlineEditLocationAlt } from "react-icons/md";
 const Address = ({ isProfilePage, addressData }) => {
 
 

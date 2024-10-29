@@ -12,8 +12,8 @@ import { ADDRESS_EDIT, ERROR_403 } from '../utils/constants'
 import EmptyCart from '../components/Cart/EmptyCart'
 import TrustBadges from '../components/Home/TrustBadges'
 import BackButton from '../components/Custom_Components/BackButton'
-import { IoIosArrowForward } from "react-icons/io";
 import { AddressFormPopup } from '../components/AddressForm/AddressFormPopup'
+import { ForwardIcon } from '../components/Icons/Icon'
 
 export async function getServerSideProps({ req }) {
   let addressData = [];
@@ -161,7 +161,7 @@ const Cart = ({ defaultAddress }) => {
                   </div>
                 </div>
                 <div class="arrow-container">
-                  <IoIosArrowForward />
+                  <ForwardIcon/>
                 </div>
               </div>
               <h5 style={{ color: 'black' }}>Total: <span>₹{total}</span></h5>
