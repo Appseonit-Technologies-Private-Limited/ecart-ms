@@ -3,6 +3,7 @@ import Razorpay from 'razorpay';
 import connectDB from '../../../../utils/connectDB'
 import Orders from '../../../../models/orderModel';
 import { convertINRPaise } from '../../../../utils/util';
+import { log_error, log_info } from '../../../../middleware/log';
 
 connectDB()
 
@@ -13,10 +14,10 @@ var rPay = new Razorpay({
 
 export const saveAndGenerateRazorPayOrder = async (res, orderId) => {
     try {
-        console.log('Initiating payment!!', orderId)
+        log_info('Initiating payment!!', orderId)
         if (orderId) {
             const order = await Orders.findOne({ _id: orderId });
-            console.log("Order is: ", order.total);
+            log_info("Order is: ", order.total);
 
             let totalAmount = order.total;
             if (process.env.NEXT_PUBLIC_CURRENCY_TYPE === 'INR') totalAmount = convertINRPaise(totalAmount);// This is because in razorpay accepts lowest currency value, for INR its paise, where 1 rupee = 100 paise.
@@ -36,7 +37,7 @@ export const saveAndGenerateRazorPayOrder = async (res, orderId) => {
             return rPayOrder.id;
         }
     } catch (err) {
-        console.error('Error occurred while razorpay payment order: ' + err);
+        log_error('Error occurred while razorpay payment order: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -46,7 +47,7 @@ export const getPayOrderStatus = async (payOrderId) => {
     if (res && !res.error_code) {
         return res.status;
     } else {
-        console.error('Error occurred while razorpay payment order status: ' + res.error_code + ' - ' + res.error_description);
+        log_error('Error occurred while razorpay payment order status: ' + res.error_code + ' - ' + res.error_description);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -56,7 +57,7 @@ export const getPayPaymentStatus = async (paymentId) => {
     if (res && !res.error_code) {
         return { payPaymentStatus: res.status, payPaymentType: res.method }
     } else {
-        console.error('Error occurred while razorpay payment status: ' + res.error_code + ' - ' + res.error_description);
+        log_error('Error occurred while razorpay payment status: ' + res.error_code + ' - ' + res.error_description);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

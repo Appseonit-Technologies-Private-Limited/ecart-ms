@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import Counter from './counterModel'
+import { log_error } from '../middleware/log';
 
 const NotificationsSchema = new mongoose.Schema({
     _id: {
@@ -44,7 +45,7 @@ NotificationsSchema.pre('save', function (next) {
             doc._id = count.seq;
             next();
         }).catch(function (error) {
-            console.error("counter error-> : " + error);
+            log_error("counter error-> : " + error);
             throw error;
         });
 });

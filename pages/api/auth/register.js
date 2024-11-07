@@ -4,6 +4,7 @@ import Users from '../../../models/userModel'
 import { valid } from '../../../utils/valid'
 import { postData } from '../../../utils/fetchData'
 import bcrypt from 'bcrypt'
+import { log_error } from '../../../middleware/log'
 
 
 connectDB()
@@ -42,7 +43,7 @@ const register = async (req, res) => {
         res.json({ msg: "Registration Successful, an email has been sent to your mail address, please activate your account to continue shopping.", delay: 12000 })
 
     } catch (err) {
-        console.error('Error occurred while register: ' + err);
+        log_error('Error occurred while register: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

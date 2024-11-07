@@ -3,11 +3,11 @@ import Orders from '../../../models/orderModel'
 import Products from '../../../models/productModel'
 import Notifications from '../../../models/notificationsModel'
 import auth from '../../../middleware/auth'
-import * as log from "../../../middleware/log"
 import { handleServerError } from '../../../middleware/error'
 import { CONTACT_ADMIN_ERR_MSG, NORMAL, ADMIN_ROLE, USER_ROLE, ORDER_DETAIL } from '../../../utils/constants'
 import { notUserRole, formatDateTime } from '../../../utils/util'
 import { updateStockAndSoldFromProd } from '../../../utils/productUtil'
+import { log_info } from '../../../middleware/log'
 
 connectDB()
 
@@ -51,13 +51,13 @@ const getOrders = async (req, res) => {
         }
         res.json({ orders })
     } catch (err) {
-        log.error('Error occurred while getOrders: ', err);
+        log_error('Error occurred while getOrders: ', err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
 
 const createOrder = async (req, res) => {
-    log.info('Creating Order ....');
+    log_info('Creating Order ....');
     try {
         const result = await auth(req, res)
         const { address, cart, total } = req.body
@@ -73,7 +73,7 @@ const createOrder = async (req, res) => {
         });
 
     } catch (err) {
-        log.error('Error occurred while createOrder: ', err);
+        log_error('Error occurred while createOrder: ', err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -125,6 +125,6 @@ const notifyAdminForNewOrder = (orderId, userId) => {
             }
         ).save();
     } catch (err) {
-        log.error('Error occurred while notifyAdminForNewOrder: ', err);
+        log_error('Error occurred while notifyAdminForNewOrder: ', err);
     }
 }

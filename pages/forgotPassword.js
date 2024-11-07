@@ -3,9 +3,8 @@ import Link from 'next/link'
 import { postData } from '../utils/fetchData'
 import { useState, useContext } from 'react'
 import { DataContext } from '../store/GlobalState'
-import moment from 'moment';
 import os from "os";
-import { PASSWORD_RESET_MAIL } from '../utils/constants.js'
+import { log_info } from '../middleware/log.js'
 
 const ForgotPassword = () => {
   const initialState = { userName: '', accountRecoveryEmail: '' }
@@ -22,7 +21,7 @@ const ForgotPassword = () => {
   }
 
   const handleSubmit = async e => {
-    console.log("accountRecoveryEmail :", accountRecoveryEmail)
+    log_info("accountRecoveryEmail :", accountRecoveryEmail)
     e.preventDefault();
     dispatch({ type: 'NOTIFY', payload: { loading: true } })
 

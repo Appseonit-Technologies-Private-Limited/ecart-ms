@@ -1,4 +1,5 @@
 import auth from '../../../middleware/auth';
+import { log_error } from '../../../middleware/log';
 import { CONTACT_ADMIN_ERR_MSG, ERROR_403 } from '../../../utils/constants';
 import { cloud_delete } from './uploadUtil';
 
@@ -22,7 +23,7 @@ const deleteImage = async (req, res) => {
         cloud_delete(req.body.publicIds);
         res.status(200).json({ message: 'Image(s) deleted successfully!' });
     } catch (err) {
-        console.error('Error occurred while deleteImage: ' + err);
+        log_error('Error occurred while deleteImage: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 

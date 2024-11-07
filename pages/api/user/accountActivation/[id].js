@@ -1,6 +1,7 @@
 import connectDB from '../../../../utils/connectDB'
 import Users from '../../../../models/userModel'
 import { CONTACT_ADMIN_ERR_MSG } from '../../../../utils/constants'
+import { log_error } from '../../../../middleware/log'
 
 connectDB()
 
@@ -19,7 +20,7 @@ export default async (req, res) => {
 const accountActivation = async (req, res) => {
     try {
         const {id} = req.query
-        console.log('ID came in activation link!')
+        log_info('ID came in activation link!')
         await Users.findOneAndUpdate({_id:  id}, {activated: true})
 
         res.send(` <!DOCTYPE html />
@@ -32,7 +33,7 @@ const accountActivation = async (req, res) => {
                  `)
         
     } catch (err) {
-        console.error('Error occurred while accountActivation: '+err);
+        log_error('Error occurred while accountActivation: '+err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }   
 }

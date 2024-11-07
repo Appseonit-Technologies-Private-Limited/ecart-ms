@@ -5,13 +5,14 @@ import { calculatePrice } from '../utils/util'
 import { DEFAULT_PROD_IMG, PRODUCT_API_ENDPOINT } from '../utils/constants'
 import { DeleteIcon, MinusIcon, PlusIcon } from './Icons/Icon'
 import { debounce } from 'lodash'
+import { log_error } from '../middleware/log'
 
 const currencyType = process.env.NEXT_PUBLIC_CURRENCY_TYPE === 'INR' ? '₹' : '$';
 
 const plusProductCountClick = async (cart, itemId, quantity, dispatch) => {
     if (!itemId || !quantity) return;
     if (typeof itemId !== 'string' || typeof quantity !== 'number' || quantity < 0) {
-        console.error('Invalid itemId or quantity provided.');
+        log_error('Invalid itemId or quantity provided.');
         return;
     }
 
@@ -20,7 +21,7 @@ const plusProductCountClick = async (cart, itemId, quantity, dispatch) => {
         if (res.error || typeof dispatch !== 'function' || typeof res.count !== 'number') return;
         if (res.count && quantity < res.count) dispatch(increase(cart, itemId));
     } catch (error) {
-        console.error(`Error in plusProductCountClick:`, error);
+        log_error(`Error in plusProductCountClick:`, error);
     }
 }
 

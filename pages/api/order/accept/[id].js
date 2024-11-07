@@ -4,7 +4,7 @@ import auth from '../../../../middleware/auth'
 import { CONTACT_ADMIN_ERR_MSG, ERROR_403, NORMAL, ORDER_DETAIL, USER_ROLE } from '../../../../utils/constants'
 import { formatDateTime, notAdminRole } from '../../../../utils/util'
 import Notifications from '../../../../models/notificationsModel'
-import * as log from "../../../../middleware/log"
+import { log_debug, log_error } from '../../../../middleware/log'
 
 connectDB()
 
@@ -21,10 +21,10 @@ export default async (req, res) => {
 }
 
 const acceptOrder = async (req, res) => {
-    log.debug("Inside acceptOrder....")
+    log_debug("Inside acceptOrder....")
     try {
         const {role} = await auth(req, res)
-        log.debug("Role : "+role)
+        log_debug("Role : "+role)
         if (notAdminRole(role)) return res.status(403).json({ err: ERROR_403 });
 
         const { id } = req.query
@@ -40,13 +40,13 @@ const acceptOrder = async (req, res) => {
                     dateOfAccept: dateOfAccept
                 }
             })
-            log.debug("Order Accepted!")
+            log_debug("Order Accepted!")
         }else{
-            log.error("acceptOrder", "Order or order's user doesn't exist!");
+            log_error("acceptOrder", "Order or order's user doesn't exist!");
             return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG });
         }
     } catch (err) {
-        console.error('Error occurred while acceptOrder: ' + err);
+        log_error('Error occurred while acceptOrder: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -63,6 +63,6 @@ const notifyUserForConfirmedOrder = (orderId, userId) => {
             }
         ).save();
     } catch (err) {
-        console.error('Error occurred while notifyUserForConfirmedOrder: ' + err);
+        log_error('Error occurred while notifyUserForConfirmedOrder: ' + err);
     }
 }

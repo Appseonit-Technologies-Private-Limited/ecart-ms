@@ -11,6 +11,7 @@ import { isEmpty } from 'lodash'
 import ProductForm from '../../components/ProductManager/ProductForm'
 import { openProductAtrributesPopup } from '../../components/ProductManager/ProductAtrributesPopup'
 import { handleUIError } from '../../middleware/error'
+import { log_info } from '../../middleware/log'
 
 const ProductsManager = () => {
     const TAX = process.env.NEXT_PUBLIC_RAZORPAY_TAX;
@@ -55,7 +56,7 @@ const ProductsManager = () => {
                 }
                 setProduct({ ...res.product, tax: calcTax, totalPrice: calcTotalPrice(res.product.price, calcTax) });
                 setImages(displayImgs);
-                //console.log('res.product.attributesRequired :',(res.product && res.product.attributesRequired))
+                //log_info('res.product.attributesRequired :',(res.product && res.product.attributesRequired))
                 setAttributesRequired(res.product && res.product.attributesRequired);
             })
         } else {
@@ -92,7 +93,7 @@ const ProductsManager = () => {
         deleteImagesFromCloudinary(delImages.current, auth, productId, false, product.attributes);
         delImages.current = [];
         const handledImgs = await uploadImagesToCloudinary(imgs, auth.token);
-        console.log('Handled Images : ',handledImgs);
+        log_info('Handled Images : ',handledImgs);
         
         setImages(handledImgs);
         return handledImgs;
@@ -109,7 +110,7 @@ const ProductsManager = () => {
 
     const handleAttributesRequired = e =>{
        //e.preventDefault();
-        //console.log('e.checked : ',e.target.checked);
+        //log_info('e.checked : ',e.target.checked);
         setAttributesRequired(e.target.checked);
     }
 
@@ -134,7 +135,7 @@ const ProductsManager = () => {
         else res = await postData('product?type=CP', data, auth.token);
         if (res.status) return handleUIError(res.err, res.status, undefined, dispatch);
         else if (res.msg) {
-            //console.log('res.productId : ', res.productId)
+            //log_info('res.productId : ', res.productId)
             dispatch({ type: 'NOTIFY', payload: { success: res.msg } })
             if (res.productId) router.push('/create/' + res.productId);
         }

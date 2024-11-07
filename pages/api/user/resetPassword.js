@@ -4,6 +4,7 @@ import Tokens from '../../../models/tokenModel'
 import auth from '../../../middleware/auth'
 import bcrypt from 'bcrypt';
 import { CONTACT_ADMIN_ERR_MSG } from '../../../utils/constants'
+import { log_error } from '../../../middleware/log';
 
 connectDB()
 
@@ -38,7 +39,7 @@ const resetPassword = async (req, res) => {
         res.json({ msg: "Password Updated Successfully!" })
 
     } catch (err) {
-        console.error('Error occurred while resetPassword: ' + err);
+        log_error('Error occurred while resetPassword: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -51,7 +52,7 @@ const validateResetToken = async (token, userId, res) => {
         if (!isValid) return res.status(401).json({ err: "Invalid request!" });
         else await Tokens.deleteMany({ userId });
     } catch (err) {
-        console.error('Error occurred while validateResetToken: ' + err);
+        log_error('Error occurred while validateResetToken: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

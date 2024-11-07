@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt';
 import { postData } from '../../../utils/fetchData';
 import moment from 'moment';
 import { CONTACT_ADMIN_ERR_MSG, PASSWORD_RESET_MAIL } from '../../../utils/constants';
+import { log_error } from '../../../middleware/log';
 
 
 connectDB()
@@ -38,7 +39,7 @@ const forgotPassword = async (req, res) => {
         else return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG });
 
     } catch (err) {
-        console.error('Error occurred while forgotPassword: ' + err);
+        log_error('Error occurred while forgotPassword: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -60,7 +61,7 @@ const generateNewToken = async (userId, res) => {
 
         return hashedToken;
     } catch (err) {
-        console.error('Error occurred while generateNewToken: ' + err);
+        log_error('Error occurred while generateNewToken: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -87,7 +88,7 @@ const mailResetPasswordLink = async (userId, userName, email, resetToken, hostNa
         return resMail.info && resMail.info === 'Mail Sent!';
 
     } catch (err) {
-        console.error('Error occurred while mailResetPasswordLink: ' + err);
+        log_error('Error occurred while mailResetPasswordLink: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

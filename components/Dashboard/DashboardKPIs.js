@@ -9,6 +9,7 @@ import { postData } from "../../utils/fetchData";
 import isEmpty from 'lodash/isEmpty';
 import { format } from 'date-fns'
 import { convertHTMLToPDFAndDownload } from "../../utils/HTMLToPDF";
+import { log_info } from "../../middleware/log";
 
 const DashboardKPIs = ({ kpiData, auth, dispatch }) => {
     const router = useRouter()
@@ -24,12 +25,12 @@ const DashboardKPIs = ({ kpiData, auth, dispatch }) => {
 
     useEffect(() => {
         if (kpiData && kpiData.charts && kpiData.charts.length > 0) {
-            console.log("KPI DATA CHECK...................")
+            log_info("KPI DATA CHECK...................")
             kpiData.charts.forEach(kpi => {
                 if (kpi.singleAnalysis) {
                     setSaKpi(kpi)
                     if (!isEmpty(kpi) && !isEmpty(dateRange)) {
-                        console.log('From KPIDATA....', kpi)
+                        log_info('From KPIDATA....', kpi);
                         getAndGenerateSAChartByDateRange(dateRange, kpi);
                     }
                 }else {
@@ -62,7 +63,7 @@ const DashboardKPIs = ({ kpiData, auth, dispatch }) => {
     }
 
     const getAndGenerateSAChartByDateRange = async (dates, kpi) => {
-        console.log('Callng getAndGenerateSAChartByDateRange..', kpi)
+        log_info('Callng getAndGenerateSAChartByDateRange..',kpi);
 
         const res = await postData('kpi', { dateRange: dates, kpi }, auth.token)
         if (res.err) return dispatch({ type: 'NOTIFY', payload: { error: res.err } });
@@ -100,7 +101,7 @@ const DashboardKPIs = ({ kpiData, auth, dispatch }) => {
 
     const handleDateRangeSelect = (range) => {
         setDateRange(range);
-console.log('From Handle method...', saKpi)
+log_info('From Handle method...',saKpi)
         getAndGenerateSAChartByDateRange(range, saKpi);
     }
 

@@ -9,6 +9,7 @@ import { orderConfirmationMail } from '../../../utils/orderConfirmationMail'
 import { restPasswordMail } from '../../../utils/resetPasswordMail'
 import { orderDeliveredMail } from '../../../utils/orderDeliveredMail'
 import auth from '../../../middleware/auth'
+import { log_error, log_info } from '../../../middleware/log'
 
 connectDB()
 
@@ -87,7 +88,7 @@ const sendMail = async (req, res) => {
             default:
         }
 
-        console.log('Sending Mail : ', "From -", fromMailId, "To - ", toMailId);
+        log_info('Sending Mail : ', "From -", fromMailId, "To - ", toMailId);
 
         // setup email data with unicode symbols
         let mailOptions = {
@@ -101,15 +102,15 @@ const sendMail = async (req, res) => {
         // send mail with defined transport object
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                console.error('Error occurred in Mail System transporter : ', error)
+                log_error('Error occurred in Mail System transporter : ', error)
                 return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG });
             }
-            console.log('Message sent: %s', info.accepted);   
+            log_info('Message sent: %s', info.accepted);   
             return info;
         });
         return res.status(200).json({ info: 'Mail Sent!' });
     } catch (err) {
-        console.error('Error occurred while sendMail: ' + err);
+        log_error('Error occurred while sendMail: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

@@ -3,6 +3,7 @@ import Tokens from '../models/tokenModel'
 import moment from 'moment'
 import { COM1_EXPIRES_IN } from './constants'
 import { SignJWT } from 'jose';
+import { log_error } from '../middleware/log';
 
 export const createAccessToken = async (payload) => {
    return await createToken(payload, COM1_EXPIRES_IN, process.env.ACCESS_TOKEN_SECRET);
@@ -34,6 +35,6 @@ const createToken = async(payload, expiryTime, secret)=>{
             .setExpirationTime(expiryTime)
             .sign(new TextEncoder().encode(secret));
     } catch (err) {
-        console.log('Error while creating token:',err);
+        log_error('Error while creating token:',err);
     }
 }

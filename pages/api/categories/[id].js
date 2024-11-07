@@ -3,6 +3,7 @@ import Categories from '../../../models/categoryModel'
 import Products from '../../../models/productModel'
 import auth from '../../../middleware/auth'
 import { CONTACT_ADMIN_ERR_MSG, ERROR_403 } from '../../../utils/constants'
+import { log_error } from '../../../middleware/log'
 
 connectDB()
 /*
@@ -37,7 +38,7 @@ const updateCategory = async (req, res) => {
             }
         })
     } catch (err) {
-        console.error('Error occurred while updateCategory: ' + err);
+        log_error('Error occurred while updateCategory: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -59,7 +60,7 @@ const deleteCategory = async (req, res) => {
 
         res.json({ msg: "Category deleted successfully." })
     } catch (err) {
-        console.error('Error occurred while deleteCategory: ' + err);
+        log_error('Error occurred while deleteCategory: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

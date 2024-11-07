@@ -5,6 +5,7 @@ import { deleteData } from '../../../utils/fetchData'
 import { ERROR_403 } from '../../../utils/constants'
 import { handleServerError } from '../../../middleware/error'
 import { displayProduct } from '../../../utils/productUtil'
+import { log_info } from '../../../middleware/log'
 
 connectDB()
 
@@ -73,7 +74,7 @@ const deleteProduct = async (req, res) => {
 }
 
 const deleteImages = async (id, token, res) => {
-    console.log("Deleting Images ...")
+    log_info("Deleting Images ...")
     try {
         const product = await Products.findById(id);
         const publicIds = product.images.map(image => image.public_id);

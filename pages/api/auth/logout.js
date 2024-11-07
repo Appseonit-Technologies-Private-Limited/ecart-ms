@@ -4,6 +4,7 @@ import { COM1, COM2, CONTACT_ADMIN_ERR_MSG, PLEASE_LOG_IN } from '../../../utils
 import { verifyToken } from '../../../middleware/VerifyToken'
 import { JWTExpired } from 'jose/errors'
 import { generateCookie } from '../../../utils/CookieHelper'
+import { log_error } from '../../../middleware/log'
 
 connectDB()
 
@@ -33,7 +34,7 @@ const logout = async (req, res) => {
         
         res.status(200).json({ msg: 'You have signed out.' });
     } catch (err) {
-        console.error('Error occurred while logout: ' + err);
+        log_error('Error occurred while logout: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -44,7 +45,7 @@ const blacklistRefreshToken = async (refreshToken, res) => {
             const result = await verifyToken(refreshToken, process.env.REFRESH_TOKEN_SECRET);
         return result.refreshTokenId;
     } catch (err) {
-        console.error('Error occurred while blacklistRefreshToken: ' + err);
+        log_error('Error occurred while blacklistRefreshToken: ' + err);
         if (err instanceof JWTExpired) return;
         return res.status(401).json({ err: PLEASE_LOG_IN });
     }

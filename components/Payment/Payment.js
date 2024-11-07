@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { patchData, postData } from '../../utils/fetchData'
 import { razorPayOptions } from '../../utils/payUtil.js'
 import { formatDateTime } from '../../utils/util.js'
+import { log_error } from '../../middleware/log.js'
 
 const Payment = (props) => {
 
@@ -64,7 +65,7 @@ const Payment = (props) => {
                     throw err;
                 })
         } catch (err) {
-            console.log(err);
+            log_error('onlinePay', err);
             props.dispatch({ type: 'NOTIFY', payload: { error: CONTACT_ADMIN_ERR_MSG } })
         }
     }
@@ -76,7 +77,7 @@ const Payment = (props) => {
             paySignature: res.razorpay_signature
         }
         postData('order/payment/verify', data, props.auth.token).then(res => {
-            //console.log("Res : ", res);
+            //log_info("Res : ",res));
             if (res && res.verified) {
                 placeOrderAndNotifyUser(order, res.method);
             } else {
@@ -100,14 +101,14 @@ const Payment = (props) => {
             // Redirecting to Thank you for shopping page.
             return router.push('/thankyou')
         } catch (err) {
-            console.log(err)
+            log_error('placeOrderAndNotifyUser',err)
             props.dispatch({ type: 'NOTIFY', payload: { error: CONTACT_ADMIN_ERR_MSG } })
         }
     }
 
     const notifyUserAndAdminAboutOrder = (order) => {
         if (props.auth && props.auth.user && props.auth.user.email) {
-            //console.log('order : ', order)
+            //log_info('order : ',order))
             const userData = {
                 userName: props.auth.user.name,
                 email: props.auth.user.email,

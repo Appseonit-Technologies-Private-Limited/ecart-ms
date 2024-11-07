@@ -3,6 +3,7 @@ import Orders from '../../../../models/orderModel'
 import auth from '../../../../middleware/auth'
 import { COD, CONTACT_ADMIN_ERR_MSG, ERROR_403 } from '../../../../utils/constants'
 import { formatDateTime } from '../../../../utils/util'
+import { log_error } from '../../../../middleware/log'
 
 connectDB()
 
@@ -57,7 +58,7 @@ const deliveredOrder = async (req, res) => {
         }
 
     } catch (err) {
-        console.error('Error occurred while deliveredOrder: ' + err);
+        log_error('Error occurred while deliveredOrder: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

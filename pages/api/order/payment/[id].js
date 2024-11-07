@@ -3,6 +3,7 @@ import auth from '../../../../middleware/auth'
 import { CONTACT_ADMIN_ERR_MSG } from '../../../../utils/constants'
 import { saveAndGenerateRazorPayOrder } from './razorpay'
 import Orders from '../../../../models/orderModel';
+import { log_error } from '../../../../middleware/log';
 
 connectDB()
 
@@ -27,7 +28,7 @@ const orderPayment = async (req, res) => {
             res.json({ msg: 'Payment success!', rPayOrderId })
         } else throw "Payment Order generation problem";
     } catch (err) {
-        console.error('Error occurred while paymentOrder: ' + err);
+        log_error('Error occurred while paymentOrder: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

@@ -3,6 +3,7 @@ import Categories from '../../../models/categoryModel'
 import Products from '../../../models/productModel'
 import auth from '../../../middleware/auth'
 import { CONTACT_ADMIN_ERR_MSG, ERROR_403 } from '../../../utils/constants'
+import { log_error, log_info } from '../../../middleware/log'
 
 connectDB()
 
@@ -29,7 +30,7 @@ const getCart = async (req, res) => {
         const selectedCart = req.body;
 
         const prodIds = selectedCart.map(item => item._id)
-        console.log('prodIds : ', prodIds)
+        log_info('prodIds : ', prodIds)
         const products = await Products.find({_id:prodIds});
         let cart = [];
         selectedCart.forEach(item => {
@@ -48,12 +49,12 @@ const getCart = async (req, res) => {
             })
         });
 
-        console.log('products : ',products)
+        log_info('products : ',products)
         res.json({
             status: 'success'
         })
     } catch (err) {
-        console.error('Error occurred while getCart: ' + err);
+        log_error('Error occurred while getCart: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

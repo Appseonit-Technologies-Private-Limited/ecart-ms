@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt'
 import { createAccessToken, createRefreshToken } from '../../../utils/generateToken'
 import { ACCEPT_COOKIE_CONSENT_MSG, COM1, COM1_MAXAGE, COM2, COM2_EXPIRES_IN, COM2_MAXAGE, CONTACT_ADMIN_ERR_MSG, INVALID_LOGIN } from '../../../utils/constants'
 import { generateCookie } from '../../../utils/CookieHelper'
+import { log_error, log_info } from '../../../middleware/log'
 
 connectDB()
 
@@ -19,7 +20,7 @@ const login = async (req, res) => {
     try {
         const { userName: email, password , cookieConsent} = req.body;
         // Check for cookie consent
-        console.log('Cookie Consent : ', cookieConsent);
+        log_info('Cookie Consent : ', cookieConsent);
         const consent = cookieConsent === 'true';
         if (!consent) {
             return res.status(400).json({ err: ACCEPT_COOKIE_CONSENT_MSG });
@@ -56,7 +57,7 @@ const login = async (req, res) => {
             }
         })
     } catch (err) {
-        console.error('Error occurred while login: ' + err);
+        log_error('Error occurred while login: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

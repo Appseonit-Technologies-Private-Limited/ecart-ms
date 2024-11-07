@@ -5,6 +5,7 @@ import Orders from '../../../../models/orderModel';
 import crypto from 'crypto';
 import { formatDateTime } from '../../../../utils/util';
 import { getPayOrderStatus, getPayPaymentStatus } from './razorpay';
+import { log_error } from '../../../../middleware/log';
 
 connectDB()
 
@@ -40,7 +41,7 @@ const verifyPayment = async (req, res) => {
         }
         res.json({ verified : false });
     } catch (err) {
-        console.error('Error occurred while verifyPayment: ' + err);
+        log_error('Error occurred while verifyPayment: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

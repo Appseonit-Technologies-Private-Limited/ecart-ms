@@ -27,7 +27,7 @@ export const DataProvider = ({ children }) => {
         
 
         if (!auth.token) {
-            //console.log('Fetching access_token........');
+            //log_info('Fetching access_token........');
             getData('auth/accessToken').then(res => {
                 if (res.err) return;
 

@@ -10,6 +10,7 @@ import DateRangeSelector from "../Custom_Components/DateRangeSelector";
 import { useRouter } from 'next/router';
 import TableGrid from '../Custom_Components/TableGrid';
 import { orderColumns } from './OrderGridJson';
+import { log_info } from '../../middleware/log';
 
 export default function Orders() {
     const { state, dispatch } = useContext(DataContext);
@@ -65,7 +66,7 @@ export default function Orders() {
                     </div>
                     <div className="float-left">
                         <DateRangeSelector handleSelect={(range) => {
-                            console.log('range', range)
+                            log_info('range',range);
                             setDateRange(range)
                         }
                         }

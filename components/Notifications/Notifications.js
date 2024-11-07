@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { getData } from '../../utils/fetchData';
 import {handleUIError} from '../../middleware/error'
 import { CONTACT_ADMIN_ERR_MSG } from '../../utils/constants';
+import { log_info } from '../../middleware/log';
 
 function Notifications() {
     const { state, dispatch } = useContext(DataContext);
@@ -25,7 +26,7 @@ function Notifications() {
             if (!isEmpty(auth.token)) {
                 isLoading(true, dispatch)
                 try {
-                    console.log('auth.token : ',auth.token);
+                    log_info('auth.token : ',auth.token);
                     
                     const res = await getData('notifications', auth.token);
                     isLoading(false, dispatch)

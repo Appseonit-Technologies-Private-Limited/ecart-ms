@@ -4,6 +4,7 @@ import Products from '../../../models/productModel'
 import auth from '../../../middleware/auth'
 import { CONTACT_ADMIN_ERR_MSG, ERROR_403 } from '../../../utils/constants'
 import { displayProduct, displayProducts } from '../../../utils/productUtil'
+import { log_error } from '../../../middleware/log'
 
 connectDB()
 
@@ -33,7 +34,7 @@ const getAllProductsCount = async (req, res) => {
         const products = await Products.find();
         res.json({ count: products.length })
     } catch (err) {
-        console.error('Error occurred while getAllProductsCount: ' + err);
+        log_error('Error occurred while getAllProductsCount: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -60,7 +61,7 @@ const getProducts = async (req, res) => {
             products: categoryWise && categoryWise > 0 ? products : displayProducts(products)
         })
     } catch (err) {
-        console.error('Error occurred while getProducts: ' + err);
+        log_error('Error occurred while getProducts: ' + err);
         return res.status(500).json({ products: []})
     }
 }
@@ -84,7 +85,7 @@ const createProduct = async (req, res) => {
         const productCreated = await newProduct.save()
         res.json({ msg: 'New product added successfully.', productId: productCreated._id })
     } catch (err) {
-        console.error('Error occurred while createProduct: ' + err);
+        log_error('Error occurred while createProduct: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -112,7 +113,7 @@ const getProductsCategoryWise = async (req, res) =>{
             catWiseProducts.push(catObj);
         })
     } catch (err) {
-        console.error('Error occurred while getProductsCategoryWise: ' + err);
+        log_error('Error occurred while getProductsCategoryWise: ' + err);
     }
     return catWiseProducts;
 }

@@ -1,8 +1,8 @@
 import { isEmpty } from "lodash";
 import { calculateDiscountedPercentage } from "./util";
 import Products from '../models/productModel';
-import * as log from "../middleware/log"
 import { DEFAULT_PROD_IMG } from "./constants";
+import { log_info } from "../middleware/log";
 
 
 export const displayProduct = product => {
@@ -13,7 +13,7 @@ export const displayProduct = product => {
             let displayProductFound = false;
             attr.sizes && attr.sizes.forEach(size => {
                 if (size.isDisplay) {
-                    //log.info('Display product for attr type: '+attr.title);
+                    //log_info('Display product for attr type: '+attr.title);
                     disProduct = populateProductPrices(disProduct, size);
                     displayProductFound = true;
                     return true;//  breaking Loop
@@ -32,7 +32,7 @@ export const displayProduct = product => {
             url: product.images && product.images.length > 0 ? product.images[0].url : DEFAULT_PROD_IMG,
             title: product.title,
         }
-        //log.info('Display product non attr type: '+disProduct.title);
+        //log_info('Display product non attr type: '+disProduct.title);
         disProduct = populateProductPrices(disProduct, { totalPrice: product.totalPrice, mrpPrice: product.mrpPrice, inStock: product.inStock });
     }
     return disProduct;
@@ -57,15 +57,15 @@ export const populateProductPrices = (product, sizeObj) => {
 }
 
 export const updateStockAndSoldFromProd = async (cart, products) => {
-    //log.info('Inside updateStockAndSoldFromProd...');
+    //log_info('Inside updateStockAndSoldFromProd...');
     if (isEmpty(products) || isEmpty(cart)) return;
     let updatedCart = [];
     cart.forEach(cartItem => {
         let product = products[cartItem._id];
-        //log.info('cartItem : '+JSON.stringify(cartItem));
-        //log.info('product.attributesRequired : '+product.attributesRequired);
+        //log_info('cartItem : ',cartItem));
+        //log_info('product.attributesRequired : '+product.attributesRequired);
         if (!product.attributesRequired) {// Without attrs - work as old behaviour
-            //log.info('product.inStock : '+product.inStock+ ', product.sold: '+product.sold);
+            //log_info('product.inStock : '+product.inStock+ ', product.sold: '+product.sold);
             cartItem.inStock = Math.abs(product.inStock - cartItem.quantity);
             cartItem.sold = Math.abs(product.sold + cartItem.quantity);
             updateInStockAndSoldById(cartItem._id, cartItem.inStock, cartItem.sold);
@@ -75,7 +75,7 @@ export const updateStockAndSoldFromProd = async (cart, products) => {
                 if(cartItem.public_id && attr.defaultImg && (attr.defaultImg.public_id === cartItem.public_id)){// Checking defaultImg public Id with cart public id.
                     !isEmpty(attr.sizes) && attr.sizes.find(size =>{
                         if(size.isDisplay){
-                            log.info('size : '+JSON.stringify(size));
+                            log_info('size : ',size);
                             size.sold = size.sold ? Math.abs(size.sold + cartItem.quantity) : cartItem.quantity;
                             size.inStock = Math.abs(size.inStock - cartItem.quantity);
                             cartItem.inStock = size.inStock;
@@ -96,7 +96,7 @@ export const updateStockAndSoldFromProd = async (cart, products) => {
 }
 
 const updateAttributes = async (_id, attributes) =>{
-    //log.info('Inside updateAttributes... ID : '+_id);
+    //log_info('Inside updateAttributes... ID : '+_id);
     if (!isEmpty(attributes)) {
         await Products.findOneAndUpdate({ _id}, { attributes });
         return true;
@@ -104,6 +104,6 @@ const updateAttributes = async (_id, attributes) =>{
 }
 
 const updateInStockAndSoldById = async (_id, inStock, sold) => {
-    //log.info('Inside updateInStockAndSoldById...ID : '+_id);
+    //log_info('Inside updateInStockAndSoldById...ID : '+_id);
     await Products.findOneAndUpdate({ _id }, { inStock, sold });
 }

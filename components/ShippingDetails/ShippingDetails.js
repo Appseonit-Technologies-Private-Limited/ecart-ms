@@ -12,7 +12,7 @@ const ShippingDetails = (props) => {
                     <span style={{ wordWrap: 'break-word' }}>
                         {props.order.address.address},<br />
                         {props.order.address.city}, {props.order.address.countryState},<br />
-                        {props.order.address.country}, {props.order.address.pincode}.<br />
+                        {props.order.address.country}, {props.order.address.pinCode}.<br />
                         Phone number: {props.order.address.phoneNumber}.
                     </span>
                 </p>

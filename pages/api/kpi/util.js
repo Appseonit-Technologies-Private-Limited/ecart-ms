@@ -2,6 +2,7 @@ import { getCurrencyFormattedValue, getDates } from '../../../utils/util'
 import { DATE_FORMAT, REGISTERED_CUSTOMERS, RISK_INDEX, SALES_BY_RANGE, TICK_FORMAT, TOTAL_ORDERS, TOTAL_PRODUCTS, TOTAL_SALES } from '../../../utils/constants';
 import { format } from 'date-fns'
 import isEmpty from 'lodash/isEmpty';
+import { log_info } from '../../../middleware/log';
 
 export const getParameterValue = (name, orders, products, users, notifications, dateRange) => {
     switch (name) {
@@ -34,7 +35,7 @@ const getSalesArr = (orders, dateRange) => {
             time_series[date] = time_series[date] + order.total;
         });
         const allDates = getDates(dateRange[0].startDate, dateRange[0].endDate);
-        //console.log('allDates: ', allDates)
+        //log_info('allDates: ', allDates)
         allDates.forEach(date => {
             if (!time_series[date]) salesArr.push(0);
             else salesArr.push(time_series[date]);

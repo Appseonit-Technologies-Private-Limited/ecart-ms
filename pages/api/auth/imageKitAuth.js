@@ -1,4 +1,5 @@
 import auth from '../../../middleware/auth';
+import { log_error } from '../../../middleware/log';
 import { CONTACT_ADMIN_ERR_MSG, ERROR_403 } from '../../../utils/constants';
 import ImageKit from "imagekit";
 
@@ -24,7 +25,7 @@ const authenticateImageKit = async (req, res) =>{
     var authenticationParameters = imageKit.getAuthenticationParameters();
         return res.status(200).json(authenticationParameters);
     } catch (err) {
-        console.error('Error occurred while ImageKit Autentication: ' + err);
+        log_error('Error occurred while ImageKit Autentication: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     } 
 }

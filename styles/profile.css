@@ -8,7 +8,7 @@
 
 .profile-menu h6{
     font-weight: normal;
-    font-size: smaller;
+    font-size: x-small;
     padding-left: 0;
     margin-top: 0;
     text-align: start;
@@ -28,6 +28,15 @@
     display: flex;
     flex-direction: column;
     box-shadow: none !important;
+  }
+
+  .profile-nav .icon{
+    font-size: larger;
+  }
+
+  
+  .profile-nav .label{
+    font-size: small;
   }
 
   .profile-menu .nav-item {
@@ -62,6 +71,7 @@
   }
 
   .address-container p{
+    line-height: normal;
     margin-bottom: 0;
     font-size: medium;
     color: black;
@@ -82,13 +92,16 @@
     .profile-menu-body button{
         width: 100%;
     }
+
+    .profile-menu h6{
+      margin-left: 0px;
+    }
 }
 
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
     /* Styles for small devices */
-
 }
 
 /* Medium devices (tablets, 768px and up) */

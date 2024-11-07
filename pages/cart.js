@@ -14,6 +14,7 @@ import TrustBadges from '../components/Home/TrustBadges'
 import BackButton from '../components/Custom_Components/BackButton'
 import { AddressFormPopup } from '../components/AddressForm/AddressFormPopup'
 import { ForwardIcon } from '../components/Icons/Icon'
+import { log_info } from '../middleware/log'
 
 export async function getServerSideProps({ req }) {
   let addressData = [];
@@ -23,10 +24,10 @@ export async function getServerSideProps({ req }) {
     const res = await getData('user/address', req.cookies.com1);
     if (res.addresses) {
       addressData = res.addresses;
-      console.log('addressData: ', addressData);
+      log_info('addressData: ', addressData);
 
       defaultAddress = addressData.find(address => address.default);
-      console.log('defaultAddress : ', defaultAddress);
+      log_info('defaultAddress : ', defaultAddress);
 
     }
   }
@@ -51,7 +52,7 @@ const Cart = ({ defaultAddress }) => {
   }, [address])
 
   // useEffect(() => {
-  //   console.log('cart : ', cart);
+  //   log_info('cart : ', cart);
 
   //   const getCart = async () => {
   //     if (cart) {
@@ -147,21 +148,28 @@ const Cart = ({ defaultAddress }) => {
           <div className="col-md-5">
             <div className="card p-3 mx-2 mx-sm-0 me-md-3">
               <h5>Order Summary</h5>
-              <div class="my-4 cart-deliver-to-container d-flex align-items-center" onClick={() =>{AddressFormPopup(dispatch, {}, ADDRESS_EDIT, false)}} data-bs-toggle="modal" data-bs-target="#confirmModal">
-                <div class="d-flex align-items-center">
-                  <span class="deliver-to">Deliver to </span>
-                  <div class="cart-deliver-address">
+              <div className="my-4 cart-deliver-to-container d-flex align-items-center" onClick={() => { AddressFormPopup(dispatch, {}, ADDRESS_EDIT, false) }} data-bs-toggle="modal" data-bs-target="#confirmModal">
+                <div className="d-flex align-items-center">
+                  <span className="deliver-to">Deliver To</span>
+                  <div className="cart-deliver-address-div">
                     {selectedAddress && selectedAddress.fullName && selectedAddress.address ?
                       (<>
-                        <span class="delivery-name">{`${selectedAddress.fullName} , `}</span>
-                        <span class="delivery-location ps-1">{selectedAddress.address}, sHARJAH, uae</span>
+                        <span className="delivery-name">{`${selectedAddress.fullName}, `}</span>
+                        <p className='delivery-address'>
+                          <span>{`${selectedAddress.address}, `}</span>
+                          <span>{`${selectedAddress.city}, `}</span>
+                          <span>{`${selectedAddress.pinCode}, `}</span>
+                          <span>{`${selectedAddress.countryState}, `}</span>
+                          <span>{`${selectedAddress.country}`}</span>
+                        </p>
+                        <span className="delivery-phone">{`Phone: ${selectedAddress.phoneNumber}`}</span>
                       </>)
-                      : <span class="delivery-name">Please choose or enter address</span>
+                      : <span className="delivery-name">Please choose or enter address</span>
                     }
                   </div>
                 </div>
-                <div class="arrow-container">
-                  <ForwardIcon/>
+                <div className="arrow-container">
+                  <ForwardIcon />
                 </div>
               </div>
               <h5 style={{ color: 'black' }}>Total: <span>₹{total}</span></h5>

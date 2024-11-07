@@ -6,6 +6,7 @@ import 'react-date-range/dist/theme/default.css'
 import { DATE_FORMAT } from '../../utils/constants'
 import USLocale from 'date-fns/locale/en-US';
 import indiaLocale from 'date-fns/locale/en-IN';
+import { log_info } from '../../middleware/log'
 
 const DateRangeSelector = (props) => {
 
@@ -28,7 +29,7 @@ const DateRangeSelector = (props) => {
 
     // hide dropdown on ESC press
     const hideOnEscape = (e) => {
-        // console.log(e.key)
+         //log_info(e.key)
         if (e.key === "Escape") {
             setOpen(false)
             setOpenGroup(false)

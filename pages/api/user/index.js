@@ -2,6 +2,7 @@ import connectDB from '../../../utils/connectDB'
 import Users from '../../../models/userModel'
 import auth from '../../../middleware/auth'
 import { ADDRESS_DEL, ADDRESS_EDIT, ADDRESS_NEW, CONTACT_ADMIN_ERR_MSG, ERROR_403 } from '../../../utils/constants'
+import { log_error } from '../../../middleware/log'
 
 connectDB()
 
@@ -13,7 +14,7 @@ connectDB()
 export default async (req, res) => {
     switch (req.method) {
         case "PATCH":
-            await uploadInfor(req, res)
+            await updateUserInfo(req, res)
             break;
         case "GET":
             await getUsers(req, res)
@@ -31,13 +32,13 @@ const getUsers = async (req, res) => {
         res.json({ users })
 
     } catch (err) {
-        console.error('Error occurred while getUsers: ' + err);
+        log_error('Error occurred while getUsers: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
 
 
-const uploadInfor = async (req, res) => {
+const updateUserInfo = async (req, res) => {
     try {
         const result = await auth(req, res)
         const updateData = req.body
@@ -68,7 +69,7 @@ const uploadInfor = async (req, res) => {
             }
         } else res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     } catch (err) {
-        console.error('Error occurred while uploadInfor: ' + err);
+        log_error('Error occurred while uploadInformation: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -81,7 +82,7 @@ const addNewAddress = async (address, id, res) => {
             return "SAVED";
         }
     } catch (err) {
-        console.error('Error occurred while addNewAddress: ' + err);
+        log_error('Error occurred while addNewAddress: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -99,7 +100,7 @@ const updateAddress = async (address, id, type, res) => {
         }
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     } catch (err) {
-        console.error('Error occurred while updateAddress: ' + type + ' - ' + err);
+        log_error('Error occurred while updateAddress: ' + type + ' - ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

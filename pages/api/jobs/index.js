@@ -3,7 +3,7 @@ import { AUTO_CANCEL_ORDER_JOB, ERROR_403 } from "../../../utils/constants";
 import { notAdminNotUserRole } from "../../../utils/util";
 import { autoCancelOrder } from "./auto_cancel_order_job";
 import auth from '../../../middleware/auth'
-import * as log from "../../../middleware/log"
+import { log_debug } from "../../../middleware/log";
 
 connectDB()
 
@@ -31,6 +31,6 @@ const publishJob = async (req, res) => {
         default:
             break;
     }
-    log.debug('Job initiated successfully!');
+    log_debug('Job initiated successfully!');
     res.json({ msg: 'Job initiated successfully!' });
 }

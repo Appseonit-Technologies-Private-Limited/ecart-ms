@@ -1,6 +1,7 @@
 import {createRouter} from 'next-connect';
 import {upload} from './multer';
 import { cloud_uploads } from './uploadUtil';
+import { log_error } from '../../../middleware/log';
 
 
 const apiRoute = createRouter();
@@ -27,7 +28,7 @@ apiRoute.post(async (req, res) => {
 
     return res.status(200).json({ message: 'Images uploaded successfully', data: uploadedImages });
   } catch (error) {
-    console.error('Error uploading files:', error);
+    log_error('Error uploading files:', error);
     res.status(500).json({ error: 'Failed to upload images' });
   }
 });

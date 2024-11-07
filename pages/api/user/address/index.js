@@ -3,6 +3,7 @@ import Users from '../../../../models/userModel'
 import { CONTACT_ADMIN_ERR_MSG, ERROR_403, PLEASE_LOG_IN } from '../../../../utils/constants'
 import { verifyToken } from '../../../../middleware/VerifyToken'
 import auth from '../../../../middleware/auth'
+import { log_error } from '../../../../middleware/log'
 
 connectDB()
 
@@ -31,7 +32,7 @@ const getAddresses = async (req, res) => {
         if (userAddresses && userAddresses.addresses) return res.status(200).json({ addresses: userAddresses.addresses })
         else res.status(204).end();
     } catch (err) {
-        console.error('Error occurred while getAddresses: ', err);
+        log_error('Error occurred while getAddresses: ', err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }

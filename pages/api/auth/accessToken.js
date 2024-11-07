@@ -5,30 +5,33 @@ import { createAccessToken } from '../../../utils/generateToken'
 import { COM1, COM1_MAXAGE, CONTACT_ADMIN_ERR_MSG, PLEASE_LOG_IN } from '../../../utils/constants'
 import { verifyToken } from '../../../middleware/VerifyToken'
 import { generateCookie } from '../../../utils/CookieHelper'
+import { log_error, log_info } from '../../../middleware/log'
 
 connectDB()
 
 export default async (req, res) => {
     try {
         const {com1: accessToken, com2: refreshToken} = req.cookies;
-        //console.log('accessToken : ',accessToken);
-        //console.log('refreshToken : ',refreshToken);
+        //log_info('accessToken : ',accessToken);
+        //log_info('refreshToken : ',refreshToken);
 
         var verifiedToken;
         var isAccessTokenActive = false;
 
         if(accessToken){
+            log_info('Verifying access token...');
             verifiedToken = await verifyToken(accessToken, process.env.ACCESS_TOKEN_SECRET);
             isAccessTokenActive = true;
-        }else{
-            if (!refreshToken) return res.status(401).json({ err: PLEASE_LOG_IN });
-
-            verifiedToken = await verifyToken(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-            //console.log('Validating Refresh Token : ',verifiedToken);  
         }
-
+        log_info('verifiedToken : '+verifiedToken+' , refreshToken : '+refreshToken);
+        if (!verifiedToken && refreshToken){
+            log_info('Verifying refresh token...');
+            verifiedToken = await verifyToken(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+        }  
+        
         if (!verifiedToken) return res.status(401).json({ err: PLEASE_LOG_IN });
-
+        log_info('________Token verification successful________________');
+        
         if(verifiedToken.refreshTokenId){
             const isBlackListed = await checkIsBlacklistedToken(verifiedToken.refreshTokenId, res);
             if(isBlackListed) return res.status(401).json({ err: `You are not authorized to access the application right now, ${CONTACT_ADMIN_ERR_MSG}` })
@@ -40,17 +43,17 @@ export default async (req, res) => {
         var access_token;
         if(isAccessTokenActive){
             access_token = accessToken;
-            console.log('Retrieveing existing Access Token ['+ access_token+']');
+            log_info('Retrieveing existing Access Token...');
         }else{
             access_token = await createAccessToken({ id: user._id });
-            console.log('New Access Token ['+access_token+'] generated successfully!');
+            log_info('New Access Token ['+access_token+'] generated successfully!');
 
             const accessTokenCookie = generateCookie(COM1, access_token, '/', COM1_MAXAGE);
 
             // Set both cookies in the response header
             res.setHeader('Set-Cookie', accessTokenCookie);
         }
-        //console.log('ACCESS TOKEN : ', access_token);
+        //log_info('ACCESS TOKEN : ', access_token);
         res.json({
             access_token,
             user: {
@@ -64,7 +67,7 @@ export default async (req, res) => {
             }
         })
     } catch (err) {
-        console.error('Error occurred while accessToken: ' + err);
+        log_error('Error occurred while accessToken: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -72,7 +75,7 @@ export default async (req, res) => {
 const checkIsBlacklistedToken = async (refreshTokenId, res) => {
     const token = await Tokens.findOne({ refreshTokenId, isBlackListed: true});
     if (token) {
-        console.error('WARNING: Blacklisted user accessing the system, refreshTokenId: ', refreshTokenId);
+        log_error('WARNING: Blacklisted user accessing the system, refreshTokenId: ', refreshTokenId);
         return true;
     }
 }

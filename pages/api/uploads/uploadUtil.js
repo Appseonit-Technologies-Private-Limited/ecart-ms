@@ -1,4 +1,5 @@
 import ImageKit from "imagekit";
+import { log_error, log_info } from "../../../middleware/log";
 
 const imageKit = new ImageKit({
     publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY,
@@ -16,10 +17,10 @@ export const cloud_uploads = (file, fileName, folder) => {
             folder // Optional folder to upload into
         }, (error, result) => {
             if (error) {
-                console.error('Image upload failed to ImageKit: ', error);
+                log_error('Image upload failed to ImageKit: ', error);
                 reject(new Error(`Image upload failed to ImageKit: ${error.message}`));
             } else {
-                console.log('Image uploaded to ImageKit successfully! : ', fileName);
+                log_info('Image uploaded to ImageKit successfully! : ', fileName);
                 resolve({ url: result.url, public_id: result.fileId });
             }
         });
@@ -29,7 +30,7 @@ export const cloud_uploads = (file, fileName, folder) => {
 export const cloud_delete = async (publicIds) => {
    try {
         publicIds.map(publid_id => imageKit.deleteFile(publid_id));
-        console.log('Image deleted successfully!');
+        log_info('Image deleted successfully!');
    } catch (error) {
         throw new Error('Image delete failed to ImageKit:', error);
    }

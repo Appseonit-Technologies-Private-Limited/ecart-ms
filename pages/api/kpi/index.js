@@ -9,6 +9,7 @@ import { CONTACT_ADMIN_ERR_MSG, DANGER, ERROR_403, WARNING } from '../../../util
 import { getParameterValue, getTimeSeriesSalesData } from './util'
 import isEmpty from 'lodash/isEmpty';
 import { notAdminRole } from '../../../utils/util'
+import { log_error } from '../../../middleware/log'
 
 connectDB()
 
@@ -37,7 +38,7 @@ const getSingleKpi = async (req, res) => {
         const kpiData = getTimeSeriesSalesData(orders, dateRange, kpi);
         res.json({ kpiData });
     } catch (err) {
-        console.error('Error occurred while getSingleKpi: ' + err);
+        log_error('Error occurred while getSingleKpi: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
@@ -137,7 +138,7 @@ const getKpis = async (req, res) => {
         // }
         res.json({ kpiData });
     } catch (err) {
-        console.error('Error occurred while getKpis: ' + err);
+        log_error('Error occurred while getKpis: ' + err);
         return res.status(500).json({ err: CONTACT_ADMIN_ERR_MSG })
     }
 }
